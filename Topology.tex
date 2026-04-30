@@ -1,0 +1,398 @@
+\documentclass[12pt, a4paper, twoside]{article}
+\usepackage[left=1in,right=1in,bottom=0.5in,top=0.8in]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{epstopdf}
+\usepackage[pdfpagelabels,hyperindex]{hyperref}
+\usepackage{xcolor}
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz-cd}
+\usepackage{longtable}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{comment}
+\usepackage{mathpartir}
+\usepackage{braket}
+\usepackage{tikz}
+\usetikzlibrary{quantikz}
+\usetikzlibrary{angles, quotes}
+\pgfplotsset{compat=1.18}
+\usepackage{soul}
+\usepackage{xcolor}
+\sethlcolor{yellow!40!white}
+
+\linespread{1.4}
+
+\hypersetup{
+pdftitle={.},
+pdfauthor={Hojune Lee},
+}
+
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+% newcommand bb
+\newcommand{\BA}{{\mathbb {A}}} \newcommand{\BB}{{\mathbb {B}}}
+\newcommand{\BC}{{\mathbb {C}}} \newcommand{\BD}{{\mathbb {D}}}
+\newcommand{\BE}{{\mathbb {E}}} \newcommand{\BF}{{\mathbb {F}}}
+\newcommand{\BG}{{\mathbb {G}}} \newcommand{\BH}{{\mathbb {H}}}
+\newcommand{\BI}{{\mathbb {I}}} \newcommand{\BJ}{{\mathbb {J}}}
+\newcommand{\BK}{{\mathbb {U}}} \newcommand{\BL}{{\mathbb {L}}}
+\newcommand{\BM}{{\mathbb {M}}} \newcommand{\BN}{{\mathbb {N}}}
+\newcommand{\BO}{{\mathbb {O}}} \newcommand{\BP}{{\mathbb {P}}}
+\newcommand{\BQ}{{\mathbb {Q}}} \newcommand{\BR}{{\mathbb {R}}}
+\newcommand{\BS}{{\mathbb {S}}} \newcommand{\BT}{{\mathbb {T}}}
+\newcommand{\BU}{{\mathbb {U}}} \newcommand{\BV}{{\mathbb {V}}}
+\newcommand{\BW}{{\mathbb {W}}} \newcommand{\BX}{{\mathbb {X}}}
+\newcommand{\BY}{{\mathbb {Y}}} \newcommand{\BZ}{{\mathbb {Z}}}
+
+% newcommand  scr
+\newcommand{\sA}{{\mathscr {A}}} \newcommand{\sB}{{\mathscr {B}}}
+\newcommand{\sC}{{\mathscr {C}}} \newcommand{\sD}{{\mathscr {D}}}
+\newcommand{\sE}{{\mathscr {E}}} \newcommand{\sF}{{\mathscr {F}}}
+\newcommand{\sG}{{\mathscr {G}}} \newcommand{\sH}{{\mathscr {H}}}
+\newcommand{\sI}{{\mathscr {I}}} \newcommand{\sJ}{{\mathscr {J}}}
+\newcommand{\sK}{{\mathscr {K}}} \newcommand{\sL}{{\mathscr {L}}}
+\newcommand{\sN}{{\mathscr {N}}} \newcommand{\sM}{{\mathscr {M}}}
+\newcommand{\sO}{{\mathscr {O}}} \newcommand{\sP}{{\mathscr {P}}}
+\newcommand{\sQ}{{\mathscr {Q}}} \newcommand{\sR}{{\mathscr {R}}}
+\newcommand{\sS}{{\mathscr {S}}} \newcommand{\sT}{{\mathscr {T}}}
+\newcommand{\sU}{{\mathscr {U}}} \newcommand{\sV}{{\mathscr {V}}}
+\newcommand{\sW}{{\mathscr {W}}} \newcommand{\sX}{{\mathscr {X}}}
+\newcommand{\sY}{{\mathscr {Y}}} \newcommand{\sZ}{{\mathscr {Z}}}
+
+
+% newcommand cal
+\newcommand{\CA}{{\mathcal {A}}} \newcommand{\CB}{{\mathcal {B}}}
+\newcommand{\CC}{{\mathcal {C}}} \newcommand{\CD}{{\mathcal {D}}}
+\newcommand{\CE}{{\mathcal {E}}} \newcommand{\CF}{{\mathcal {F}}}
+\newcommand{\CG}{{\mathcal {G}}} \newcommand{\CH}{{\mathcal {H}}}
+\newcommand{\CI}{{\mathcal {I}}} \newcommand{\CJ}{{\mathcal {J}}}
+\newcommand{\CK}{{\mathcal {K}}} \newcommand{\CL}{{\mathcal {L}}}
+\newcommand{\CM}{{\mathcal {M}}} \newcommand{\CN}{{\mathcal {N}}}
+\newcommand{\CO}{{\mathcal {O}}} \newcommand{\CP}{{\mathcal {P}}}
+\newcommand{\CQ}{{\mathcal {Q}}} \newcommand{\CR}{{\mathcal {R}}}
+\newcommand{\CS}{{\mathcal {S}}} \newcommand{\CT}{{\mathcal {T}}}
+\newcommand{\CU}{{\mathcal {U}}} \newcommand{\CV}{{\mathcal {V}}}
+\newcommand{\CW}{{\mathcal {W}}} \newcommand{\CX}{{\mathcal {X}}}
+\newcommand{\CY}{{\mathcal {Y}}} \newcommand{\CZ}{{\mathcal {Z}}}
+
+% newcommand frak
+\newcommand{\fa}{{\mathfrak{a}}}  \newcommand{\fb}{{\mathfrak{b}}}
+\newcommand{\fc}{{\mathfrak{c}}}  \newcommand{\fd}{{\mathfrak{d}}}
+\newcommand{\fe}{{\mathfrak{e}}}  \newcommand{\ff}{{\mathfrak{f}}}
+\newcommand{\fg}{{\mathfrak{g}}}  \newcommand{\fh}{{\mathfrak{h}}}
+\newcommand{\fii}{{\mathfrak{i}}}  \newcommand{\fj}{{\mathfrak{j}}}
+\newcommand{\fk}{{\mathfrak{m}}}  \newcommand{\fl}{{\mathfrak{l}}}
+\newcommand{\fm}{{\mathfrak{m}}}  \newcommand{\fn}{{\mathfrak{n}}}
+\newcommand{\fo}{{\mathfrak{o}}}  \newcommand{\fp}{{\mathfrak{p}}}
+\newcommand{\fq}{{\mathfrak{q}}}  \newcommand{\fr}{{\mathfrak{r}}}
+\newcommand{\fs}{{\mathfrak{s}}}  \newcommand{\ft}{{\mathfrak{t}}}
+\newcommand{\fu}{{\mathfrak{u}}}  \newcommand{\fv}{{\mathfrak{v}}}
+\newcommand{\fw}{{\mathfrak{w}}}  \newcommand{\fx}{{\mathfrak{x}}}
+\newcommand{\fy}{{\mathfrak{y}}}  \newcommand{\fz}{{\mathfrak{z}}}
+
+\newcommand{\fA}{{\mathfrak{A}}}  \newcommand{\fB}{{\mathfrak{B}}}
+\newcommand{\fC}{{\mathfrak{C}}}  \newcommand{\fD}{{\mathfrak{D}}}
+\newcommand{\fE}{{\mathfrak{E}}}  \newcommand{\fF}{{\mathfrak{F}}}
+\newcommand{\fG}{{\mathfrak{G}}}  \newcommand{\fH}{{\mathfrak{H}}}
+\newcommand{\fI}{{\mathfrak{I}}}  \newcommand{\fJ}{{\mathfrak{J}}}
+\newcommand{\fK}{{\mathfrak{K}}}  \newcommand{\fL}{{\mathfrak{L}}}
+\newcommand{\fM}{{\mathfrak{M}}}  \newcommand{\fN}{{\mathfrak{N}}}
+\newcommand{\fO}{{\mathfrak{O}}}  \newcommand{\fP}{{\mathfrak{P}}}
+\newcommand{\fQ}{{\mathfrak{Q}}}  \newcommand{\fR}{{\mathfrak{R}}}
+\newcommand{\fS}{{\mathfrak{S}}}  \newcommand{\fT}{{\mathfrak{T}}}
+\newcommand{\fU}{{\mathfrak{U}}}  \newcommand{\fV}{{\mathfrak{V}}}
+\newcommand{\fW}{{\mathfrak{W}}}  \newcommand{\fX}{{\mathfrak{X}}}
+\newcommand{\fY}{{\mathfrak{Y}}}  \newcommand{\fZ}{{\mathfrak{Z}}}
+
+
+
+% newcommand :rm
+    \newcommand{\RA}{{\mathrm {A}}} \newcommand{\RB}{{\mathrm {B}}}
+\newcommand{\RC}{{\mathrm {C}}} \newcommand{\RD}{{\mathrm {D}}}
+\newcommand{\RE}{{\mathrm {E}}} \newcommand{\RF}{{\mathrm {F}}}
+\newcommand{\RG}{{\mathrm {G}}} \newcommand{\RH}{{\mathrm {H}}}
+\newcommand{\RI}{{\mathrm {I}}} \newcommand{\RJ}{{\mathrm {J}}}
+\newcommand{\RK}{{\mathrm {K}}} \newcommand{\RL}{{\mathrm {L}}}
+\newcommand{\RM}{{\mathrm {M}}} \newcommand{\RN}{{\mathrm {N}}}
+\newcommand{\RO}{{\mathrm {O}}} \newcommand{\RP}{{\mathrm {P}}}
+\newcommand{\RQ}{{\mathrm {Q}}} \newcommand{\RR}{{\mathrm {R}}}
+\newcommand{\RS}{{\mathrm {S}}} \newcommand{\RT}{{\mathrm {T}}}
+\newcommand{\RU}{{\mathrm {U}}} \newcommand{\RV}{{\mathrm {V}}}
+\newcommand{\RW}{{\mathrm {W}}} \newcommand{\RX}{{\mathrm {X}}}
+\newcommand{\RY}{{\mathrm {Y}}} \newcommand{\RZ}{{\mathrm {Z}}}
+
+\newcommand{\Ad}{{\mathrm{Ad}}} \newcommand{\Aut}{{\mathrm{Aut}}}
+\newcommand{\Br}{{\mathrm{Br}}} \newcommand{\Ch}{{\mathrm{Ch}}}
+\newcommand{\cod}{{\mathrm{cod}}} \newcommand{\cont}{{\mathrm{cont}}}
+\newcommand{\cl}{{\mathrm{cl}}}   \newcommand{\Cl}{{\mathrm{Cl}}}
+\newcommand{\disc}{{\mathrm{disc}}}\newcommand{\Eis}{{\mathrm{Eis}}}
+\newcommand{\Div}{{\mathrm{Div}}} \renewcommand{\div}{{\mathrm{div}}}
+\newcommand{\End}{{\mathrm{End}}} \newcommand{\Frob}{{\mathrm{Frob}}}
+\newcommand{\Gal}{{\mathrm{Gal}}} \newcommand{\GL}{{\mathrm{GL}}}
+\newcommand{\Hom}{{\mathrm{Hom}}} \renewcommand{\Im}{{\mathrm{Im}}}
+\newcommand{\Ind}{{\mathrm{Ind}}} \newcommand{\ind}{{\mathrm{ind}}}
+\newcommand{\inv}{{\mathrm{inv}}}
+\newcommand{\Isom}{{\mathrm{Isom}}} \newcommand{\Jac}{{\mathrm{Jac}}}
+\newcommand{\ad}{{\mathrm{ad}}}  \newcommand{\Tr}{{\mathrm{Tr}}}
+\newcommand{\Ker}{{\mathrm{Ker}}} \newcommand{\Ros}{{\mathrm{Ros}}}
+\newcommand{\Lie}{{\mathrm{Lie}}} \newcommand{\Hol}{{\mathrm{Hol}}}
+
+\newcommand{\cyc}{{\mathrm{cyc}}}\newcommand{\id}{{\mathrm{id}}}
+\newcommand{\new}{{\mathrm{new}}} \newcommand{\NS}{{\mathrm{NS}}}
+\newcommand{\ord}{{\mathrm{ord}}} \newcommand{\rank}{{\mathrm{rank}}}
+\newcommand{\PGL}{{\mathrm{PGL}}} \newcommand{\Pic}{\mathrm{Pic}}
+\newcommand{\cond}{\mathrm{cond}} \newcommand{\Is}{{\mathrm{Is}}}
+\renewcommand{\Re}{{\mathrm{Re}}} \newcommand{\reg}{{\mathrm{reg}}}
+\newcommand{\Res}{{\mathrm{Res}}} \newcommand{\Sel}{{\mathrm{Sel}}}
+\newcommand{\RTr}{{\mathrm{Tr}}} \newcommand{\alg}{{\mathrm{alg}}}
+\newcommand{\PSL}{{\mathrm{PSL}}}
+
+\newcommand{\coker}{{\mathrm{coker}}}
+\newcommand{\val}{{\mathrm{val}}} 
+\newcommand{\sign}{{\mathrm{sign}}}
+\newcommand{\mult}{{\mathrm{mult}}} 
+\newcommand{\Vol}{{\mathrm{Vol}}}
+\newcommand{\Meas}{{\mathrm{Meas}}}
+\renewcommand{\mod}{\ \mathrm{mod}\ }
+\newcommand{\Ann}{\mathrm{Ann}}
+\newcommand{\Tor}{\mathrm{Tor}}
+\newcommand{\Supp}{\mathrm{Supp}}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\Max}{\mathrm{Max}}
+\newcommand{\Coker}{\mathrm{Coker}}
+\newcommand{\Stab}{\mathrm{Stab}}
+\newcommand{\Irr}{\mathrm{Irr}}
+\newcommand{\Inf}{\mathrm{Inf}}
+\newcommand{\Sup}{\mathrm{Sup}}
+\newcommand{\rk}{\mathrm{rk}}
+\newcommand{\Fil}{\mathrm{Fil}}
+\newcommand{\Sim}{{\mathrm{Sim}}} 
+\newcommand{\SL}{{\mathrm{SL}}}
+\newcommand{\Spec}{{\mathrm{Spec}}} 
+\newcommand{\SO}{{\mathrm{SO}}}
+\newcommand{\SU}{{\mathrm{SU}}} 
+\newcommand{\Sym}{{\mathrm{Sym}}}
+\newcommand{\sgn}{{\mathrm{sgn}}} 
+\newcommand{\tr}{{\mathrm{tr}}}
+\newcommand{\tor}{{\mathrm{tor}}}  
+\newcommand{\ur}{{\mathrm{ur}}}
+\newcommand{\vol}{{\mathrm{vol}}}  
+\newcommand{\ab}{{\mathrm{ab}}}
+\newcommand{\Sh}{{\mathrm{Sh}}} 
+\newcommand{\Ell}{{\mathrm{Ell}}}
+\newcommand{\Char}{{\mathrm{Char}}}
+\newcommand{\Tate}{{\mathrm{Tate}}}
+\newcommand{\corank}{{\mathrm{corank}}} 
+\newcommand{\Cond}{{\mathrm{Cond}}}
+\newcommand{\Inn}{{\mathrm{Inn}}} 
+\newcommand{\Spf}{{\mathrm{Spf}}}
+\newcommand{\Mat}{{\mathrm{Mat}}}
+\font\cyr=wncyr10  
+\newcommand{\Sha}{\hbox{\cyr X}}
+\newcommand{\wt}{\widetilde} 
+\newcommand{\wh}{\widehat} 
+\newcommand{\ck}{\check}
+\newcommand{\pp}{\frac{\partial\bar\partial}{\pi i}}
+\newcommand{\pair}[1]{\langle {#1} \rangle}
+\newcommand{\wpair}[1]{\left\{{#1}\right\}}
+\newcommand{\intn}[1]{\left( {#1} \right)}
+\newcommand{\norm}[1]{\|{#1}\|}
+\newcommand{\sfrac}[2]{\left( \frac {#1}{#2}\right)}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\ov}{\overline}
+\newcommand{\Gros}{Gr\"{o}ssencharaktere}
+\newcommand{\incl}{\hookrightarrow}
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\imp}{\Longrightarrow}
+\newcommand{\lto}{\longmapsto}
+\newcommand{\bs}{\backslash}
+\newcommand{\nequiv}{\equiv\hspace{-7.8pt}/}
+\theoremstyle{plain}
+
+\tcbuselibrary{theorems}
+
+\tcbset{
+    commonstyle/.style={
+        enhanced,
+        breakable,
+        arc=2mm,
+        fonttitle=\bfseries,
+        description font=\normalfont,
+        before skip=12pt,
+        after skip=12pt,
+        separator sign={.},
+    }
+}
+
+\tcbset{thmstyle/.style={commonstyle, colback=blue!5, colframe=blue!30!black}}
+
+\tcbset{defstyle/.style={commonstyle, colback=teal!5, colframe=teal!35!black}}
+
+\tcbset{remstyle/.style={commonstyle, colback=orange!5, colframe=orange!40!black}}
+
+% [Theorem Style]
+\newtcbtheorem[number within=section]{thm}{Theorem}{thmstyle}{thm}
+\newtcbtheorem[use counter from=thm]{cor}{Corollary}{thmstyle}{cor}
+\newtcbtheorem[use counter from=thm]{prop}{Proposition}{thmstyle}{prop}
+\newtcbtheorem[use counter from=thm]{lem}{Lemma}{thmstyle}{lem}
+\newtcbtheorem[use counter from=thm]{conj}{Conjecture}{thmstyle}{conj}
+\newtcbtheorem[use counter from=thm]{quest}{Question}{thmstyle}{quest}
+\newtcbtheorem[use counter from=thm]{ppty}{Property}{thmstyle}{ppty}
+\newtcbtheorem[use counter from=thm]{axiom}{Axiom}{thmstyle}{ax}
+\newtcbtheorem[use counter from=thm]{claim}{Claim}{thmstyle}{clm}
+\newtcbtheorem[use counter from=thm]{prob}{Problem}{thmstyle}{prob}
+
+% [Definition Style]
+\newtcbtheorem[use counter from=thm]{defn}{Definition}{defstyle}{def}
+\newtcbtheorem[use counter from=thm]{exmp}{Example}{defstyle}{ex}
+\newtcbtheorem[use counter from=thm]{exer}{Exercise}{defstyle}{exe}
+\newtcbtheorem[use counter from=thm]{notn}{Notation}{defstyle}{not}
+
+% [Remark Style]
+\newtcbtheorem[use counter from=thm]{rem}{Remark}{remstyle}{rem}
+\newtcbtheorem[use counter from=thm]{warn}{Warning}{remstyle}{wrn}
+
+\author{Hojune Lee}
+
+\title{Topology}
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{9cm}
+            
+        \Huge
+        \textbf{Topology}
+    
+        \vspace{1cm}
+        \large
+        Summary with my Intuitions
+        \vspace{3cm}
+        
+        \LARGE
+        \textbf{Hojune Lee}
+            
+        \vspace{8cm}
+            
+        \normalsize
+        \textbf{School of Computing, KAIST}\\  
+    \end{center}
+\end{titlepage}
+
+\hypersetup{linkcolor=black}
+\tableofcontents
+\hypersetup{linkcolor=blue}
+
+\newpage 
+
+\section{Definition of Topology}
+
+In many times, we \lq draw' some mathematical objects especially sets. One of the key intuition of studing topology is how can we \lq draw' such things. 
+To draw somethings formally, we need to define bunch of things like \textit{shape of sets}. 
+As we describe \textit{shape of groups} with its inner structures like subgroups, we describe \textit{shape of sets} with its inner structures like subsets. 
+
+\begin{defn}{Topology}{defn_topology}
+    A topology $\CT$ on a set $X$ is collection of subsets of $X$ having following axioms. 
+    \begin{enumerate}
+        \item $\emptyset, X \in \CT$
+        \item $\CT$ is closed under arbitrary unions. 
+        \item $\CT$ is closed under finite intersections. 
+    \end{enumerate}
+\end{defn}
+
+Then \hl{we denote the pair $\intn{X, \CT}$ is \textit{topological space} (or just \textit{space}) and call every $U \in \CT$ by is \textit{open set} in $X$.} 
+Then now $X$ is shaped by $\CT$ with certain axioms such that related subsets of $X$. This is very similar to defining groups. 
+
+\begin{defn}{Group}{defn_group}
+    Let $G$ be a set and $\star: G \times G \ra G$ is binary operation. $\intn{G, \star}$ is group when have following axioms. 
+    \begin{enumerate}
+        \item $\forall a, b, c \in G, \quad a \star (b \star c) = (a \star b) \star c$. 
+        \item $\exists! 1_G \in G$ such that $\forall x \in G$, $1_G \star x = x \star 1_G = x$. 
+        \item $\forall x \in G, \exists x^{-1} \in G$ such that $x \star x^{-1} = x^{-1} \star x = 1_G$. 
+    \end{enumerate}
+\end{defn}
+
+Well, the definition of topology is quite less intuitive. However we already familiar with 
+\lq shapes' in $\BR^n$ and often draw them in natural. Topology is just generalize such notions into general sets. 
+In analysis in $\BR^n$, the key block was \textit{open balls}. We generalize this notion into general set also, which is called \textit{basis}. 
+
+\begin{defn}{Basis}{defn_basis}
+    A \textit{basis} $\CB$ is collection of subsets of $X$ having following axioms. 
+    \begin{enumerate}
+        \item $\forall x \in X$, $\exists B \in \CB$ such that $x \in B$. 
+        \item $\forall B_1, B_2 \in \CB$, if $x \in B_1 \cap B_2$, $\exists B^* \in \CB$ such that $x \in B^* \subseteq B_1 \cap B_2$. 
+    \end{enumerate}
+\end{defn}
+
+This is very natural property when we imagine open balls in $\BR^n$. Another good motivation to understand this is that, 
+understand each $B \in \CB$ is collection of \lq near' elements. In metric space we'll define later, such notion of distance is very natural but here, 
+we need to understand abstractically. This collection is called \textit{basis} since \hl{it generates some topology on $X$}.
+
+\begin{defn}{Topology generated by Basis}{defn_topology generated by basis}
+    Let $\CB$ is a basis of $X$. Then, define 
+    \[\CT_\CB = \{U \subseteq X \mid \forall x \in U,~ \exists B \in \CB,~ x \in B \subseteq U\}\]
+    Then $\CT_\CB$ is a topology on $X$ and called topology generated by $\CB$. 
+\end{defn}
+
+\begin{rem}{}{remark 1}
+    $\CT_\CB$ is well-defined topology.
+\end{rem}
+
+As we noted $\CB$ \lq generates' some topology and it is called basis, there are more intuitive way to construct $\CT_\CB$. 
+
+\begin{lem}{Topology generated by Basis}{lem_topology generated by basis}
+    $\CT_\CB = $ collection of all unions in $\CB$.  
+\end{lem}
+
+Then next the natural question is that, \textit{can we compare 2 topologies with its basis}? 
+The answer is yes, and we'll use following theorem in many times. Following theorem allows us to 
+compare the inclusion relation (or equivalence relation) of 2 topologies via its basis. 
+
+\begin{thm}{Topology Comparison with Basis}{thm_topology comparison with basis}
+    Let $\CB_1, \CB_2$ be basis of $X$ and $\CT_1, \CT_2$ be topology of $X$ generated by $\CB_1, \CB_2$ respectively. 
+    Then $\CT_1 \subseteq \CT_2$ if and only if $\forall x \in X$, $\forall B_1 \in \CB_1$ such that $x \in B_1$, there exists $B_2 \in \CB_2$ such that $x \in B_2 \subseteq B_1$. 
+\end{thm}
+
+We observe that once we have basis $\CB$, then we can generate some topology by unioning them. 
+However, in \ref{def:defn_topology} topology is closed under not only union but also finite intersection. 
+So we can define more light basis for topology(or, basis for basis). 
+
+\begin{defn}{Subbasis}{defn_subbasis}
+    A subbasis $\CS$ is collection of subsets of $X$ having following axiom. 
+    \begin{enumerate}
+        \item $\forall x \in X$, $\exists S \in \CS$ such that $x \in S$. 
+    \end{enumerate}
+    equivalently, the entire union of $\CS$ is $X$. 
+\end{defn}
+
+Then, we can observe that 
+\[\CS \xrightarrow{\text{finite intersections}} \CB \xrightarrow{\text{arbitrary unions}} \CT\]
+
+\newpage 
+
+\section{Some Famous Topologies}
+
+In this section, we'll define a few useful topologies. 
+
+\begin{defn}{Standard Topology}{defn_standard topology}
+    Let $X = \BR$ and $\CB = \{(a, b) \mid a < b\}$. $\CT_\CB$ is called standard topology of $\BR$. 
+\end{defn}
+
+\begin{defn}{Lower Limit Topology}{defn_lower limit topology}
+    Let $X = \BR$ and $\CB = \{[a, b) \mid a < b\}$. $\CT_\CB$ is called lower limit topology of $\BR$. 
+\end{defn}
+
+
+
+\end{document}
