@@ -448,4 +448,101 @@ subspace topology but not in ordered topology. In general,
     Then, $\CT_2 \subseteq \CT_1$ in general. Furthermore, $\CT_1 = \CT_2$ if and only if every gap in $Y$ is either open or closed. 
 \end{thm}
 
+\newpage 
+
+\section{Closed Sets and Limit Points}
+
+We defined basic notions of topology via well-shaped subsets called \textit{open sets}. 
+Another type of sets can be useful. 
+
+\begin{defn}{Closed Sets}{defn_closed sets}
+    $C \subset X$ is closed when $X \setminus C$ is open in $X$ 
+\end{defn}
+
+Openess and closedness is familiar notion in $\BR^n$ space. Closed set is generalization of the closedness into general sets. 
+Sometimes, arguing with closed set is much easier than open sets despite they are just complement of open sets. 
+
+\begin{thm}{Topology Axioms for Closed Sets}{thm_3.2}
+    Let $(X, \CT)$ be a topological space. Then following variation of axioms hold. 
+    \begin{enumerate}
+        \item $\emptyset, X$ is closed set. 
+        \item Arbitrary intersections of closed sets are closed. 
+        \item Finite unions of closed sets are closed. 
+    \end{enumerate}
+\end{thm}
+
+\begin{thm}{Subspace Topology for Closed Sets}{thm_3.3}
+    Let $Y$ be subspace of $X$. Then, $D \subseteq Y$ is closed in $Y$ if and only if 
+    there exists closed set $C$ in $X$ such that $D = C \cap Y$. 
+\end{thm}
+
+\begin{proof}
+    If $D \subseteq Y$ is closed, then $Y \setminus D$ is open in $Y$. So, we can find 
+    open set $U$ in $X$ such that $Y \setminus D = U \cap Y$. Then, $D = U^c \cap Y$ and $U^c$ is closed in $X$. If $D = C \cap Y$ for closed set $C$ in $X$, 
+    $Y \setminus D = Y \cap C^c$ is open in $Y$, so $D$ is closed in $Y$. 
+\end{proof}
+
+\begin{thm}{When closed sets in $Y$ is also closed in $X$?}{thm_3.4}
+    If $Y$ is subspace of $X$ and $Y$ is closed in $X$, then closed sets in $Y$ is closed in $X$. 
+\end{thm}
+
+Now we define few more way to construct meaningful sets. 
+
+\begin{defn}{Interior and Closure of a Set}{defn_interior and closure}
+    Let $A$ be any subset of $X$. The interior of $A$ (denoted by $\text{Int } A$) is union of all open sets contained in $A$. i.e., 
+    the largest open set in $A$. The closure of $A$ (denoted by $\overbar{A}$) is intersection of all closed sets containing $A$. i.e., 
+    the smallest closed set containing $A$. 
+\end{defn}
+
+In many times, closure of set acts quite important roles. So we state few theorems related to the closure of set. 
+
+\begin{thm}{Closure in the Subspace}{thm_3.6}
+    Let $X$ be a topological space and $Y$ is subspace of $X$. 
+    For $A \subseteq Y \subseteq X$, denote $\overbar{A}$ by closure of $A$ in $X$. Then closure of $A$ in $Y$ is 
+    determined by $\overbar{A} \cap Y$. 
+\end{thm}
+
+\begin{proof}
+    Let $C$ be closed set in $X$ such that $A \subseteq C$. 
+    Then, $C \cap Y$ is closed in $Y$ and $A \subseteq C \cap Y$. 
+    So, $\overbar{A} \cap Y \subseteq$ closure of $A$ in $Y$. 
+    And for $D$ be closed set in $Y$ such that $A \subseteq D$, 
+    by definition, $D = C \cap Y$ where $C$ is closed and $A \subseteq C$. 
+    So, closure of $A$ in $Y$ is equivalent to $\overbar{A} \cap Y$. 
+\end{proof}
+
+\begin{thm}{Points in Closure}{thm_points in closure}
+    Let $X$ be a topological space and $A \subseteq X$ be any subset. 
+    Then $x \in \overbar{A}$ if and only if every \textit{neighborhoods} of $x$ \textit{intersects} with $A$.
+\end{thm}
+
+Here, \textit{neighborhood} of $x$ means that any open sets containing $x$. Also, we say $A, B$ are intersects when $A \cap B \neq \emptyset$. 
+This is important property of points in the closure. 
+
+\begin{proof}
+    If $x \in \overbar{A}$ but $\exists \, U$ which is neighborhood of $x$ and $U \cap A = \emptyset$, 
+    Then $A \subseteq U^c$ and $U^c$ is closed. So by definition, $\overbar{A} \subseteq U^c$ so $x \in U^c$ which is contradiction. 
+    If every neighborhoods of $x$ intersects with $A$ but $x \notin \overbar{A}$, 
+    then it means that there exists a closed set $C$ such that containing $A$ but does not contain $x$.
+    It implies that $x \in X \setminus C$ and $X \setminus C \cap A = \emptyset$ which is contradiction. 
+\end{proof}
+
+\begin{defn}{Limit Points}{defn_limit points}
+    If $A$ is a subset of topological space $X$, we say that $x$ is a limit point of $A$ when 
+    every neighborhoods of $x$ intersects with $A$ other than $x$ itself. i.e., $x \in \overbar{A \setminus \{x\}}$. 
+\end{defn}
+
+Then now, \hl{we can describe the closure of set $A$ with $A$ itself and its limit points.}
+
+\begin{thm}{Closure Representation}{thm_closure representation}
+    Let $X$ be a topological space and $A \subseteq X$ be any subset. 
+    Denote $A'$ by set of limit points of $A$. Then, 
+    \[\overbar{A} = A \cup A'\]
+    In other words, $\overbar{A} \setminus A = $ limit points of $A$ but not in $A$.
+\end{thm}
+
+\begin{cor}{When $A$ is closed?}{cor_3.10}
+    $A \subseteq X$ is closed if and only if $A' \subseteq A$. i.e., $A$ contains all of its limit points. 
+\end{cor}
+
 \end{document}
