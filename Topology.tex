@@ -545,4 +545,51 @@ Then now, \hl{we can describe the closure of set $A$ with $A$ itself and its lim
     $A \subseteq X$ is closed if and only if $A' \subseteq A$. i.e., $A$ contains all of its limit points. 
 \end{cor}
 
+\newpage 
+
+\section{Basic notion of Hausdorff Space}
+
+We learned how can we define each shapes of sets and construct them into spaces. 
+\hl{Then we can wonder, what is the good shapes for spaces? And how can we categorize them?}
+Actually the answer for this question is dealt in further section but we define very part of them here
+since it will be heavily used. 
+
+\begin{defn}{Hausdorff Space}{defn_Hausdorff space}
+    A topological space $(X, \CT)$ is called Hausdorff space when 
+    \[\textit{$\forall \, x \neq y \in X$, there exists disjoint neighborhoods of $x, y$ respectively.}\]
+    In other words, we can \textit{seperate} two \textit{points} via their neighborhoods always. 
+\end{defn}
+
+Actually we can understand that why this is good property for space since real line $\BR$ 
+have this property. Once our space is Hausdorff, we can find a few interesting facts. 
+
+\begin{thm}{Finite sets in Hausdorff spaces}{thm_4.2}
+    Let $X$ be a Hausdorff space. Then, every finite set in $X$ is closed. 
+\end{thm}
+
+\begin{proof}
+    Since finite union of closed sets are closed, so it is sufficient to show that 
+    any singleton set $\{x\}$ is closed in $X$. Now suppose that $y \in X$ is a limit point of $\{x\}$. 
+    If $x \neq y$, since $X$ is Hausdorff we can find $U_1, U_2$ such that both are neighborhoods of $x, y$ respectively and $U_1 \cap U_2 = \emptyset$. 
+    Then, according to theorem \ref{thm:thm_points in closure},  $y$ can't be limit point of $\{x\}$. 
+    So unless $x$ is limit point or not, we can state $\{x\}$ contained all its limit points and so closed set. 
+\end{proof}
+
+Now we find next interesting property of Hausdorff space. Let's call the $\BN$-indexed sets of points in $X$ by \textit{sequences} and denoted by $\{x_n\}_{n \in \BN}$. 
+In general notion, we state that $\{x_n\}_{n \in \BN}$ converges to $x \in X$ when 
+\[\textit{For any neighborhood $U$ of $x$, we can find $N \in \BN$ such that $x_m \in U$ for $m \geq N$.}\]
+Then following good property holds in Hausdorff space. 
+
+\begin{thm}{Unique Convergency in Hausdorff Space}{thm_unique convergency in Hausdorff space}
+    If $X$ is a Hausdorff space, then any sequences in $X$ converges into at most one point.
+\end{thm}
+
+\begin{thm}{Hausdorff spaces with Famous Topologies}{thm_4.4}
+    Any space with Order topology, Subspace topology of Hausdorff space is Hausdorff. 
+\end{thm}
+
+\newpage 
+
+\section{Continuous Functions and Homeomorphisms}
+
 \end{document}
