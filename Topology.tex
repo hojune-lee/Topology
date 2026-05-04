@@ -242,7 +242,6 @@ pdfauthor={Hojune Lee},
 
 \tcbset{remstyle/.style={commonstyle, colback=orange!5, colframe=orange!40!black}}
 
-% [Theorem Style]
 \newtcbtheorem[number within=section]{thm}{Theorem}{thmstyle}{thm}
 \newtcbtheorem[use counter from=thm]{cor}{Corollary}{thmstyle}{cor}
 \newtcbtheorem[use counter from=thm]{prop}{Proposition}{thmstyle}{prop}
@@ -254,13 +253,11 @@ pdfauthor={Hojune Lee},
 \newtcbtheorem[use counter from=thm]{claim}{Claim}{thmstyle}{clm}
 \newtcbtheorem[use counter from=thm]{prob}{Problem}{thmstyle}{prob}
 
-% [Definition Style]
 \newtcbtheorem[use counter from=thm]{defn}{Definition}{defstyle}{def}
 \newtcbtheorem[use counter from=thm]{exmp}{Example}{defstyle}{ex}
 \newtcbtheorem[use counter from=thm]{exer}{Exercise}{defstyle}{exe}
 \newtcbtheorem[use counter from=thm]{notn}{Notation}{defstyle}{not}
 
-% [Remark Style]
 \newtcbtheorem[use counter from=thm]{rem}{Remark}{remstyle}{rem}
 \newtcbtheorem[use counter from=thm]{warn}{Warning}{remstyle}{wrn}
 
@@ -1144,6 +1141,108 @@ We can define connected space slightly differently.
 \end{proof}
 
 \hl{Here, we can imagine that not only elements but also a limit point acts role of \textit{connection port} of a set.}
+First, we can state the notion of \textit{connection port} of elements as following lemmata. 
+
+\begin{lem}{Connected Subspaces}{connected subspaces}
+    If the sets $C$ and $D$ form a seperation of $X$, and if $Y$ is a connected subspace of $X$, 
+    then $Y$ lies entirely within either $C$ or $D$.
+\end{lem}
+
+\begin{proof}
+    Suppose not, then $C \cap Y, D \cap Y \neq \emptyset$ and $(C \cap Y) \cap (D \cap Y) = \emptyset$ and both are open in $Y$, 
+    moreover $(C \cap Y) \cup (D \cap Y) = Y$. So, contradiction to $Y$ is connected subspace. 
+\end{proof}
+
+\begin{lem}{Connection Port - Elements}{connection port - elements}
+    The union of connected subspaces that \textcolor{red}{point in common} is connected. 
+\end{lem}
+
+\begin{proof}
+    Let $\{A_\alpha\}_{\alpha \in J}$ be a family of connected subspaces of $X$ and there exists $x \in X$ such that $x \in A_\alpha$ for any $\alpha \in J$. 
+    Suppose that $\bigcup A_\alpha$ is not connected. Then we can find $\bigcup A_\alpha = C \cup D$ where 
+    $C, D$ forms seperation of $\bigcup A_\alpha$. W.L.O.G., $x \in C$. 
+    Then, according to \ref{lem:lem:connected subspaces}, every $A_\alpha \subseteq C$ so $D = \emptyset$ which is contradiction. 
+\end{proof}
+
+Now we state the notion of connection port of limit points as following theorem. 
+
+\begin{thm}{Connection Port - Limit Points}{connection port - limit points}
+    Let $A$ be connected subspace of $X$. For $A \subseteq B \subseteq \overbar{A}$, then
+    $B$ is connected subspace. 
+\end{thm}
+
+\begin{proof}
+    Suppose that $B$ is not connected. Then, we can find seperation $U, V$ of $B$ such that 
+    $U$ contains all its limit points in $B$ and $V$ also. However since $A \subseteq B$, according to \ref{lem:connected subspaces}
+    $A$ entirely in $U$ without loss of generality. 
+    Then all elements in $V$ is $B \setminus A \subseteq A'$. But they are limit points of $A \subseteq U$, contradiction. 
+\end{proof}
+
+Now we'll see important results for connected spaces. The big question is, \hl{what preserves the connectedness?}
+
+\begin{thm}{Continuous Map Preserves Connectedness}{continuous map preserves connectedness}
+    The image of connected set under continuous map is connected. 
+\end{thm}
+
+\begin{proof}
+    Let $f: X \rightarrow Y$ is continuous map and $X$ is connected space. 
+    For convenience, let $Y = \Im(X)$. 
+    If $Y$ is not connected, there are $U, V$ forming seperation of $Y$. 
+    Since they are open, $f^{-1}(U), f^{-1}(V)$ also open in $X$. 
+    And they are non-empty and disjoint partition of $X$, contradiction to $X$ is connected. 
+\end{proof}
+
+\begin{thm}{Finite Cartesian Product of connected spaces}{finite cartesian product of connected spaces}
+    A finite Cartesian product of connected spaces is connected.
+\end{thm}
+
+\begin{proof}
+    It is enough to show that if $X, Y$ are connected spaces, then $X \times Y$ is connected. 
+    Pick one point $a \times b$ in $X \times Y$. For any $x \in X$, since $x \times Y \cong Y$ and $X \times b \cong X$, 
+    both of $x \times Y, X \times b$ are connected. Then \ref{lem:connection port - elements} implies that 
+    following subspace is connected: 
+    \[T_x = (X \times b) \cup (x \times Y)\]
+    Now, form the union $\bigcup_{x \in X} T_x$ then this is also connected since $a \times b \in T_x$ for any $x \in X$ and then \ref{lem:connection port - elements}. 
+    However, $\bigcup_{x \in X}T_x = X \times Y$. So $X \times Y$ is connected. 
+\end{proof}
+
+Here are some interesting results. As we refered in \ref{prop:box topology versus product topology}, 
+when we consider the arbitrary cartesian products, the connectedness depends on what topology we take for the space. 
+
+\begin{thm}{Box Topology and Product Topology, in connectedness}{8.9}
+    Let $\{X_\alpha\}_{\alpha \in J}$ is family of connected spaces. 
+    $\prod_{\alpha \in J}X_\alpha$ is connected under product topology, but not always true under box topology. 
+\end{thm}
+
+The example is quite tricky. We can imagine $\BR^\omega$ as a set of sequences on $\BR$. 
+Then, we can categorize such sequences by: 
+\[A: \text{ Bounded sequences }, \quad B: \text{ Unbounded sequences}\]
+Then $A \cap B = \emptyset$, $A \cup B = \BR^{\omega}$. 
+Now we claim that $A, B$ both are open. 
+For sequence $\{x_n\}_{n \in \BN}$, construct 
+\[U = (x_1 - 1, x_1 + 1) \times (x_2 - 1, x_2 + 1) \times \cdots\]
+Then $U$ is open in box topology, and $U \subseteq A$ if $\{x_n\}$ is bounded, and $U \subseteq B$ if $\{x_n\}$ is unbounded. 
+So $A, B$ both are open and $\BR^{\omega}$ is not connected. 
+Actually this example shows that second part of \ref{thm:8.9}. 
+\begin{proof}
+    Choose $(x_\alpha)_{\alpha \in J}$ in $\prod X_\alpha$. 
+    We can define $Y$ by set of $(y_\alpha)_{\alpha \in J}$ such that $y_\alpha \neq x_\alpha$ for finitely many $\alpha \in J$. 
+    Then, we can define $X_K$ by $\prod H_\alpha$ such that $H_\alpha = X_\alpha$ if $\alpha \in K$ and $H_\alpha = \{x_\alpha\}$ if not. 
+    Then $X_K \cong \prod_{\alpha \in K}X_\alpha$ Here if $K$ is finite, then $\prod_{\alpha \in K} X_\alpha$ is connected by \ref{thm:finite cartesian product of connected spaces} 
+    and so for $X_K$. 
+    Note that $Y = \bigcup_{\forall K \subseteq J, |K| < \infty} X_K$ and each $X_K$ has common point 
+    $(x_\alpha)$. So $Y$ is connected. 
+    Now suppose any basis element $\prod_{\alpha \in L, |L| < \infty} U_\alpha$ for $\prod X_\alpha$. 
+    In such basis element, we can always find 
+    \[(z_\alpha) = \begin{cases}
+        x_\alpha & \alpha \notin L \\
+        z_\alpha & \alpha \in L
+    \end{cases}\]
+    Then it is clear that $(z_\alpha) \in \prod_{\alpha \in L, |L| < \infty} U_\alpha$ and $(z_\alpha) \in Y$. 
+    So, every basis of $\prod X_\alpha$ intersects $Y$. Means that every points of $\prod X_\alpha$ is limit points of $Y$, 
+    implies that $\overbar{Y} = \prod X_\alpha$. However $Y$ is connected, so $\overbar{Y}$ also connected by \ref{thm:connection port - limit points}. 
+    So $\prod X_\alpha$ also connected. 
+\end{proof}
 
 \newpage 
 
