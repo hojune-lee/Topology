@@ -30,6 +30,7 @@
 \usepackage{soul}
 \usepackage{xcolor}
 \sethlcolor{yellow!40!white}
+\usetikzlibrary{decorations.markings, arrows.meta}
 
 \linespread{1.4}
 
@@ -873,6 +874,276 @@ This implies that, $y_\beta \in V_\beta \cap A_\beta$. So, $x_\beta \in \overbar
 \newpage 
 
 \section{The Quotient Topology}
+
+The notion of quotient is always non-trivial(But, very fun if once you understand). 
+In the Group theory, we encounter the quotient group with normal subgroups. 
+The intuitive concept was that, grouping some subset into sort of equivalent classes. 
+We can do same thing in topology. Whenever the space is $X$, we can grouping some elements in equivalent classes. 
+Such notion is visualizable and natural, see following figure. 
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1.5]
+        \tikzset{midarrow/.style={decoration={markings, mark=at position 0.55 with {\arrow{>}}},postaction={decorate}}}
+        \tikzset{doublemidarrow/.style={decoration={markings, mark=at position 0.55 with {\arrow{>>}}},postaction={decorate}}}
+
+        \fill[blue!5] (0,0) rectangle (2,2);
+
+        \draw[thick, midarrow] (0,0) -- (2,0) node[midway, below] {$a$};
+        \draw[thick, midarrow] (0,2) -- (2,2) node[midway, above] {$a$};
+        \draw[thick, doublemidarrow] (0,0) -- (0,2) node[midway, left] {$b$};
+        \draw[thick, doublemidarrow] (2,0) -- (2,2) node[midway, right] {$b$};
+
+        \filldraw (0,0) circle (1pt) node[below left] {$p$};
+        \filldraw (2,0) circle (1pt) node[below right] {$p$};
+        \filldraw (0,2) circle (1pt) node[above left] {$p$};
+        \filldraw (2,2) circle (1pt) node[above right] {$p$};
+    \end{tikzpicture}
+    \caption{The fundamental polygon of a torus.}
+    \label{fig:torus_polygon}
+\end{figure}
+
+Now suppose that 2 sides represented as $b$ are equivalent. 
+Then the natural image of such rectangle can be represented as following. 
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1]
+        \tikzset{arrowA/.style={decoration={markings, mark=at position 0.65 with {\arrow{>}}},postaction={decorate}}}
+        \tikzset{arrowB/.style={decoration={markings, mark=at position 0.55 with {\arrow{>>}}},postaction={decorate}}}
+
+        \fill[gray!10] (-1.5, 2) arc (180:360:1.5 and 0.5) -- (1.5, 0) arc (360:180:1.5 and 0.5) -- cycle;
+        \fill[gray!20] (0,2) ellipse (1.5 and 0.5);
+
+        \draw[thick, red, dashed] (1.5, 2) arc (0:180:1.5 and 0.5);
+        \draw[thick, red, dashed] (1.5, 0) arc (0:180:1.5 and 0.5);
+
+        \draw[thick] (-1.5, 0) -- (-1.5, 2);
+        \draw[thick] (1.5, 0) -- (1.5, 2);
+
+        \draw[thick, red, arrowA] (-1.5, 2) arc (180:360:1.5 and 0.5) node[pos=0.7, below right] {$a$};
+        \draw[thick, red, arrowA] (-1.5, 0) arc (180:360:1.5 and 0.5) node[pos=0.7, below right] {$a$};
+
+        \draw[thick, blue, arrowB] (0, -0.5) -- (0, 1.5) node[midway, right] {$b$};
+
+        \filldraw[black] (0, 1.5) circle (1.5pt) node[above left] {$p$};
+        \filldraw[black] (0, -0.5) circle (1.5pt) node[below left] {$p$};
+
+    \end{tikzpicture}
+    \caption{The cylinder formed by identifying the edges $b$ of the fundamental polygon.}
+    \label{fig:torus_cylinder}
+\end{figure}
+
+Now, do same thing to the both side $a$ also. 
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1]
+        % 화살표 스타일 정의
+        \tikzset{arrowA/.style={decoration={markings, mark=at position 0.3 with {\arrow{>}}},postaction={decorate}}}
+        \tikzset{arrowB/.style={decoration={markings, mark=at position 0.5 with {\arrow{>>}}},postaction={decorate}}}
+
+        % 1. 바탕색 칠하기 및 투명 구멍 뚫기
+        % 윗입술과 똑같이 위로 휘게(bend left) 만들어서 완벽한 '눈' 모양으로 구멍을 뚫어줍니다.
+        \fill[gray!10, even odd rule] 
+            (0,0) ellipse (3 and 1.5)
+            (-1.2, -0.1) to[bend left=30] (1.2, -0.1)  % 위로 휨
+            to[bend left=30] cycle;                    % 되돌아오면서 아래로 휨
+
+        \draw[thick] (0,0) ellipse (3 and 1.5);
+
+        \draw[thick] (-1.5, 0) to[bend right=40] (1.5, 0);
+        \draw[thick] (-1.2, -0.1) to[bend left=30] (1.2, -0.1);
+    \end{tikzpicture}
+    \caption{The standard generators $a$ and $b$ on the torus $\mathbb{T}^2$.}
+    \label{fig:torus_generators}
+\end{figure}
+
+Our goal in this section is generalizing this notions into topological words. 
+Let's define and understand bunch of things from now on. 
+
+\newpage 
+
+\begin{defn}{Quotient Map}{quotient map}
+    Let $X, Y$ be topological spaces and $p: X \rightarrow Y$ be a surjective map. 
+    The map $p$ is said to be a \textit{quotient map} provided a subset $U$ of $Y$ is open in $Y$ 
+    if and only if $p^{-1}(U)$ is open in $X$. 
+\end{defn}
+
+\begin{rem}{}{7.2}
+    Following is the order of strongness of definitions. 
+    \[\begin{tikzcd}
+    & & & Quotient ~ Map & \arrow[dr, no head] & & \\
+    Continuous ~ Map \arrow[r, no head] & \arrow{ur} \arrow{dr} & & & & \arrow[r] & Homeomorphism \\
+    & & & Embeddings & \arrow[ur, no head] & &
+    \end{tikzcd}\]
+    Quotient map is continuous map with surjectivity and Embedding is continuous map with injectivity, and Homeomorphism is continuous map with bijectivity. 
+\end{rem}
+The if and only if condition above implies that, quotient map $p$ is continuous($\Rightarrow$) and 
+if preimage $p^{-1}(U)$ of something $U \subseteq Y$ is open in $X$, then $U$ is open in $Y$.($\Leftarrow$)
+\hl{Note that, there aren't any guarantee that image of any open set in $X$ is also open in $Y$.}
+We can obtain an alternative way to define quotient maps. 
+
+\begin{defn}{Saturated Set}{saturated set}
+    Let $X, Y$ be topological spaces and $p: X \rightarrow Y$ is a surjective map. 
+    We say that $C \subseteq X$ is saturated with respect to $p$ if 
+    $C$ equals the complete preimage of some subset of $Y$. i.e., $p^{-1}(p(C)) = C$ holds. Equivalently, 
+    $C$ contains all $p^{-1}(\{y\})$ such that intersects with $C$. 
+\end{defn}
+
+Then now we can say that \hl{$p$ is quotient map if and only if $p$ is continuous and every open saturated set in $X$ map to open set in $Y$.}
+We also say that $f: X \rightarrow Y$ is an \textit{open map} if image of open set in $X$ is open in $Y$. 
+Then, every surjective continuous open map is quotient map. (First one is stronger notion). 
+Before move on, we summarize such confusing concepts in following way. 
+
+\begin{rem}{Continuous, Quotient, Homeomorphism}{7.4} 
+    \begin{itemize}
+        \item If $f$ is continuous, $U \subseteq Y$ is open $\implies$ complete preimage of $U$ is open in $X$. 
+        \item If $f$ is quotient map, there is a bijection between open sets in $Y$ and open complete preimages in $X$. 
+        \item If $f$ is Homeomorphism, there is a bijection between open sets in $Y$ and open sets in $X$. 
+    \end{itemize}
+\end{rem}
+
+Now we can define \textit{quotient topology} and \textit{quotient space} which are main topics in this section. 
+\begin{defn}{Quotient Topology}{quotient topology}
+    $X$ is a space and $A$ is a set. For any $p: X \rightarrow A$ surjective map, 
+    \hl{there exists unique topology of $A$ such that make $p$ be a quotient map}. 
+    Such topology is called \textit{quotient topology} induced by $p$. 
+\end{defn}
+
+Such topology of $A$ is just collection of $U \subseteq A$ such that $p^{-1}(U)$ is open in $X$. 
+It automatically makes that $p$ be a continuous map, and even quotient map. 
+Intuitively, surjective map can be imagine as a compression of $X$ into smaller set $A$. 
+Above definition states that, there is the unique \lq shape' for $A$ that makes this becomes \lq good' compression. 
+Actually the \lq compression' of space $X$ is quite non-trivial in above context. 
+We define the \textit{quotient space} in general and see how to describe such compression in topological words. 
+
+\begin{defn}{Quotient Space}{quotient space}
+    Let $X$ be a topological space and $X^*$ be a disjoint partition of $X$. 
+    We can define the projection $p: X \rightarrow X^*$ in natural manner, which is surjective map. 
+    Then \ref{def:quotient topology} says that we can find unique \textit{quotient topology} of $X^*$. 
+    With it, $X^*$ is called quotient space of $X$. 
+\end{defn}
+
+Then it is not hard to understand that $X^*$ is compressed space of space $X$. 
+Each element in $X^*$ is a sort of \textit{representation} of its equivalent classes of elements of $X$. 
+So any $U \subseteq X^*$ is collection of \textit{equivalent classes} and its preimage $p^{-1}(U)$ is open. 
+
+As we stated in first of this section, now we can generalize the constructing torus from 2D rectangle. 
+Let 
+\[X = [0,1] \times [0,1]\]
+Then we can define $X^*$ by: 
+\[X^* = \begin{cases}
+    \{(x, y)\} & (x,y) \in (0,1) \times (0,1) \\
+    \{(0, y), (1, y)\} & y \in (0,1) \\
+    \{(x, 0), (x, 1)\} & x \in (0, 1) \\
+    \{(0, 0), (0, 1), (1, 0), (1, 1)\}
+\end{cases}\]
+
+Then $X^*$ becomes a torus and we can pull-back open sets on torus into open sets on rectangle. 
+We state 2 theorems related to continuity on quotient maps. 
+
+\newpage 
+
+\begin{thm}{Continuity of Quotient Map - Mapping Out}{7.7}
+    Let $p: X \rightarrow Y$ be a quotient map. 
+    Let $Z$ be a space and let $g: X \rightarrow Z$ be a map such that constant on each $p^{-1}(y)$ for $y \in Y$. 
+    Then, $g$ induces a map $f: Y \rightarrow Z$ such that $f \circ p = g$. 
+    $f$ is continuous if and only if $g$ is continuous, $f$ is quotient map if and only if $g$ is quotient map.
+\end{thm}
+
+\begin{center}
+\begin{tikzcd}[column sep=huge, row sep=huge, ampersand replacement=\&]
+    X \arrow[d, "p"'] \arrow[rd, "g"] \\
+    Y \arrow[r, dashed, "f"] \& Z
+\end{tikzcd}
+\end{center}
+
+\begin{proof}
+    $f$ can be well-defined as following way: 
+    \[f: y \mapsto g\left( p^{-1}(y) \right)\]
+    Then for any $x \in X$, 
+    \[f \circ p (x) = g(p^{-1}p(x)) = g(x)\]
+    Then it is clear that if $f$ is continuous(quotient map), then $g$ is continuous(quotient map). 
+    Now suppose that $g$ is continuous. Let $U$ be any open set in $Z$. 
+    Then, $g^{-1}(U)$ is open in $X$. However, $g^{-1}(U)$ is complete preimage of some subset $V$ in $Y$ so $p^{-1}(V) = g^{-1}(U)$. 
+    Since $p$ is quotient map, $V$ is open in $Y$. However, $V = p \circ g^{-1}(U) = f^{-1}(U)$ is open in $Y$, so $f$ is continuous.  
+\end{proof}
+
+\begin{cor}{}{7.8}
+    Let $g: X \rightarrow Z$ be a surjective continuous map. Let $X^*$ be the following 
+    collection of subsets of $X$: 
+    \[X^* = \{g^{-1}(z) \mid z \in Z\}\]
+    Give $X^*$ the quotient topology. 
+    \begin{itemize}
+        \item The map $g$ induces a bijective continuous map $f: X^* \rightarrow Z$, which is a homeomorphism if and only if $g$ is a quotient map. 
+        \begin{center}
+        \begin{tikzcd}[column sep=huge, row sep=huge, ampersand replacement=\&]
+            X\arrow[d, "p"'] \arrow[rd, "g"]\\
+            X^* \arrow[r, "f", dashed, no head] \& Z 
+        \end{tikzcd}
+        \end{center}
+        \item If $Z$ is Hausdorff, so is $X^*$.  
+    \end{itemize}
+\end{cor}
+
+\begin{proof}
+    Since $g$ is surjective, $f = g \circ p^{-1}$ clearly forms the bijection between $X^*$ and $Z$. 
+    Suppose that $f$ is a homeomorphism and $g^{-1}(U)$ is open for some subset $U$ of $Z$. 
+    Since $f$ is bijection, there exists $V$ in $X^*$ such that $f(V) = U$. 
+    Then by definition of $f$, $p^{-1}(V) = g^{-1}(U)$. So $p^{-1}(V)$ is open in $X$, implies that $V$ is open in $X^*$. 
+    Since $f$ is homeomorphism, $U$ is open in $Z$. 
+    Suppose that $g$ is a quotient map. Then for any open set $U$ in $X$, 
+    $p^{-1}(U)$ and $g^{-1}(U)$ both are open in $X^*, Z$ respectively. 
+    However, they bijects via $f$, so $f$ is homeomorphism. 
+    If $Z$ is Hausdorff, $X^*$ is clearly Hausdorff. 
+\end{proof}
+
+\newpage 
+
+\section{Connected Spaces}
+
+From now on, our main focus is on defining and analyzing \lq good' shapes and spaces in general. 
+First of all, we can imagine the good properties in $\BR^n$ for example, \textit{Maximum Value Theorem, Intermediate Value Theorem, Uniform Continuity Theorem} so on. 
+However, in $\BR$, they holds for closed interval $[a, b]$. So we can imagine that $[a, b]$ is somewhat good-shaped subspace of the good space $\BR$. 
+Since the condition for \lq good' can be differ for each properties, so we want to generalize them as much as possible. 
+The first concept is quite natural, which is called \textit{connectedness}. 
+
+\begin{defn}{Seperation and Connected}{seperation and connected}
+    Let $X$ be a topological space. 
+    We say that $U, V$ is a \textit{seperation} of $X$ if 
+    $U, V \neq \emptyset, X = U \cup V$ and $U, V$ are open set in $X$. 
+    If such $U, V$ are not exists in $X$, then we say that $X$ is \textit{connected} space. 
+\end{defn}
+
+\hl{Connectedness is obviously topological invariant. i.e., any Homeomorphism preserves the connectivity.} 
+This is clear since any Homeomorphisms preserves the seperation. 
+We can define connected space slightly differently. 
+
+\begin{lem}{}{8.2}
+    $X$ is connected if and only if clopen sets in $X$ are only the trivial ones(i.e., if $A \subseteq X$ is both closed and open, then $A = \emptyset$ or $X$). 
+\end{lem}
+
+\begin{proof}
+    Existance of clopen set is equivalent to existance of seperation of $X$. 
+\end{proof}
+
+\begin{lem}{Subspace Connectivity}{subspace connectivity}
+    If $Y$ is a subspace of $X$, a seperation of $Y$ is a pair of disjoint nonempty sets $A$ and $B$ whose union is $Y$, 
+    neither of which contains a limit point of the other. 
+    The space $Y$ is connected if and only if there exists no seperation of $Y$. 
+\end{lem}
+
+\begin{proof}
+    Suppose that $Y$ is not connected, then there exists $A, B \neq \emptyset$, $A \cup B = Y$ and $A, B$ are open in $Y$. 
+    Then, $A, B$ are also closed in $Y$. So, by \ref{thm:thm_3.6}, 
+    \[A = \text{ closure of $A$ in $Y$ } = \overbar{A} \cap Y\]
+    And similarly for $B$, we can obtain that $A, B$ contains all of its limit points in themselves. So, $A, B$ is the seperation of $Y$. 
+    Suppose that $A, B$ are a seperation of $Y$. 
+    Then we can obtain $A, B$ are both closed and open in $Y$, so $Y$ is not connected. 
+\end{proof}
+
+\hl{Here, we can imagine that not only elements but also a limit point acts role of \textit{connection port} of a set.}
 
 \newpage 
 
