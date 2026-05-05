@@ -1246,6 +1246,113 @@ Actually this example shows that second part of \ref{thm:8.9}.
 
 \newpage 
 
+\section{Connected Subspaces of The Real Line}
+
+In this section, we state full-of intuitive parts about connectedness. 
+We intuitively knows that any intervals and rays are connected in $\BR$. 
+Such connected sets in $\BR$ has \lq good' properties, like \textit{intermediate value theorem}. 
+Our goal is find the general condition that makes our space holds \textit{intermediate value theorem}, like $\BR$. 
+And also, state another fully intuitive notion called \textit{path connected}. 
+
+\begin{defn}{Linear continuum}{linear continuum}
+    A simply ordered set $L$ non-empty is called a \textit{linear continuum} if following holds: 
+    \begin{enumerate}
+        \item $L$ has the least upper bound property.
+        \item If $x < y$, exists $z$ such that $x < z < y$. 
+    \end{enumerate}
+    Where least upper bound property means that, 
+    if $A \subseteq L$ is bounded above, then $\sup A \in L$. 
+\end{defn}
+
+\hl{This is the target property that our general space behaviors like $\BR$ (in connectedness' perspective).}
+First $\BR$-like behavior is following. 
+
+\begin{thm}{Convex Connectedness}{convex connectedness}
+    Let $L$ is a linear continuum with ordered topology. \textit{Any convex set $Y$ in $L$ is connected}. 
+    So, $L$ itself, intervals, and rays are connected. 
+\end{thm}
+
+\begin{proof}
+    Suppose that our convex set $Y \subseteq L$ is not connected. 
+    Then $Y$ has a seperation $A, B$. 
+    Let's choose $a \in A, b \in B$ and $a < b$ withour loss of generality. 
+    Since $Y$ is convex, $[a,b] \subseteq Y$. 
+    Let's denote 
+    \[A_0 = [a,b] \cap A, \quad B_0 = [a,b] \cap B\]
+    However, $[a,b] \subseteq Y \subseteq L$ also supspace and $A_0, B_0$ are non-empty open sets in $[a, b]$, which union is $[a,b]$. 
+    So $A_0, B_0$ forms seperation of $[a, b]$.
+    Now, let $x = \sup A_0$. This is well-defined since $A_0$ is bounded and $L$ is linear continuum. 
+    And $a \leq x \leq b$, so $x \in [a,b]$. Suppose that $x \in B_0$. 
+    Since $B_0$ is open, we can find small open interval for $x$ in $B_0$. 
+    See it partly, we obtain $(d, x] \subseteq B_0$. Then $d$ is smaller upperbound than $x$, contradiction. 
+    Vice versa, $Y$ is connected. 
+\end{proof}
+Now it's time to generalize one of the famous theorem in real analysis, which is \textit{intermediate value theorem}. 
+\hl{The condition is much generalized, $f$ is continuous, $X$ is connected, $Y$ is order space. }
+\begin{thm}{The Intermediate Value Theorem}{IVT}
+    Let $f: X \rightarrow Y$ be a continuous map where $X$ is connected and $Y$ is order space. 
+    For $a, b \in X$, if $f(a) < r < f(b)$ then there exists $c \in X$ such that $f(c) = r$. 
+\end{thm}
+
+\begin{proof}
+    Suppose that such $c$ is not exists. 
+    Then, $r \notin \Im(X)$ so we can seperate $\Im(X)$ by 
+    \[A_0 = \Im(X) \cap (-\infty, r), \quad B_0 = \Im(X) \cap (r, \infty)\]
+    Since $A_0, B_0$ is open in $\Im(X)$ and non-empty disjoint, 
+    they are seperation of $\Im(X)$. However, the image of connected space under continuous map is connected by \ref{thm:continuous map preserves connectedness}.
+    So this is contradiction, and such $c$ is exists. 
+\end{proof}
+
+Now we define another version of connectedness, which is called \textit{path connected}. 
+This is drawable concepts, but not exactly equivalent to what we defined. 
+
+\begin{defn}{Path Connected}{path connected}
+    Let $X$ be a topological space. We define a \textit{path} between $x, y \in X$ by a continuous mapping 
+    $f: [a, b] \rightarrow X$ such that $f(a) = x, f(b) = y$. Where $[a, b] \subseteq \BR$. 
+    $X$ is called \textit{path connected} if for every $x, y \in X$, there exists a path from $x$ to $y$. 
+\end{defn}
+
+\begin{thm}{Path Connected Implies Connected}{path connected implies connected}
+    If $X$ is path connected space, then $X$ is connected space. 
+\end{thm}
+
+\begin{proof}
+    Suppose that $X$ is not connected so there is a seperation $A, B$ of $X$. 
+    Then since every path is image of convex(so, connected) space, \textit{path is connected}. 
+    So by \ref{lem:connected subspaces}, path is entirely in $A$ or $B$. 
+    Then, we can't find a path between $a \in A$ and $b \in B$, contradiction to $X$ is path connected. 
+    So, $X$ is connected.
+\end{proof}
+
+\begin{prop}{Connected Does Not Implies Path Connected}{connected does not implies path connected}
+    Let $S = \{x \cdot \sin(1/x) \mid 0 < x \leq 1\}$. $\overbar{S}$ is connected but not path connected. 
+\end{prop}
+
+\begin{proof}
+    Since $S$ is image of $(0, 1]$ under continuous map, so $S$ is connected. This implies that $\overbar{S}$ is connected by \ref{thm:connection port - limit points}. 
+    Note that $\overbar{S} = S \cup (0 \times [-1, 1])$. 
+    There is not any path between $a \in S, b \in 0 \times [-1, 1]$. 
+    If there exists a path, $f: [0, 1] \rightarrow \overbar{S}$ such that $f(0) = b$ and $f(1) = a$ is continuous. 
+    However, it oscillate in $[-1, 1]$ near $x = 0$, continuity is not hold near $x = 0$. 
+\end{proof}
+
+\newpage 
+
+\section{Compact Space}
+
+When we say something is \lq compact', it means that \lq Wow, that's very good or suitable'. According to our textbook page 161, Munkres\cite{munkres}
+refer good historical development of the word \lq compact' in topology. 
+First, in $\BR$, we observe that any closed interval has very good properties like 
+uniform continuity theorem and maximum value theorem. 
+After that, mathematicians like Weierstrass observe that every infinite subsets of $[a, b]$ has a limit point. 
+Later, finally we find the core generalization via open coverings. 
+
+\begin{defn}{Open Covering}{open covering}
+
+\end{defn}
+
+\newpage 
+
 \bibliographystyle{plain}
 \bibliography{reference} 
 
