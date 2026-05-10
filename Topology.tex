@@ -1345,11 +1345,167 @@ refer good historical development of the word \lq compact' in topology.
 First, in $\BR$, we observe that any closed interval has very good properties like 
 uniform continuity theorem and maximum value theorem. 
 After that, mathematicians like Weierstrass observe that every infinite subsets of $[a, b]$ has a limit point. 
-Later, finally we find the core generalization via open coverings. 
+Later, finally we find the core generalization via open coverings. We begin with define open covering of space. 
 
 \begin{defn}{Open Covering}{open covering}
-
+    A family $\CA$ of subsets of $(X, \CT)$ is called \textit{open covering} of $X$ if 
+    every $A \in \CA$ is open and $\bigcup_{A \in \CA} A = X$. 
 \end{defn}
+
+With this definition, we define general \textit{compact} in topological spaces. 
+
+\begin{defn}{Compact}{compact}
+    $X$ is said to be \textit{compact} if for any open covering $\CA$ of $X$ contains \textit{finite subcollection} that also covers $X$. 
+\end{defn}
+
+You might realize that it is hard to specify given space is compact. To decide that given space is \textit{not} compact, 
+we tries to find proper open covering that we never find finite subcovering from there. Often 
+choose \textit{sequential} covering such that decreases, so if there exists finite subcovering, 
+some contradiction occurs. For example, following open covering for $(0,1]$ with standard topology shows this: 
+\[\{\left(1/n, 1\right] \mid n \in \BN\} \implies (0,1] \text{ is not compact }\]
+We can state some lemmata between previous concepts and compactness. 
+
+\begin{lem}{Subspace Compactness}{subspace compactness}
+    Let $Y$ be a subspace of $X$. $Y$ is compact if and only if 
+    every open covering of $Y$ in $X$ contains a finite subcovering of $Y$. 
+\end{lem}
+
+\begin{thm}{Closed in Compact is Compact}{closed in compact is compact}
+    Closed subspace of compact space is compact. 
+\end{thm}
+
+\begin{thm}{Compact in Hausdorff is Closed}{compact in Hausdorff is closed}
+    Compact subspace of Hausdorff space is closed.
+\end{thm}
+
+\begin{proof}
+    Let $X$ be a Hausdorff space and $C$ is subspace of $X$ which is compact. 
+    Then, we'll show that $X \setminus C$ is open in $X$. 
+    Choose any $x \in X \setminus C$. 
+    Then for any $y \in C$, since $X$ is Hausdorff, we can find pair of disjoint open neighborhood $U_x, U_y$ with respect to $x, y$. 
+    We collect all of this into: 
+    \[\CA = \{U_y \mid y \in C\}\]
+    Then since this forms a open covering of $C$ in $X$, we can apply \ref{lem:subspace compactness} and 
+    obtain finite subcovering of $C$: 
+    \[\CA' = \{U_{y_1}, \cdots, U_{y_n}\}\]
+    We have its pair elements $U_{x}^1, \cdots, U_{x}^n$ and 
+    \[U = \bigcap_{i \in [n]} U_{x_i} \implies \text{ open neighborhood of $x$ disjoint with $C$ }\]
+    So, $U \subseteq X \setminus C$, implies that $X \setminus C$ is open in $X$. 
+\end{proof}
+
+We bring some useful features in above proof into following lemma. This will be appear in sections about seperation axioms. 
+
+\begin{lem}{}{10.6}
+    If $Y$ is a compact subspace of Hausdorff space $X$ and $x \notin Y$, 
+    then there exists two disjoint open sets $U$ and $V$: 
+    \[U \text{ is neighborhood of $x$ }, \quad Y \subseteq V\]
+\end{lem}
+
+Next few theorems construct the connection between continuous map and homeomorphisms with compactness.
+
+\begin{thm}{Continuous Map Preserves Compactness}{continuous preserves compact}
+    The image of compact space under continuous map is compact. 
+\end{thm}
+
+\begin{thm}{From Compact into Hausdorff}{}
+    Let $f: X \rightarrow Y$ be a bijective continuous map. If $X$ is compact and $Y$ is Hausdorff then $f$ is a homeomorphism. 
+\end{thm}
+
+\begin{proof}
+    Only thing we need to do is that show $f^{-1}$ is continuous. 
+    Then it is enough to show that, image of closed set in $X$ is also closed in $Y$. 
+    First, if $A \subseteq X$ is closed, then it is compact by \ref{thm:closed in compact is compact}. 
+    However, image of compact subspace under continuous map is also compact by previous theorem. 
+    Finally, compact subspace $\Im(A)$ under $f$ in Hausdorff space $Y$ is closed by \ref{thm:compact in Hausdorff is closed}. 
+\end{proof}
+
+Now we prove some important and quite non-trivial statements. 
+
+\begin{lem}{Tube Lemma}{tube lemma}
+    Let $X \times Y$ be a product space where $Y$ is compact. 
+    If $N$ is open set of $X \times Y$ containing $x_0 \times Y$ for some $x_0 \in X$, 
+    then $N$ contains some \textit{tube} $W \times Y$ about $x_0 \times Y$, where $W$ is a neighborhood of $x_0$ in $X$. 
+\end{lem}
+
+\begin{proof}
+    Since $N$ is an open set of $X \times Y$, we can denote $N$ is a union of basis element $\CT_X \times \CT_Y$. 
+    So, denote 
+    \[N = \bigcup_{\alpha \in J} (U_\alpha \times V_\alpha), \quad U_\alpha \in \CT_X, \quad V_\alpha \in \CT_Y\]
+    Now here, since $x_0 \times Y \subseteq N$, $\{V_\alpha \mid \alpha \in J, x_0 \in U_\alpha \}$ 
+    is open covering of $Y$ and so we can find finite subcovering of $Y$ by 
+    \[\{V_i \mid i \in [n], x_0 \in U_i \} \text{ such that } \bigcup_{i \in [n]} V_i = Y\]
+    Then, we construct 
+    \[W = \bigcap_{i \in [n]} U_i \implies W \text{ is neighborhood of $x_0$ in $X$}\]
+    Then it is clear that $W \times Y \subseteq N$. 
+\end{proof}
+
+\begin{thm}{Product of Finite Compact is Compact}{product of finite compact is compact}
+    The product of finitely many compact space is compact. 
+\end{thm}
+
+\begin{proof}
+    If is sufficient to show that if $X, Y$ is compact then $X \times Y$ is compact. 
+    Let $\CA$ be any open covering of $X \times Y$. 
+    Then for any fixed $x_0 \in X$, $x_0 \times Y$ is homeomorphic to $Y$ and so compact. 
+    By \ref{lem:subspace compactness}, $x_0 \times Y$ is compact subspace of $X \times Y$ and 
+    $\CA$ is a open covering of $x_0 \times Y$, so we can find finite subcovering $A_1, \cdots, A_n \in \CA$ such that 
+    $x_0 \times Y \subseteq \bigcup A_i = N$. 
+    Then according to \ref{lem:tube lemma}, we can find $W_{x_0} \times Y \subseteq N$ such that $W$ is neighborhood of $x_0$ in $X$. 
+    Do this for every $x_0 \in X$ then collect 
+    \[\{W_x \mid x \in X\} \implies \text{ open covering of $X$ } \implies \text{Finite subcovering } \{W_{x_1}, \cdots, W_{x_m}\}\]
+    Then, 
+    \[\{W_{x_i} \times Y \mid i \in [m]\} \implies \text{Finite Subcovering of $\CA$ of $X \times Y$}\] 
+    This completes the proof.
+\end{proof}
+
+\begin{thm}{Tychonoff Theorem}{Tychonoff theorem}
+    Product of arbitrary many compact spaces is compact. 
+\end{thm}
+
+\begin{proof}
+    We prove this later.
+\end{proof}
+
+Finally, we propose another criterion for space to be compact. 
+
+\begin{defn}{Finite Intersection Property}{finite intersection property}
+    A collection $\CC$ of subsets of $X$ is said to have the \textit{finite intersection property} if for 
+    every finite subcollection 
+    \[\{C_1, \cdots, C_n\}\]
+    of $\CC$, the intersection $C_1 \cap \cdots \cap C_n$ is nonempty. 
+\end{defn}
+
+\begin{thm}{Finite Intersection Property Criterion}{finite intersection property criterion}
+    $X$ is compact if and only if every collection $\CC$ of \textit{closed subsets} in $X$ having finite intersection property. 
+    i.e., $\bigcap_{C \in \CC} C \neq \emptyset$. 
+\end{thm}
+
+\begin{proof}
+    First, it is important to observe the connection between definition of open covering 
+    and finite intersection property of closed sets. 
+    Let $\CC$ be a given collection of closed sets in $X$. Then, we can construct 
+    \[\CA = \{X \setminus C \mid C \in \CC\}\]
+    This is collection of open sets in $X$. Suppose that $\CA$ has a finite subcovering of $X$. 
+    \[\{A_1, \cdots, A_n\} \subseteq \CA \implies \bigcup_{i \in [n]} A_i = X\]
+    This implies that 
+    \[\bigcap_{i \in [n]} C_i = \emptyset \text{ where $C_i = X \setminus A_i \in \CC$ }\]
+    However, $X$ is compact if and only if for any open covering $\CA$, we can find finite subcovering in $\CA$. 
+    So, $X$ is compact if and only if any collection of open sets $\CA$ doesn't have finite subcovering, then $\CA$ not cover $X$. 
+    Latter can be translated into words of $\CC$ and finite intersection property: 
+    \begin{center}
+        \textit{Any collection $\CC$ of closed subsets in $X$ having finite intersection property.}
+    \end{center}
+\end{proof}
+
+\newpage 
+
+\section{Metric and Metric Topology}
+
+Before moving on to the compactness of Euclidean spaces, it is good time to define the 
+general notion of distance, which is called \textit{metric} and topology induced by it. 
+$\BR$ is very intuitive space for us and we learned so far about $\BR$. 
+In many theories including topology, sometimes they behaves like \textit{meta-theory} of our domain. 
+The notion of \textit{metric} is sort of that. 
 
 \newpage 
 
