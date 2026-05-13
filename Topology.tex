@@ -1671,6 +1671,252 @@ So we now observe how can we generalize that cases and connect with box topology
     Then, $\mathbf{x} \in B_D(\mathbf{x}, \varepsilon) \subseteq \prod U_i$
 \end{proof}
 
+\begin{thm}{Subspaces of Metric Space is Metric Space}{11.13}
+    Let $X$ be a metric space with metric $d$. 
+    If $A$ is subspace of $X$ with subspace topology, $d|_{A \times A}$ is metric of $A$ 
+    and it induce that topology. 
+\end{thm}
+
+\begin{lem}{Metric Space is Hausdorff}{11.14}
+    Metric space is Hausdorff. 
+\end{lem}
+
+Once metric is defined, the notion of continuity become more intuitive to us. 
+As I mentioned, the formal definition of continuity said that \lq near images are from near domain'. 
+The concept \lq near' can be dealt with numerical number in metric space. \lq $\varepsilon$-near images are from $\delta$-near domain elements'. 
+
+\begin{thm}{Continuity on Metrizable Space}{continuity on metrizable space}
+    Let $f: X \rightarrow Y$ and $X, Y$ are metrizable with $d_X, d_Y$ respectively. 
+    The continuity of $f$ is equivalent to that given any $x \in X$ and $\varepsilon > 0$, 
+    there exists $\delta > 0$ such that 
+    \[d_X(x, y) < \delta \implies d_Y(f(x), f(y)) < \varepsilon\] 
+\end{thm}
+
+In analysis, the sequence is sort of important feature we studied. 
+We might want to generalize the concept of sequences and convergence also. 
+First one is the relation between limit points and convergent sequence. 
+
+\begin{lem}{The Sequence Lemma}{sequence lemma}
+    Let $X$ be a topological space. 
+    For $A \subseteq X$, if there is a sequence of points of $A$ converging to $x$, then $x \in \overbar{A}$. 
+    The converse holds if $X$ is metrizable. (i.e., if $X$ is metrizable there exists a sequence of points of $A$ such that converges into $x \in \overbar{A}$. )
+\end{lem}
+
+\begin{proof}
+    Let $\{a_n\}_{n \in \BN}$ converges to $x \in X$. 
+    By the definition, for any neighborhood $U$ of $x$ in $X$, 
+    there exists $N \in \BN$ such that if $a_n, n \geq \BN$ then $a_n \in U$. This automatically implies that 
+    for any neighborhood $U$ of $X$, $U \cap A \neq \emptyset$ so $x \in \overbar{A}$. 
+
+    Let $X$ be metrizable with $d$ and $x \in \overbar{A}$. 
+    Then, we can construct 
+    \[\{B_d(x, 1/n) \mid n \in \BN\}\]
+    becomes sequence of neighborhood of $x$ in $X$. 
+    However since $x \in \overbar{A}$, we can find elements of $A$ in each open balls. 
+    Let's denote them by $\{a_n\}_{n \in \BN}$. It converges to $x$ in $A$. 
+\end{proof}
+
+\begin{thm}{Continuity Preserves Convergence}{Continuity Preserves Convergence}
+    If $f: X \rightarrow Y$ is continuous and $\{x_n\}_{n \in \BN} \rightarrow x$ is a convergent sequence in $X$ 
+    then $\{f(x_n)\}_{n \in \BN}$ converges to $f(x)$ in $Y$. 
+    The converges holds if $X$ is metrizable. 
+\end{thm}
+
+\begin{proof}
+    The preimage of neighborhood $U$ of $f(x)$ in $Y$ is neighborhood $V$ of $x$ in $X$, so we can find 
+    $N \in \BN$ such that $x_n \in N$ for $n \geq V$. So, all of images of them sended into $U$, so $\{f(x_n)\}$ converges to $f(x)$. 
+
+    If $X$ is metrizable and latter condition holds, we'll see the continuity of $f$ by $f(\overbar{A}) \subseteq \overbar{f(A)}$. 
+    If $x \in \overbar{A}$, then we can find $\{x_n\}$ in $A$ converges to $x$ since $X$ is metrizable, by \ref{lem:sequence lemma}. 
+    Then, $\{f(x_n)\}$ converges to $f(x)$ by the condition. So, $f(x) \in \overbar{f(A)}$. This implies that 
+    $f(\overbar{A}) \subseteq \overbar{f(A)}$, $f$ is continuous by \ref{thm:thm_5.5}. 
+\end{proof}
+
+As you might realized, we used metrizable property while proving \ref{lem:sequence lemma} however 
+\lq not very much' use the power of metrizable spaces. We just used to obtain \hl{sequencially decreasing neighborhood of $x$}. 
+So indeed, \ref{lem:sequence lemma} and \ref{thm:Continuity Preserves Convergence} holds on weaker condition. 
+It is quite non-trivial definition, but we'll revisit this concept in latter section. 
+
+\begin{defn}{Countable Basis, First Countability}{coutable basis, first Countability}
+    A space $X$ is said to have a \textit{countable basis at the point $x$} if there is a countable collection 
+    $\{U_n\}_{n \in \BN}$ of neighborhoods of $x$ such that any neighborhood $U$ of $x$ contains at least one of the sets $U_n$. 
+    i.e., $\forall U$ neighborhood of $x$, we can find $U_n$ such that $x \in U_n \subseteq U$ from countable many $\{U_n\}$. 
+    If $X$ has a countable basis at each points then $X$ satisfy the \textit{first countability axiom}. 
+\end{defn}
+
+\begin{rem}{Holds on First Countable Space $X$}{11.19}
+    We can replace $B(x, 1/n)$ into $B_n = U_1 \cap \cdots \cap U_n$ for countable basis $\{U_n\}$ of $x$ 
+    in proof of \ref{lem:sequence lemma} and so on \ref{thm:Continuity Preserves Convergence}. 
+\end{rem}
+
+In analysis, we also dealt with sequence of functions and its convergences. 
+
+\newpage 
+
+\begin{defn}{Uniform Convergence}{uniform convergence}
+    Let $\{f_n: X \rightarrow Y\}$ be a sequence of functions from \hl{set $X$ to metric space $Y$ with $d$}. 
+    We say that $\{f_n\}$ \textit{converges uniformly} to $f$ and denote $\{f_n\} \rightrightarrows f$ 
+    if given $\varepsilon > 0$, there exists $N \in \BN$ such that 
+    \[d(f_n(x), f(x)) < \varepsilon\]
+    for all $n > N$ and $\forall x \in X$. 
+\end{defn}
+
+\begin{thm}{Uniform Limit Theorem}{uniform limit theorem}
+    Let $f_n: X \rightarrow Y$ be a sequence of \hl{continuous functions} from topological space $X$ into metric space $Y$. \hl{If $\{f_n\}$ uniformly converges to $f$ then $f$ is continuous.}
+\end{thm}
+
+\begin{proof}
+    Let $V$ be open in $Y$. For $y_0 \in V$, let $f(x_0) = y_0$. Then we can find $B(y_0, \varepsilon) \subseteq V$. 
+    Since $\{f_n\} \rightrightarrows f$, we can find $N \in \BN$ such that $d(f_n(x), f(x)) < \varepsilon/3$ for any $x \in X$. 
+    Here, $f_N$ is continuous map, so we can state that $U = f^{-1}_N(B(f_N(x_0), \varepsilon/3))$ is open neighborhood of $x_0$ in $X$. 
+    Then for $x \in U$, 
+    \[d(f(x), f_N(x)) < \varepsilon/3 \quad \because \text{ uniform continuity }\]
+    \[d(f_N(x), f_N(x_0)) < \varepsilon/3 \quad \because x, x_0 \in U\]
+    \[d(f_N(x_0), f(x_0)) < \varepsilon/3 \quad \because \text{ uniform continuity }\]
+    This implies that if $x \in U$, $d(f(x), f(x_0)) < \varepsilon$ so $x \in U$ implies that $U \subseteq f^{-1}(V)$, so $f^{-1}(V)$ is open in $X$. 
+\end{proof}
+
+\begin{rem}{Uniform Metric and Uniform Convergence}{11.22}
+    The \textit{uniform metric} is related with \textit{uniform convergence}. 
+\end{rem}
+
+Recap, uniform metric on $\BR^J$ is defined by 
+\[\overbar{\rho}: (\mathbf{x}, \mathbf{y}) \mapsto \sup \left\{\overbar{d}(x_\alpha, y_\alpha) \mid \alpha \in J\right\}\]
+For a set $X$, view $\BR^X$ as collection of $f: X \rightarrow \BR$ and give $\BR^X$ to uniform metric. 
+Suppose that $\{f_n\}$, the sequence of elements in $\BR^X$ converges to $f$ with respect to uniform metric. 
+We can say that $f_n: X \rightarrow \BR$ uniformly converges to $f$. 
+
+\begin{rem}{Not metrizable}{11.23}
+    To show that some space is not metrizable, in many case we show that 
+    such space does not holds sequence lemma with some counter example. 
+\end{rem}
+
+\newpage 
+
+\section{Compactness with Metric}
+
+Again, the motive of compact space is generally good space to derive. 
+For motivation, we state following theorem without proof. 
+
+\begin{thm}{Compact = Closed and Bounded in $\BR^n$}{compact = closed and bounded}
+    $A \subseteq \BR^n$ is compact if and only if $A$ is closed and bounded in $\BR^n$ 
+    under Euclidean metric or square metric.
+\end{thm}
+
+Anyone read this theorem might agree that such space is intuitively, enough good for analysis. 
+One good property of compact space is stated in following theorem. 
+
+\begin{thm}{Extreme Value Theorem}{extreme value theorem}
+    Let $f: X \rightarrow Y$ be countinuous function where $Y$ is order topology space. 
+    If $X$ is compact, then $\exists \, c, d \in X$ such that $f(c) \leq f(x) \leq f(d)$ for any $x \in X$. 
+\end{thm}
+
+\begin{proof}
+    Since continuous map preserves compactness by \ref{thm:continuous preserves compact}, 
+    $f(X) \subseteq Y$ is compact. So, since 
+    \[\{(-\infty, a) \mid a \in f(X)\} \implies \text{open cover of $f(X)$}\]
+    we can find finite subcovering, 
+    \[\{(-\infty, a_1), \cdots, (-\infty, a_n)\} \implies \max\{a_i\} = \sup f(X) = f(d)\]
+    Similarly for $\inf f(X)$. 
+\end{proof}
+
+From now on, \textit{the most important and useful} theorems will be stated. 
+Before moving on, we define one more very intuitive notion: distanct from point-to-set. 
+There are few way to define it, however following definition is the most standard one. 
+
+\begin{defn}{Distance from Point to Set}{distance from point to set}
+    Let $(X, d)$ be a metric space and $\emptyset \neq A \subseteq X$. 
+    For $x \in X$, we can define the \textit{distance} from $x$ to $A$ by 
+    \[d(x, A) := \inf \{d(x, a) \mid a \in A\}\]
+\end{defn}
+
+\begin{rem}{Distance is Continuous}{12.4}
+    For fixed $A$, distance in continuous over $X$. 
+\end{rem}
+
+Now here we state one of the most important theorem in this summary note. 
+
+\newpage
+
+\begin{thm}{Lebesgue Number Lemma}{Lebesgue number lemma}
+    Let $\CA$ be an open covering of the metric space $(X, d)$. 
+    If $X$ is compact then there exists $\delta > 0$ such that 
+    each subset of $X$ having diameter less than $\delta$, there exists an element of $\CA$ containing it. 
+    Such $\delta$ is called a \hl{Lebesgue number} for the covering $\CA$. 
+\end{thm}
+
+\begin{proof}
+    Let $\CA$ be any open covering of $X$. 
+    If $X \in \CA$, then statement automatically holds for any $\delta > 0$. 
+    So suppose that $X \notin \CA$. 
+    Since $X$ is compact, we can find finite subcovering $\{A_1, \cdots, A_n\} \subseteq \CA$. 
+    Denote $C_i = X \setminus A_i$ for each $i \in [n]$. Define 
+    \[f(x) = \frac{1}{n}\sum_{i = 1}^{n} d(x, C_i)\]
+    Then \hl{$f(x) > 0$ (strictly larger than 0) since $x$ must contained in some open cover ($= A_i$)}, so 
+    \[x \in A_i \implies B_d(x, \varepsilon) \subseteq A_i \implies d(x, C_i) > \varepsilon \implies f(x) > 0\]
+    However, according to \ref{rem:12.4} and summation of continuous functions are continuous, $f$ is continuous over $X$. 
+    Since $X$ is compact, $f(X)$ also compact by \ref{thm:continuous preserves compact} 
+    and so closed and bounded. We can find minimum($=\delta$) of $f(X)$. 
+    This $\delta > 0$ become a Lebesgue number we claimed. Suppose that $B \subseteq X$ and diameter of $B$ $< \delta$. 
+    Let $x_0 \in B$ then 
+    \[\delta \leq f(x_0) \leq d(x_0, C_m) \text{ where $C_m$ is the most far $C_i$}\]
+    Implies that $B(f(x_0), \delta) \subseteq A_m \in \CA$. 
+\end{proof}
+
+Now view $\CA$ as the \textit{collection of open sets} such that as many as enough to cover $X$ totally. 
+The Lebesgue number theorem states that, if $X$ is compact space then 
+we can assume that any sufficiently small($\delta$-small) subset of $X$ is totally contained in some given open set. 
+
+In compact space another good property also arises which is called \textit{uniform continuous}. 
+
+\begin{defn}{Uniform Continuous}{uniform continuous}
+    $f: X \rightarrow Y$ is a continuous map where $X, Y$ are metric space induced by $d_X, d_Y$ respectively. 
+    $f$ is uniformly continuous if for any $\varepsilon > 0$, we can find $\delta > 0$ such that 
+    \[d_X(x_0, x_1) < \delta \implies d_Y(f(x_0), f(x_1)) < \varepsilon\]
+\end{defn}
+
+We describe that the continuity intuitively implies that \textit{near elements(neighborhood) of codomain is from a near elements(neighborhood) of domain}. 
+Uniform continuity (1) Explicitly determines the \lq near' via metric $d_X, d_Y$ respectively. (2) Such nearness is \lq globally determined' for $X, Y$ both. 
+
+\begin{thm}{Uniform Continuity Theorem}{uniform continuity theorem}
+    Continuous function from compact metric space into general metric space is uniformly continuous.
+\end{thm}
+
+\begin{proof}
+    Easily proved by \ref{thm:Lebesgue number lemma}. Find $\delta$ from 
+    preimage of $\varepsilon/2$-open balls for each element of $Y$. 
+    For $x_0 \in X$, image of any $\delta/2$-ball centered by $x_0$ is contained in 
+    $\varepsilon/2$-ball. 
+\end{proof}
+
+Finally we prove that the uncountablity of real number. We say that $x \in X$ is an \textit{isolated point} of $X$ 
+if $\{x\}$ is open in $X$. 
+
+\begin{thm}{Uncountablity of Compact Hausdorff with Non-isolated}{12.8}
+    Let $X$ be a nonempty compact Hausdorff space. If $X$ has no isolated points, then $X$ is uncountable. 
+\end{thm}
+
+\begin{proof}
+    Let $x \in X$ and $U$ be arbitrary chosen nonempty open set of $X$. 
+    If $x \in U$, since $x$ is not isolated point, $\{x\} \subset U$ so we can find $x \neq y \in U$. 
+    If $x \notin U$, since $U$ is nonempty we can find $x \neq y \in U$. 
+    Since $X$ is Hausdorff, we can construct two open sets $W_x, W_y$ distinguishing $x, y$ respectively. 
+    Let $V = W_y \cap U$. Again it distinguishes $x$ in $U$ and open. Since $x \in W_x \subseteq X \setminus V$, 
+    we can say that $x \notin \overbar{V}$. 
+
+    Let $f: \BN \rightarrow X$ and $f(n) := x_n$. 
+    Let $V_0 = X$. We can find $V_1 \subset V_0$ such that $x_1 \notin \overbar{V_1}$. 
+    Similarly, we can find $V_n \subset V_{n-1}$ such that $x_n \notin \overbar{V_{n-1}}$. 
+    Then now we obtain 
+    \[X = \overbar{V_0} \supset \overbar{V_1} \supset \cdots\]
+    Note that $X$ is compact and each $\overbar{V_i}$ is closed. 
+    by \ref{def:finite intersection property}, 
+    \[\exists \, x \in \bigcap_{i \in \BN} \overbar{V_i}\]
+    If $x = x_m$ for some $m \in \BN$, $x_m \in \overbar{V_m}$ but it is impossible. 
+    So for any given countable sequence, we can find $x \in X$ that not contained in it. 
+    So $X$ is uncountable. 
+\end{proof}
+
 \newpage 
 
 \bibliographystyle{plain}
