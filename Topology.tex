@@ -1917,6 +1917,97 @@ if $\{x\}$ is open in $X$.
     So $X$ is uncountable. 
 \end{proof}
 
+\newpage
+
+\section{Limit Point Compactness}
+
+At the beginning of section 10, we mentioned that \lq compact' means good-property inheritted. 
+We learned the standard version definition of such good property via finite subcovering exists in any given open covering. 
+There are another version of \lq good' which is called \textit{limit point compactness}. 
+This is generally weaker than standard compactness, however, they agree on the metrizable spaces. 
+
+\begin{defn}{Limit Point Compactness}{limit point compact}
+    A space $X$ is said to be \textit{limit point compact} if \hl{every infinite subset of $X$ has a limit point}. 
+\end{defn}
+
+This is quite natural. Once our space is limit point compactness, we can imagine that 
+our space is sort of \lq bounded' in some sence. Actually, general compactness also states the 
+general concepts of bounded space. 
+
+\begin{thm}{Compactness $\implies$ Limit Point Compactness}{compact then limit point compact}
+    Compactness implies limit point compactness, but not conversely.
+\end{thm}
+
+\begin{proof}
+    Suppose that $X$ is compact but not limit point compact. 
+    Then, we can find $A \subseteq X$ infinite order but $A$ doesn't have any limit point. 
+    Then by definition, for all $a \in A$ we can find open neighborhood $U_a$ of $a$ such that $U_a \cap A = \{a\}$. 
+    $\CC = \{U_a \mid a \in A\}$ be a open covering of $A$. However, $X$ is compact so we can find 
+    $U_1, \cdots, U_n$ that finite subcovering of $A$. But it cover only $n$ elements of $A$, here contradiction occurs. 
+    
+    The minimal uncountable well-ordered set $S_\Omega$ is not compact but limit point compact. 
+\end{proof}
+
+Similarly we define one more compactness which is called \textit{sequentially compactness}. 
+
+\begin{defn}{Sequentially Compact}{sequentially compact}
+    Let $X$ be a topological space and $\{x_n\}$ is a sequence of points of $X$. Let 
+    \[n_1 < n_2 < \cdots < n_i < \cdots\]
+    For sequence $\{y_i\}, y_i = x_{n_i}$ is called a subsequence of $\{x_n\}$. 
+    $X$ is said to be \textit{sequentially compact} if every subsequence of points of $X$ has a 
+    convergent subsequence. 
+\end{defn}
+
+\newpage 
+
+\begin{thm}{Three Compacts are Same on Metrizable Space}{13.4}
+    On the metrizable space $X$, 
+    \[X \textit{ is compact} \iff X \textit{ is limit point compact} \iff X \textit{ is sequentially compact}\]
+\end{thm}
+
+\begin{proof}
+    Compactness implies limit point compactness for general $X$ by \ref{thm:compact then limit point compact}. 
+
+    (2) $\implies$ (3) Suppose that $X$ is limit point compact. 
+    Let $\{x_n\}$ be any sequence of points of $X$. If $\{x_n\}$ is finite, then it already converges. 
+    Then if $\{x_n\}$ is infinite set over $X$, there exists a limit point $x$. 
+    We can find subsequence of $\{x_n\}$ such that converges to $x$ by following algorithm: 
+    \[y_1 \implies x_{n_1} \in B(x, 1)\]
+    Then, 
+    \[y_{i} \implies x_{n_{i}} \in B(x, 1/i), \, n_{i-1} < n_{i}\]
+    Second process is well defined since there are infinitely many elements in $B(x, 1/i)$ and 
+    so we can always find such $n_i$. 
+
+    (3) $\implies$ (1) Suppose that $X$ is sequentially compact space. 
+    First, \hl{Lebesgue number lemma holds on $X$}. Suppose that $\CA$ be any open covering of $X$. 
+    Suppose that $\nexists \, \delta > 0$ such that diam$(B) < \delta \implies \exists A \in \CA \,$ such that $B \in A \in \CA$ holds. 
+    Since such $\delta$ not exists, once we choose $n$, there exists a set diameter is less than $1/n$ but 
+    not contained in any element of $\CA$ totally. 
+    Let $C_n$ be such a set(diam$(C_n) < 1/n$ but $C_n$ not totally contained in any $A \in \CA$). 
+    For each $C_n$, choose $x_n \in C_n$. Then there exists $\{y_i\}, y_i = x_{n_i}$ that converges to $a$. 
+    Since $\CA$ is a covering, $a \in A \in \CA$ for some $A$. 
+    $A$ is open set and $a \in A$, so we can find $B(a, \varepsilon) \subseteq A$. 
+    Since $\{x_{n_i}\} \rightarrow a$, we can find $x_{n_i}$ such that $B(x_{n_i}, 1/n_i) \subseteq B(a, \varepsilon) \subseteq A$. 
+    However, this is contradiction. ($\because$ $x_{n_i}$ is sampled from non-$A$-containing set size less than $1/n_i$)
+
+    Second, \hl{given $\varepsilon > 0$, there exists finite covering of $X$ by open $\varepsilon$-balls in $X$.}
+    Suppose not, means that for some $\varepsilon > 0$, $X$ can't be covered by finite $\varepsilon$-balls. 
+    Now we sample points in each $\varepsilon$-balls at most one. In general, 
+    given $x_1, \cdots, x_n$, choose $x_{n+1}$ to be a point not in the union 
+    \[B(x_1, \varepsilon) \cup \cdots \cup B(x_n, \varepsilon)\]
+    Then $\{x_n\}$ can not have convergent subsequence. 
+
+    Finally, \hl{$X$ is compact.}
+    Given any open covering $\CA$ of $X$, we can find Lebesgue number $\delta$. 
+    Let $\varepsilon = \delta/3$ and find finite covering of $X$ by open $\varepsilon$-balls. 
+    Each of balls has size $< 2\delta/3$, so it lies in some $A \in \CA$. 
+    Collect such $A$, it becomes finite subcovering of $X$ from $\CA$. So $X$ is compact. 
+\end{proof}
+
+\newpage 
+
+\section{Local Compactness}
+
 \newpage 
 
 \bibliographystyle{plain}
