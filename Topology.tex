@@ -2139,6 +2139,146 @@ Classical example is following. We denote that $S^n$ by one-point compactificati
 
 \newpage 
 
+\section{Seperation Axioms}
+
+Have you ever considered the topological \lq resolution' of a space? 
+Our previous encounter with Hausdorff spaces illustrated that topology is deeply concerned with the ability to separate distinct points using open neighborhoods. 
+In this section, we will explore this concept in full generality. The fundamental measure of a space's \lq resolution' is the degree to which its points and closed sets can be \textit{topologically separated}. 
+Much like how higher resolution provides greater clarity in optics, stronger topological conditions allow us to distinguish finer structural details within a space. We will formalize these levels of resolution through the hierarchy of Separation Axioms, categorizing spaces by what topological entities they can successfully separate.
+
+Before moving on to the definition, all the concepts consisted with 2 parts: (1) What objects we're trying to seperate? (2) How we define such objects are seperated? 
+
+\begin{defn}{$T_1$ space}{T1 space}
+    A space $X$ is $T_1$ if for any pair of distinct points $x, y$, there exists an open set $U$ with $x \in U, y \notin U$. 
+\end{defn}
+
+Under this basic resolution, we can state following. 
+
+\begin{prop}{$T_1 \iff$ Singleton Set is Closed}{T1 iff singleton set is closed}
+    $X$ is $T_1$ if and only if every singleton $\{x\}$ is a closed set. 
+\end{prop}
+
+\begin{proof}
+    If $X$ is $T_1$, for any point $y$ in $X - x$, we can find $y \in U, x \notin U$. 
+    So, $y \in U \subseteq X - x$, implies that $X - x$ is open, so $\{x\}$ is closed. 
+
+    If any $\{x\}$ is closed set, then with similar reasoning, we can seperated $x, y$ by open set such that $x \in U, y \notin U$. 
+\end{proof}
+
+\begin{defn}{$T_2$ space, Hausdorff space}{T2 space}
+    A space $X$ is $T_2$(Hausdorff) if for every pair of distinct points $x, y$ 
+    there exists disjoint open sets $U, V$ with $x \in U, y \in V$. 
+\end{defn}
+
+\begin{prop}{Uniqueness of Limits}{unique limit property}
+    In a Hausdorff space, every sequence converges to at most one point. 
+\end{prop}
+
+\begin{defn}{$T_3$ space, Regular space}{T3 space}
+    A space $X$ is $T_3$(Regular) if it is $T_1$ and for any $x \in X$ and every closed set $C$ such that $x \notin C$, there exists 
+    disjoint open sets $U, V$ such that $x \in U, C \subseteq V$.  
+\end{defn}
+Note that seperating object is upgraded from $T_2$. (point/point $\rightarrow$ point/closed set). 
+
+\begin{prop}{Equivalent Characterization of Regularity}{regularity property}
+    A $T_1$ space $X$ is regular if and only if $\forall x \in X$ and every open $W$ containing $x$, there exists open neighborhood $U$ of $x$ with 
+    \[x \in U \subseteq \overbar{U} \subseteq W\]
+\end{prop}
+
+\begin{proof}
+    Let $X$ be a regular space. For arbitrary given $x$ and open $W$ that $x \in W$, 
+    $x$ and $X \setminus W$ are seperable via open sets. So, 
+    \[U,V \text{ are disjoint open sets such that } x \in U, \, X \setminus W \subseteq V\]
+    Means that $x \in U \subseteq X \setminus V$. Since $X \setminus V$ is closed, 
+    \[x \in U \subseteq \overbar{U} \subseteq W\]
+
+    Suppose that later condition holds. For arbitrary $x$ and closed set $C$ that $x \notin C$, 
+    $W = X \setminus C$ is open and containing $x$, so we can find open $U$ such that $x \in U \subseteq \overbar{U} \subseteq X \setminus C$. 
+    Then, let $V = X \setminus \overbar{U}$. It is open and $U, V$ are disjoint and $C \subseteq V$. 
+\end{proof} 
+
+\begin{defn}{$T_4$ space, Normal space}{T4 space}
+    A space $X$ is $T_4$(Normal) if it is $T_1$ and for every pair of disjoint closed set $A, B$, there 
+    exists disjoint open sets $U, V$ with $A \subseteq U$ and $B \subseteq V$. 
+\end{defn}
+
+You can easily obtain following result. 
+\[T_4 \implies T_3 \implies T_2 \implies T_1\]
+We upgrades the seperated objects from $T_1$ to $T_4$, with same seperation scheme: via open set. 
+So this can view as \lq resolution level' of given space. 
+One natural question is that what's the resolution level of spaces we've learned before? 
+
+\begin{thm}{Metrizable Space is $T_4$(Normal)}{metrizable is normal}
+    Every metrizable space is Normal. 
+\end{thm}
+
+\begin{proof}
+    Let $X$ be a metrizable space and $d$ be a metric of $X$. 
+    Given any two disjoint closed sets $A, B$ of $X$, define following function: 
+    \[f(x) = \frac{d(x, A)}{d(x, A) + d(x, B)}\]
+    Since $A, B$ are disjoint, this is well-defined(denominator is non-zero). 
+    Since distance is continuous, $f$ is continuous and $f(A) = \{0\}, f(B) = \{1\}$. 
+    Then $U = f^{-1}([0, 1/2)), V = f^{-1}((1/2, 1])$ are disjoint open sets with $A \subseteq U, B \subseteq V$. 
+\end{proof}
+
+\begin{thm}{Compact Hausdorff space is Normal}{compact Hausdorff is normal}
+    Every compact Hausdorff space is Normal. 
+\end{thm}
+
+\begin{proof}
+    Let $X$ be compact Hausdorff space and $A, B$ are two disjoint closed subset in $X$. 
+    Suppose that we choose any point $\alpha \in A$. For every point $\beta \in B$, since $X$ is Hausdorff, 
+    we can find $U_\alpha^\beta, V_\beta$ such that $\alpha \in U_\alpha^\beta$ and $\beta \in V_\beta$. 
+    Collection of $V_\beta$ such that $\{V_\beta \mid \beta \in B\}$ forms an open covering of $B$. 
+    Since $B$ is closed subset in compact space, $B$ also compact by \ref{thm:closed in compact is compact}. 
+    So we can find $\{V_{\beta_1}, \cdots, V_{\beta_n}\}$ a finite subcovering. 
+    Then we have corresponding $U_\alpha^{\beta_i}$ an open neighborhood of $\alpha$. 
+    Then, 
+    \[U_\alpha^* = \bigcap U_\alpha^{\beta_i}, V^*_\alpha = \bigcup V_{\beta_i} \implies U^*_\alpha \cap V^*_\alpha = \emptyset, \text{ both are open }, \alpha \in U^*_\alpha, \quad B \subseteq V^*_\alpha\]
+    Do this all for $\alpha \in A$, obtaining $\{U^*_\alpha \mid \alpha \in A\}$ forms open covering of $A$. 
+    By the similar reasoning, we finally obtain finite subcovering $\{U^*_{\alpha_i}\}_{i = 1}^{m}$
+    \[A \subseteq U = \bigcup U^*_{\alpha_i}, \quad B \subseteq V = \bigcap V^*_{\alpha_i}\]
+    Where $U, V$ are disjoint open set in $X$. 
+\end{proof}
+
+\begin{exmp}{Examples}{examples of seperation axioms}
+    The Sorgenfrey plane $\BR_l \times \BR_l$ is not normal although $\BR_l$ is normal. 
+    $\BR$ with $K$-topology is not regular. 
+\end{exmp}
+
+\begin{defn}{Tychonoff Space}{Tychonoff space}
+    A space $X$ is $T_{3.5}$(Completely Regular, Tychonoff) space if it is $T_1$ 
+    and for every $x \in X$ and every closed set $C$ with $x \notin C$, 
+    there exists a continuous function $f: X \rightarrow [0,1]$ with $f(x) = 0$ and $f(C) = 1$. 
+\end{defn}
+
+In general, 
+\[T_4 \implies T_{3.5} \implies T_3 \implies T_2 \implies T_1\]
+$T_{3.5} \implies T_3$ is clear but $T_4 \implies T_{3.5}$ need quite amount of jobs, which is called \textit{Urysohn's Lemma}. 
+In the next section, we'll mainly focus on Urysohn's lemma. Before moving on, 
+we also characterize Normality condition in other words. 
+i.e., there are always perfect gap between closed set and its open boundary. 
+
+\begin{lem}{Shrinking Lemma, Characterization of Normal}{shrinking lemma}
+    A $T_1$ space $X$ is normal if and only if for every closed set 
+    $C$ and every open set $W$ with $C \subseteq W$, there exists an open set $V$ with 
+    $C \subseteq V \subseteq \overbar{V} \subseteq W$. 
+\end{lem}
+
+\begin{proof}
+    Suppose that $X$ is $T_1$ Normal space. 
+    Given arbitrary closed set $C$ and open set $W$ with $C \subseteq W$, 
+    we can seperate $C$ and $X \setminus W$ via open sets. i.e., 
+    $C \subseteq V$, $X \setminus W \subseteq U$ where $U, V$ are disjoint open sets. 
+    However, $C \subseteq V \subseteq X \setminus U$ however $X \setminus U$ is closed. So we obtain 
+    \[C \subseteq V \subseteq \overbar{V} \subseteq W\]
+    Conversely, let $A, B$ be disjoint closed sets in $X$. Then find open set $U, V$ such that 
+    $A \subseteq U \subseteq \overbar{U} \subseteq X \setminus B$, and vice versa for $B$ and $V$. 
+    $U, V$ are disjoint open sets such that seperates $A, B$. 
+\end{proof}
+
+\newpage 
+
 \bibliographystyle{plain}
 \bibliography{reference} 
 
