@@ -1365,6 +1365,10 @@ some contradiction occurs. For example, following open covering for $(0,1]$ with
 \[\{\left(1/n, 1\right] \mid n \in \BN\} \implies (0,1] \text{ is not compact }\]
 We can state some lemmata between previous concepts and compactness. 
 
+\begin{lem}{Compactness under Union and Intersection}{compact union intersection}
+    Finite union of compact subspaces are compact. Arbitrary intersections of compact subspaces in \textit{Hausdorff} space is compact. 
+\end{lem}
+
 \begin{lem}{Subspace Compactness}{subspace compactness}
     Let $Y$ be a subspace of $X$. $Y$ is compact if and only if 
     every open covering of $Y$ in $X$ contains a finite subcovering of $Y$. 
@@ -1395,7 +1399,7 @@ We can state some lemmata between previous concepts and compactness.
 
 We bring some useful features in above proof into following lemma. This will be appear in sections about seperation axioms. 
 
-\begin{lem}{}{10.6}
+\begin{lem}{}{10.7}
     If $Y$ is a compact subspace of Hausdorff space $X$ and $x \notin Y$, 
     then there exists two disjoint open sets $U$ and $V$: 
     \[U \text{ is neighborhood of $x$ }, \quad Y \subseteq V\]
@@ -1406,6 +1410,19 @@ Next few theorems construct the connection between continuous map and homeomorph
 \begin{thm}{Continuous Map Preserves Compactness}{continuous preserves compact}
     The image of compact space under continuous map is compact. 
 \end{thm}
+
+\begin{proof}
+    Straight forward, so omitted. 
+\end{proof}
+
+\begin{cor}{Compactness is Absolute}{compact is absolute}
+    Let $Y$ be the subspace of $X$. If $K$ is compact in $Y$, then $K$ also compact in $X$. 
+\end{cor}
+
+\begin{proof}
+    Natural inclusion $f: Y \hookrightarrow X$ is continuous. 
+    Since continuity preserves compactness, $f(K) = K \subseteq X$ also compact. 
+\end{proof}
 
 \begin{thm}{From Compact into Hausdorff}{}
     Let $f: X \rightarrow Y$ be a bijective continuous map. If $X$ is compact and $Y$ is Hausdorff then $f$ is a homeomorphism. 
@@ -2008,7 +2025,117 @@ Similarly we define one more compactness which is called \textit{sequentially co
 
 \section{Local Compactness}
 
+Until now, when we say \lq compactness' that was sort of global property of spaces(or subspaces). 
+But as you did in open set, if we can choose \textit{compact boundary containing $x$} in a (not necessarily compact) space, 
+it can be also a good property. Indeed, $\BR^n$ is sort of such space. 
+Since all intuitions came from standard space like $\BR^n$, we give name for such property. 
 
+\begin{defn}{Local Compactness}{local compact}
+    A space $X$ is said to be \textit{locally compact} at $x$ if there exists 
+    compact subspace $C \subseteq X$ that contains a neighborhood of $x$. 
+    If $X$ is locally compact at each of its points, $X$ is said to be \textit{locally compact space}. 
+\end{defn}
+
+\begin{rem}{Compact $\implies$ Locally Compact}{14.2}
+    Compact space is locally compact. 
+\end{rem}
+
+\begin{proof}
+    $\forall x \in X$, we can choose any neighborhood $U$ of $x$ in $X$. 
+    Then, $x \in U \subseteq \overbar{U}$ is closed subset in compact space $X$, so $X$ is locally compact. 
+\end{proof}
+
+\begin{warn}{Non Locally Compact Spaces}{14.3}
+    $\BQ, \BR^\omega$(with product topology) is not locally compact. 
+\end{warn}
+
+From now on, we'll study \textit{compactifications}. 
+There are very good intuition about this in p.183 of \cite{munkres}. 
+As just quoting them, two of the most well-behaved classes of spaces for mathematics are the 
+metrizable spaces and the \textit{compact Hausdorff} spaces. 
+If a given space is not of one types, the next best thing one can hope for is that 
+it is a \hl{subspace of one of those spaces since we can imbedding}. 
+However, subspace of a compact Hausdorff space need not be compact. \hl{Then, under what conditions is a space homemomorphic with a subspace of a compact Hausdorff space?}
+
+\begin{thm}{Compactification Theorem}{14.4}
+    $X$ is \textit{locally compact Hausdorff} if and only if there exists a space $Y$ satisfying the following conditions: 
+    \begin{enumerate}
+        \item $X$ is a subspace of $Y$
+        \item $Y \setminus X$ is consists of a single point. 
+        \item $Y$ is a compact Hausdorff space. 
+    \end{enumerate}
+    Such $Y$ is unique up to homeomorphisms which is the identity map on $X$. 
+\end{thm}
+
+\begin{proof}
+    Suppose that $X$ is locally compact Hausdorff space. 
+    Let $\infty \notin X$ be the newly introduced object. Let's construct 
+    \[Y = X \cup \{\infty\}\]
+    And we give following topology for $Y$. 
+    \[\CT_Y = \CT_X \cup \{Y \setminus C \mid C \text{ is compact in $X$ }\}\]
+    This satisfies the axiom of topology: 
+    \begin{enumerate}
+        \item $\emptyset \in \CT_X$, $Y = Y \setminus \emptyset \in \{Y \setminus C\}$
+        \item 
+        \begin{itemize}
+            \item For $U_1, U_2 \in \CT_X, U_1 \cap U_2 \in \CT_X$. 
+            \item For $U_1 \in \CT_X, U_2 = Y \setminus C$, since $U_1 \subseteq X$, $U_1 \cap U_2 = U_1 \cap (X \setminus C)$. 
+            Since $X$ is Hausdorff, compact subset $C$ is closed so $X \setminus C$ is open. It implies that 
+            $U_1 \cap U_2 = U_1 \cap (X \setminus C) \in \CT_X$. 
+            \item For $U_1 = Y \setminus C_1, U_2 = Y \setminus C_2$, we obtain $U_1 \cap U_2 = Y \setminus (C_1 \cup C_2)$. 
+            Then by \ref{lem:compact union intersection}, $C_1 \cup C_2$ is compact in $X$ and so $U_1 \cap U_2 \in \{Y \setminus C\}$. 
+        \end{itemize}
+        \item 
+        \begin{itemize}
+            \item Arbitrary union in $\CT_X$ is in $\CT_X$. 
+            \item $\bigcup (Y \setminus C_\beta) = Y \setminus (\bigcap C_\beta)$, however by \ref{lem:compact union intersection}, in Hausdorff space arbitrary intersection of compact set is compact. So, it is in $\{Y \setminus C\}$. 
+            \item $\left(\bigcup U_\alpha \right) \cup \left(\bigcup Y \setminus C_\beta\right) = U \cup (Y \setminus C) = Y \setminus (C \setminus U)$. However, $C \setminus U$ is closed 
+            subset of compact set $C$ so $C \setminus U$ is compact, it is in $\{Y \setminus C\}$. 
+        \end{itemize}
+    \end{enumerate}
+    Then remaining things to do is showing that: (1) $X$ is subspace of $Y$. (2) $Y$ is compact. (3) $Y$ is Hausdorff. 
+    
+    (1) If $U \in \CT_X$, then $U \cap X = U \in \CT_X$. If $U = Y \setminus C$, $U \cap X = X \setminus C \in \CT_X$ since $C$ is closed. 
+    And since $\CT_X \subseteq \CT_Y$, $X$ is subspace of $Y$. 
+
+    (2) Let $\CA$ be an open covering of $Y$. To cover $\infty \in Y$, $\CA$ must contain at least one 
+    open set of type $A = Y \setminus C$. Then, $\CA - A$ is open covering of $C$. Since $C$ is compact in $X$ and by \ref{cor:compact is absolute} it also compact in $Y$. 
+    So there are finite subcovering $\{A_n\}$ from $\CA - A$, then $\{A_n\} \cup A$ becomes finite subcovering of $\CA$ of $Y$. 
+
+    (3) If $x, y \in X \subseteq Y$, then we can seperate them via open sets. 
+    Without loss of generality, let $x \in X, y = \infty$. 
+    Since $X$ is locally compact, we can construct neighborhood $U$ of $x$ containing in $C$. 
+    Then, $y \in Y \setminus C$ which is open in $Y$. $U$ and $Y \setminus C$ is open disjoint neighborhood of $x, y$ respectively in $Y$. 
+
+    Now we prove converse. Suppose that $Y$ satisfies conditions in the state. 
+    Then $X$ is subspace of Hausdorff, so it also become Hausdorff. 
+    Let $x \in X$. Since $Y \setminus X = \{\infty\}$ by second condition and $Y$ is Hausdorff, 
+    in Hausdorff space $Y$, we can find disjoint neighborhood $U, V$ of $x, \infty$ respectively. 
+    Then $Y \setminus V$ is closed in $Y$ and contained in $X$. Since $Y$ is compact, 
+    $Y \setminus V$ is compact by \ref{thm:closed in compact is compact}. 
+    By \ref{lem:subspace compactness}, it is a compact in $X$ and containing $U$. 
+    So, $X$ is locally compact. 
+
+    Uniqueness of embedding is obvious. 
+\end{proof}
+
+This is the notion of compactification. More formally, we say that construction of $Y$ in \ref{thm:14.4} 
+is \textit{one-point compactification} of $X$. In other words, $X$ is locally compact Hausdorff if and only if $X$ has the unique one-point compactification up to homeomorphism. 
+
+Classical example is following. We denote that $S^n$ by one-point compactification of $\BR^n$. 
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    \draw[<->, thick] (-3, 0) -- (3, 0) node[right, font=\large] {$\mathbb{R}$};
+
+    \draw[thick] (0, 1) circle (1);
+    \node[right, font=\large] at (1, 1) {$S^1$};
+
+    \filldraw (0, 2) circle (1.5pt) node[above, font=\large, yshift=2pt] {$\infty$};
+
+    \filldraw (0, 0) circle (1.5pt) node[below, yshift=-2pt] {$0$};
+\end{tikzpicture}
+\end{center}
 
 \newpage 
 
