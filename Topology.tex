@@ -2279,6 +2279,139 @@ i.e., there are always perfect gap between closed set and its open boundary.
 
 \newpage 
 
+\section{More About Normal Spaces}
+
+\begin{defn}{First Countable}{first countable}
+    A space $X$ is first countable if for any point $x \in X$, there exists countable open neighborhoods 
+    $\{U_n\}_{n \in \BN}$ of $x$ such that for arbitrary open set $U$ containing $x$, we can find $U_i$ such that 
+    $x \in U_i \subseteq U_n$. 
+\end{defn}
+
+\begin{defn}{Second Countable}{second countable}
+    A space $X$ is \textit{second countable} if it has a countable basis $\CB = \{B_n\}$. 
+\end{defn}
+
+\begin{defn}{Lindel\"of Space}{Lidelof Space}
+    A space $X$ is Lindel\"of if for every open covering $\CA$ of $X$, 
+    we can find \textit{countable} subcovering of $\CA$. 
+\end{defn}
+
+\begin{thm}{Regular + Second Countable $\implies$ Normal}{regular + second countable = normal}
+    Every second countable regular($T_3$) space is normal($T_4$). 
+\end{thm}
+
+\begin{proof}
+    Let $\CB = \{L_n\}$ be the countable basis of $X$ and $A, B$ are disjoint closed sets in $X$. 
+    Since $A, B$ are closed and $X$ is regular, we can find open sets $U, V$ such that 
+    \[x \in V \subseteq \overbar{V} \subseteq U \subseteq X \setminus B\]
+    By the definition of basis, we can find a basis $L_i \in \CB$ such that $x \in L_i \subseteq V$. 
+    Do this for all $x \in A$ and collect $L_i$. Then such collection is subcollection of $\{L_n\}$, so countable and 
+    it becomes the \textit{countable subcovering} of $A$ of $\CB$. 
+    Denote it by $\{U_n\}$. 
+    Do exactly same things for $B$ and construct countable subcovering $\{V_n\}$ of $B$. 
+    Now, let $U = \bigcup U_n$ and $V = \bigcup V_n$ then they are open sets containing $A, B$ respectively. 
+    Yet, they are not need to be disjoint. 
+    Let's newly define 
+    \[U_n' = U_n \setminus \bigcup_{i = 1}^{n} \overbar{V_i}, \quad V_n' = V_n \setminus \bigcup_{i = 1}^{n} \overbar{U_i}\]
+    Then clearly $U_n', V_n'$ are open, and $\{U_n'\}$ covers $A$, $\{V_n'\}$ covers $B$. 
+    Finally, 
+    \[U' = \bigcup U'_n , \quad V' = \bigcup V'_n\]
+    are disjoint open sets such that seperating $A, B$ in $X$. 
+\end{proof}
+
+\newpage
+
+\section{Urysohn's Metrization Theorem}
+
+All the notions we defined in Section 15 are highly \textit{topological}. 
+However, they are clear enough for us to \textit{visualize} in our minds. 
+Such mental images are typically based on $\mathbb{R}$, $\mathbb{R}^2$, or $\mathbb{R}^3$, which are highly intuitive for humans. 
+Urysohn's lemma and the theorems induced by it establish a crucial connection between these topological intuitions and real spaces.
+
+Meanwhile, I would like to note that ``separation'' consists of two parts: 
+(1) What objects are we trying to separate? 
+(2) How do we define the separation of these objects?
+
+In the previous section, the answer to (2) always involved \textit{open-set separators}. 
+However, Urysohn demonstrated that in certain cases, this separation can be achieved via \textit{continuous real-valued functions}.
+
+See following lemma and understand how the \textit{seperator} is changed from open boundary. 
+
+\begin{lem}{Urysohn's Lemma}{Urysohn's Lemma}
+    Let $X$ be a \textit{normal} space and $A, B \subseteq X$ be disjoint closed sets. 
+    Then there exists a continuous function 
+    \[f: X \rightarrow [0, 1]\]
+    such that $f|_A \equiv 0$ and $f|_B \equiv 1$. 
+\end{lem}
+
+\begin{claim}{Big Picture of Proof}{Urysohn's Lemma Proof}
+    If $X$ is metrizable space(implies normal \ref{thm:metrizable is normal}) then the seperator function will be 
+    \[f(x) = \frac{d(x, A)}{d(x, A) + d(x, B)}\]
+    However the main result of Urysohn's Lemma states that it is also possible for general normal spaces. 
+    \hl{Where can we find the numbers in topological setting?} There are some non-trivial techinique using indexing. 
+    First, we define \textit{dyadic rationals} by 
+    \[\BD = \left\{\frac{k}{2^n} \mid k, n \in \BN\right\} \cap [0, 1]\]
+    We'll use this set as \textit{index set} and construct a family of open sets $\{U_r\}_{r \in \BD}$ such that satisfy
+    \[r < s \implies A \subseteq U_r \subseteq \overbar{U_r} \subseteq U_s \subseteq X \setminus B \tag{$\star$}\]
+    From this definition, we finally define 
+    \[f(x) = \inf \{r \in \BD \mid x \in U_r\}\]
+    This is continuous and $f|_A \equiv 0, f|_B \equiv 1$. 
+\end{claim}
+
+\begin{proof}
+    Let $U_1 = X \setminus B$ which is open in $X$. 
+    Then, $A \subseteq U_1$ so by \ref{lem:shrinking lemma}, we can find an open set $U_0$ such that 
+    \[A \subseteq U_0 \subseteq \overbar{U_0} \subseteq U_1 = X \setminus B\]   
+    Now our goal is constructing $\{U_r\}_{r \in \BD}$ holds condition ($\star$). 
+    We'll construct $U_r$ inductively with respect to $n$. 
+    Suppose that if $n \leq m$, we already have 
+    \[ \left\{U_\alpha \mid \alpha = \frac{k}{2^n} , k \in \BN , U_\alpha \text{ is open }\right\} , \quad \frac{x}{2^n} = r < s = \frac{y}{2^n} \implies \overbar{U_r} \subseteq U_s \tag{I.H.}\]
+    Now we consider construction of 
+    \[\left\{U_\alpha \mid \alpha = \frac{k}{2^{m+1}}, k \in \BN, U_\alpha \text{ is open }\right\} \tag{1}\]
+    We define 
+    \[ \text{For each $t = \frac{2k+1}{2^{m+1}}$, we can find $r = \frac{k}{2^m}, s = \frac{k+1}{2^m}$ so $t = \frac{r + s}{2}$. } \]
+    However here, we already have $U_r \subseteq \overbar{U_r} \subseteq U_s$. Since $\overbar{U_r}$ is closed and $U_s$ is open, 
+    we can apply \ref{lem:shrinking lemma} and find an open set (denote it $U_t$) such that 
+    \[r < \frac{r + s}{2} = t < s , \quad \overbar{U_r} \subseteq U_t \subseteq \overbar{U_t} \subseteq U_s\]
+    This construct (1) successfully, however such (1) satisfy ($\star$) clearly. 
+    With this inductive construction, we construct 
+    \[\{U_r\}_{r \in \BD}, \quad U_r \text{ is open in $X$}, \quad r < s \implies A = U_0 \subseteq U_r \subseteq \overbar{U_r} \subseteq U_s \subseteq U_1 = X \setminus B\]
+    Now as stated above, define 
+    \[f: X \rightarrow [0, 1] \text{ defined by } f: x \mapsto \begin{cases}
+        \inf \underbrace{\{r \in \BD \mid x \in U_r\}}_{L} & L \neq \emptyset \\
+        1 & L = \emptyset
+    \end{cases}\]
+    Then $f|_A \equiv 0$ since $A \subseteq U_0$. Also, $f|_B \equiv 1$ since 
+    $U_1 = X \setminus B$, so $L = \emptyset$ in this case always. 
+    And $\Im(X) \subseteq [0, 1]$ since $L \subseteq [0, 1]$. One last thing to prove is that the 
+    \textit{continuity of $f$}. Using \ref{lem:lem_5.4}, it is sufficient to show that \hl{preimage of subbasis of codomain is open in domain}. 
+    The standard subbasis of $[0,1]$ is \textit{open rays}, such that for $a \in [0,1]$, $(-\infty, a)$ and $(a, \infty)$. In this case, 
+    \[\CS = \{[0, a), (a, 1] \mid a \in [0,1]\}\]
+    However, 
+    \[f^{-1}([0, a)) = \bigcup_{r \in \BD, r < a} U_r, \quad f^{-1}((a, 1]) = \bigcup_{s \in \BD, s > a} (X \setminus \overbar{U_s})\]
+    So any preimages of subbasis of $[0,1]$ is open in $X$, so $f$ is continuous map. 
+\end{proof}
+
+\begin{rem}{}{16.3}
+    Try to prove the last part of above proof: showing continuity of $f$. 
+    The dense property of $\BD$ is used. 
+    Also, try to prove that the converse of Urysohn's Lemma also holds. 
+    If we try to change our argument for one closed set and one point and continuous functions, 
+    we have $T_{3.5}$, Tychonoff space. 
+\end{rem}
+
+Now we prove the main theorem of this section. 
+
+\begin{thm}{Urysohn's Metrization Theorem}{Urysohn's metrization theorem}
+    Every regular second countable space is metrizable. 
+    Furthermore, it embeds homeomorphically into the Hilbert cube 
+    \[H = [0,1]^\omega = \prod_{i = 1}^{\infty} [0,1]\]
+    with the metric 
+    \[d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{n=1}^{\infty}\frac{(x_n - y_n)^2}{n^2}}\]
+\end{thm}
+
+\newpage 
+
 \bibliographystyle{plain}
 \bibliography{reference} 
 
