@@ -2410,6 +2410,65 @@ Now we prove the main theorem of this section.
     \[d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{n=1}^{\infty}\frac{(x_n - y_n)^2}{n^2}}\]
 \end{thm}
 
+\begin{proof}
+    Our goal is find a nice embedding from $X$ to metrizable space $[0,1]^\omega$ and then argue that 
+    there exists homeomorphism between and $X$ with its image of embedding. Then, since metrizablity is 
+    topological invariant, $X$ is also metrizable. 
+
+    Since $X$ is countable, let $\CB = \{B_n\}_{n = 1}^{\infty}$ be a 
+    countable basis for $X$. Let's define 
+    \[\CP = \{(n, m) \in \BN \times \BN \mid \overbar{B_n} \subseteq B_m\}\]
+    Since $\BN \times \BN$ is countable, $\CP$ also countable so we can denote $\CP = \{(n_k, m_k)\}_{k \in \BN}$. 
+    Here, for each $(n_k, m_k) \in \CP$, we can find 2 closed sets: $\overbar{B_{n_k}}$ and $X \setminus B_{m_k}$. 
+    Remarks that, every second countable regular space is normal by \ref{thm:regular + second countable = normal}. 
+    \hl{So $X$ is normal and we can apply Urysohn's Lemma to $\overbar{B_{n_k}}$ and $X \setminus B_{m_k}$}. 
+    \[g_k: X \rightarrow [0,1] , \quad g_k|_{\overbar{B_{n_k}}} \equiv 0, \quad g_k|_{X \setminus B_{m_k}} \equiv 1\]
+    Now we have the family $\{g_k\}_{k \in \BN}$ of continuous functions from $X$ to $[0,1]$ that seperates closed sets. 
+    \hl{We first show that $X$ is $T_{3.5}$ space with this construction of $\{g_k\}$.} 
+    Suppose that $x \in X$ and $C$ be a closed set of $X$ such that $x \notin C$. 
+    Then $x \in X \setminus C$ which is open, by \ref{prop:regularity property} we can find \textit{nice gap} $V$ between $x$ and $X \setminus C$ means that 
+    \[x \in V \subseteq \overbar{V} \subseteq X \setminus C\]
+    However, since $\CB$ is a basis of $X$, we can find $B_m \in \CB$ such that 
+    \[x \in B_m \subseteq V \subseteq \overbar{V} \subseteq X \setminus C\]
+    Also by \ref{prop:regularity property}, we can find \textit{nice gap} $W$ between $x$ and $B_m$ means that  
+    \[x \in W \subseteq \overbar{W} \subseteq B_m \subseteq V \subseteq \overbar{V} \subseteq X \setminus C\]
+    Finally we find a basis $B_n$ such that $x \in B_n \subseteq W$. It implies that $\overbar{B_n} \subseteq \overbar{W}$, so we denote 
+    \[x \in \overbar{B_n} \subseteq \overbar{W} \subseteq B_m \subseteq X \setminus C\]
+    Now, $(n, m) \in \CP$ so they have natural number index(denote $k$). 
+    Then, 
+    \[g_k|_{\overbar{B_n}} \equiv 0, \quad g_k|_{X \setminus B_m} \equiv 1, \quad g_k \text{ is continuous }\]
+    Since $x \in B_n$ and $C \subseteq X \setminus B_m$, we can rewrite  
+    \[g_k(x) = 0, \quad g_k|_{C} \equiv 1, \quad g_k \text{ is continuous }\]
+    This seperates $x$ and closed set $C$ not containing $x$ via continuous real function, so $X$ is $T_{3.5}$. 
+    Now we'll embed $X$ into $[0,1]^\omega$ by following function $F: X \rightarrow [0,1]^\omega$ 
+    \[F: x \mapsto (g_k(x))_{k \in \BN}\]
+    Then, $F$ is injective. For $x \neq y \in X$, since $\{y\}$ is singleton so closed in $X$ by $T_1$ axiom. 
+    It implies that there exists $g_k$ such that $g_k(x) = 0$, $g_k(y) = 1$. So $F(x), F(y)$ are 
+    different in at least one index $k$. 
+
+    Since $F$ is mapping onto product space $[0,1]^\omega$ and continuous since it is indexwise continuous. Means that 
+    each $g_k$ continuous so $F$ is continuous by \ref{thm:6.18}. 
+
+    Finally, $F$ is an open map. Let $x \in X$ and choose any neighborhood $U$ of $x$ in $X$. 
+    Then $X \setminus U$ is closed and $x \notin X \setminus U$, we can find $g_k$ such that 
+    $g_k(x) = 0, g_k(X \setminus U) = \{1\}$. 
+    Let's define 
+    \[W = F(X) \cap \pi_{k}^{-1}([0,1/2))\]
+    This is open in $F(X)$, $W \subseteq F(U)$ and contains $F(x)$ in $[0,1]^\omega$. 
+    So, $F(U)$ is open in $F(X)$ means that $F$ is an open map. 
+
+    Injective, continuous, open map forms a homeomorphism from $X$ to its image under $F$, $F(X)$. 
+    So, $X \cong F(X)$ implies that $X$ is metrizable. 
+\end{proof}
+
+\begin{rem}{}{17.5}
+    \begin{enumerate}
+        \item Every separable metrizable spaces can embedded into Hibert Cube. 
+        \item Since local Euclidean implies regularity, every topological manifold is metrizable. 
+        \item Every metrizable space is $T_3$ and every separable metrizable space is second countable. 
+    \end{enumerate}
+\end{rem}
+
 \newpage 
 
 \bibliographystyle{plain}
