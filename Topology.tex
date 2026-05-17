@@ -2483,6 +2483,125 @@ I studied this part with Lecture note by Hyungryul Baik, KAIST \cite{Lecture01}.
 
 \section{Tietze Extension Theorem}
 
+In mathematics, we often study the \lq extension' like \textit{field extension}. 
+When you softly study Riemann Conjecture, you might also find the word extension. 
+It's like a dual concept of \lq embeddings'. We'll \textit{expand} our domain of continuous function in some condition. 
+Actually, the \textit{Tietze Extension Theorem} is one of the most powerful topological theorem we'll often use further. 
+Also \hl{It characterize normality: $X$ is normal if and only if it has the Tietze extension property. }
+
+We first prove the key lemma of Tietze extension theorem. 
+
+\begin{lem}{Third Trick}{third trick}
+    Let $X$ be normal and $A \subseteq X$ be closed. For $h: A \rightarrow [-M, M]$ continuous function, 
+    there exists a continuous function $g: X \rightarrow [-M/3, M/3]$ such that 
+    \[\left|h(x) - g(x)\right| \leq \frac{2M}{3}, \quad \forall x \in A\]
+\end{lem}
+
+\begin{proof}
+    We define following two region: 
+    \[A^{-} = h^{-1}([-M, -M/3]) \quad A^+ = h^{-1}([M/3, M])\]
+    Since $A^- \cap A^+ = h^{-1}(\emptyset) = \emptyset$, $A^-, A^+$ are disjoint. Preimage of closed set under continuous map is closed, so $A^-, A^+$ is closed in $A$. 
+    Moreover since $A$ is closed in $X$, we deduce that \textit{$A^-, A^+$ are disjoint closed set of $X$}. 
+    By Urysohn's lemma \ref{lem:Urysohn's Lemma}, we can find $g: X \rightarrow [-M/3, M/3]$ (Since the choice of domain range is arbitrary $[a, b]$) 
+    such that $g|_{A^-} \equiv -M/3$ and $g|_{A^+} \equiv M/3$. 
+    Then, 
+    \[|h(x) - g(x)|_{x \in A} = \begin{cases}
+        \big|[-M, -M/3] - (-M/3)\big| \leq 2M/3 & x \in A^- \\ 
+        \big|[M/3, M] - (M/3)\big| \leq 2M/3 & x \in A^+ \\ 
+        \big|[-M/3, M/3] - [-M/3, M/3]\big| \leq 2M/3 & x \in A \setminus (A^- \cup A^+)
+    \end{cases} \]
+    implies that 
+    \[|h(x) - g(x)|_{x \in A} \leq 2M/3\]
+\end{proof}
+
+\newpage
+
+Now we're ready to prove main statement of this section. 
+
+\begin{thm}{Tietze Extension Theorem}{Tietze extension theorem}
+    Let $X$ be a normal space and $A \subseteq X$ be a closed subset. 
+    \begin{enumerate}
+        \item If $f: A \rightarrow [a, b]$ is continuous then there exists continuous $F: X \rightarrow [a, b]$ with $F|_A = f$. 
+        \item If $f: A \rightarrow \BR$ is continuous then there exists continuous $F: X \rightarrow \BR$ with $F|_A = f$. 
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    For (1), it is sufficient to show for $f: A \rightarrow [-1, 1]$. (Since the choice is arbitrary) 
+    We'll do inductive construction of our target function. Begin with 
+    \[h_0 = f: A \rightarrow [-1, 1]\]
+    By \ref{lem:third trick}, we can find 
+    \[g_1: X \rightarrow [-1/3, 1/3], \quad \norm{h_0 - g_1}_A \leq 2/3\]
+    So, we can construct 
+    \[h_1 = (h_0 - g_1)|_A : A \rightarrow [-2/3, 2/3]\]
+    Inductively doing this: 
+    \[h_n = (h_0 - g_1 - g_2 - \cdots - g_n)|_A : A \rightarrow [-(2/3)^n, (2/3)^n]\]
+    So we can denote it into following way. 
+    \[\norm{h_0 - \sum_{i = 1}^n g_i}_A \leq \left(\frac{2}{3}\right)^n\]
+    Let's denote the partial summation of functional series be: 
+    \[S_n = \sum_{i = 1}^{n} g_i\]
+    However, it is uniformly Cauchy: 
+    \[\norm{g_n + g_{n+1} + \cdots + g_m}_X \leq \sum_{i = n}^{m} \left(\frac{1}{3}\right)^i \rightarrow 0 , \quad n, m \rightarrow \infty\]
+    Hence uniformly converges: 
+    \[\sum_{i = 1}^{n} g_i = S_n \rightrightarrows F = \sum_{i=1}^{\infty} g_i\]
+    Now we claim that $F$ is our target function(Tietze extension function). 
+    First, each $g_i$ is continuous since they are from \ref{lem:Urysohn's Lemma}, 
+    and uniform continuity preserves functionwise continuity so $F$ is continuous. 
+    And domain of $F$ is $X$, also the codomain of $F$ is $[-1, 1]$ since 
+    \[|F(x)| \leq \sum_{i=1}^{\infty} |g_i(x)| \leq \sum_{i=1}^{\infty} \left(\frac{1}{3}\right)^i \leq 1\]
+    Finally, $F|_A \equiv f$ since 
+    \[\norm{f - S_n}_A \leq \left(\frac{2}{3}\right)^n , \quad S_n \rightrightarrows F \implies F|_A \equiv f\]
+    Now let's prove the second part of the theorem. First, 
+    \[\BR \cong (-1, 1) \text{ by } \varphi: t \mapsto \frac{t}{1 + |t|}\]
+    Then for $f: A \rightarrow \BR$, we can construct $\varphi \circ f : A \rightarrow (-1, 1)$. 
+    By part (1), we find 
+    \[G: X \rightarrow [-1, 1], \quad G|_A \equiv \varphi \circ f\]
+    One natural way is obtaining $f$-extension by $\varphi^{-1} \circ G$. However, 
+    if $G$ has $-1, 1$ as its image, $\varphi^{-1}$ is not defined. 
+    So we must modify $G$ properly, let 
+    \[C = G^{-1}(\{-1, 1\}) \implies \text{ closed in $X$ }\]
+    since $\{-1, 1\}$ is discrete set in Hausdorff space so closed, and its preimage under continuous function $G$ also closed in $X$. 
+    And since $G(A)$ does not contain $-1, 1$ , $C$ and $A$ are disjoint closed sets in $X$. 
+    So the Urysohn's Lemma \ref{lem:Urysohn's Lemma} again implies that there exists 
+    \[\lambda: X \rightarrow [0, 1], \quad \lambda|_C \equiv 0, \quad \lambda|_A \equiv 1\]
+    Let's construct 
+    \[\overbar{G} = \lambda \cdot G\]
+    We obtain $\overbar{G}$ is continuous, and 
+    \[\overbar{G}|_A = \lambda(A) \cdot G|_A = G|_A = \varphi \circ f\]
+    Finally, 
+    \[G(x) = \pm 1 \implies \lambda(x) = 0 \implies \overbar{G}(x) = 0\]
+    So, 
+    \[\overbar{G}(X) \subseteq (-1, 1)\]
+    Now we can well-define 
+    \[F = \varphi^{-1} \circ \overbar{G} : X \rightarrow \BR , F|_A = f \]
+\end{proof}
+
+\newpage
+
+Here I append some remarks from \cite{Lecture01}. 
+
+\begin{rem}{}{18.3}
+    If Tietze extension property holds then $X$ is normal. 
+\end{rem}
+
+\begin{proof}
+    Let $A, B$ are disjoint open sets in $X$. 
+    We construct $f: A \rightarrow 0$ and $g: B \rightarrow 1$. 
+    Since constant function is continuous, they are continuous in $A, B$ respectively. 
+    By \ref{lem:lem_pasting lemma}, we can construct 
+    \[h: A \cup B \rightarrow [0, 1], \quad h|_A \equiv f, \quad h|_B \equiv g, \quad h\text{ is continuous }\]
+    So we can apply Tietze extension theorem: 
+    \[F: X \rightarrow [0, 1], \quad \text{ continuous }, \quad F|_A \equiv 0 , F|_B \equiv 1\]
+    This can be viewed as Urysohn seperation function in \ref{lem:Urysohn's Lemma}. 
+    Now simply, $F^{-1}([0, 1/2))$ and $ F^{-1}((1/2, 1])$ forms open seperator of $A, B$ in $X$. 
+    Implies that $X$ is normal. 
+\end{proof}
+
+\begin{rem}{}{18.3}
+    Closedness of domain is matter: For example, $f(x) = \sin(1/x)$ on $(0, 1]$ has no 
+    continuous extension to $[0, 1]$. 
+\end{rem}
+
 \newpage 
 
 \bibliographystyle{plainurl}
