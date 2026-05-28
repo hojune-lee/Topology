@@ -2604,6 +2604,90 @@ Here I append some remarks from \cite{Lecture01}.
 
 \newpage 
 
+\section{Homotopy}
+
+Now we're ready to dive into \lq real' (not $\BR$) topology. From now on, 
+we dealt very nice abstraction of drawable spaces via main object path and homotopy. 
+First, we define general notion of homotopy first. 
+
+\begin{defn}{Homotopy}{homotopy}
+    Let $f, f': X \rightarrow Y$ be continuous maps. 
+    We say that $f$ is \textit{homotopic} to $f'$ (denoted by $f \simeq f'$) if there exists 
+    \[F: X \times [0,1] \rightarrow Y, \quad F\text{ is continuous }, \quad F|_{X \times \{0\}} \equiv f, \quad F|_{X \times \{1\}} \equiv f'\]
+    Such $F$ is called \textit{homotopy} between $f$ and $f'$. 
+    If $f$ is homotopic to constant map, $f$ is called \textit{nul-homotopic}. 
+\end{defn}
+
+Homotopy can be understand as \hl{\textit{Continuous(time) change of continuous function}. i.e., We 
+often call $[0,1]$ as \textit{time axis}.}
+Through out the time going, our function $f$ \hl{changed continuously} to $f'$. 
+
+\begin{prop}{Homotopic is Equivalence Relation}{homotopic equiv}
+    The relation \textit{homotopic}($\simeq$) is equivalence relation. i.e., 
+    \begin{itemize}
+        \item $f \simeq f$ 
+        \item $f \simeq f' \iff f' \simeq f$ 
+        \item $f \simeq g, g \simeq h \implies f \simeq h$. 
+    \end{itemize}
+\end{prop}
+
+So we can define equivalence classes under this relation, which is called \textit{homotopy classes}. 
+
+Now we define very natural, intuitive notion of drawing \textit{line, path} on space $X$. 
+We call that 
+\[\gamma: [0,1] \rightarrow X, \quad \gamma \text{ is continuous } \implies \gamma \text{ is a path on $X$}\]
+And naturally says $\gamma(0)$ is the \textit{initial point of $\gamma$}, and $\gamma(1)$ is the \textit{end point of $\gamma$}. 
+Since this notion is more intuitive, useful, and important specific case of \ref{def:homotopy}, we specialize them. 
+
+\newpage 
+
+\begin{defn}{Path Homotopy}{path homotopy}
+    Let $\gamma, \gamma': [0,1] \rightarrow X$ be paths. 
+    We say that they are \textit{path homotopic relative to end points}(denoted by $\simeq_p$)
+    if 
+    \[\gamma(0) = \gamma'(0), \quad \gamma(1) = \gamma'(1)\]
+    and there exists 
+    \[F: [0,1] \times [0,1] \rightarrow X, \quad F \text{ is continuous }, \quad F|_{[0,1] \times \{0\}} \equiv \gamma, \quad F|_{[0,1] \times \{1\}} \equiv \gamma'\]
+\end{defn}
+
+You can find a few nice examples in \cite{munkres} page 325-326. 
+However, we can generalize the notion of \lq concatenation' of two paths on space as following. 
+
+\begin{defn}{Path Product}{path product}
+    Let $\gamma, \delta: [0,1] \rightarrow X$ be paths on $X$ such that $\gamma(1) = \delta(0)$. 
+    Then we can construct following path: 
+    \[\gamma * \delta: [0,1] \rightarrow X, \quad t \mapsto \begin{cases}
+        \gamma(2t) & t \in [0,1/2] \\
+        \delta(2t - 1) & t \in [1/2, 1]
+    \end{cases}\]
+    This is well define based on pasting lemma \ref{lem:lem_pasting lemma}. 
+\end{defn}
+
+We can just imagine that 2 times faster move through $\gamma$ then $\delta$. 
+By the way, as we noted at \ref{prop:homotopic equiv}, we can find \textit{path homotopic classes} of path $\gamma$ in $X$: 
+\[[\gamma] = \{\delta \mid \delta \simeq_p \gamma, \delta \text{ is any path in $X$}\}\]
+Then suprisingly, we can define the natural binary operation between \textit{path homotopic classes}.
+
+\begin{defn}{Define Binary Operation on Path Homotopic Classes}{path hom bin op}
+    We can define following binary operation $*$: 
+    \[[\gamma] * [\delta] \mapsto [\gamma * \delta]\]
+\end{defn}
+
+Then we'll not prove, but following holds (very naturally)
+\begin{enumerate}
+    \item This is well-defined, i.e., $[\gamma] * [\delta] = [\gamma'] * [\delta']$ for $\gamma \simeq_p \gamma', \delta \simeq_p \delta'$.
+    \item $[\gamma] * ([\delta] * [\eta]) = ([\gamma] * [\delta]) * [\eta]$
+    \item For $\gamma(0) = x_0, \gamma(1) = x_1$, define $e_{x}$ be constant map onto $x$. Then, we obtain 
+    \[[\gamma] * [e_{x_1}] = [e_{x_0}] * [\gamma] = [\gamma]\]
+    \item We can define $\overbar{\gamma}(s) = \gamma(1 - s)$, the reverse path. Then, 
+    \[[\gamma] * [\overbar{\gamma}] = [e_{x_0}], [\overbar{\gamma}] * [\gamma] = [e_{x_1}]\]
+    \item Let $\gamma$ be a path and suppose that $0 \leq a_0 < a_1 < \cdots < a_n = 1$ and $\gamma_i: I \rightarrow X$ induced by 
+    $\gamma(a_{i-1})$ to $\gamma(a_{i})$. Then, 
+    \[[\gamma] = [\gamma_1] * \cdots * [\gamma_m]\]
+\end{enumerate}
+
+\newpage 
+
 \bibliographystyle{plainurl}
 \bibliography{reference} 
 
