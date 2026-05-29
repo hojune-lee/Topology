@@ -2686,6 +2686,73 @@ Then we'll not prove, but following holds (very naturally)
     \[[\gamma] = [\gamma_1] * \cdots * [\gamma_m]\]
 \end{enumerate}
 
+\newpage
+
+\section{The Fundamental Groups}
+
+At this moment, one beautiful combination between Algebraic notions and Topological notions. 
+One interesting story when I studied this parts, my Topology professor taught us about \lq free groups' 
+and in the following Algebra class, Algebra professor taught us about \lq fundamental groups'. 
+
+We define bunch of important definitions here. 
+
+\begin{defn}{The Fundamental Groups}{fundamental group}
+    If some path has same initial/end point $x_0$, we specialize them to call a \textit{loop based at $x_0$}.
+    The set of path homotopy classes of loops based at $x_0$ is denoted by $\pi_1(X, x_0)$. 
+    With binary operation defined in \ref{def:path hom bin op}, $\pi_1(X, x_0)$ is group and it is called 
+    \textit{the fundamental group of $X$ relative to the base point $x_0$}. 
+\end{defn}
+
+First natural curious is that, what if we change the \lq base point $x_0$' on the same space $X$? 
+Once there exists a path $\alpha$ between $x_0$ and $x_1$ in $X$, we can construct following natural map. 
+\[\hat{\alpha}: \pi_1(X, x_0) \rightarrow \pi_1(X, x_1) \text{ defined by } [\gamma] \mapsto [\overbar{\alpha}] * [\gamma] * [\alpha]\]
+Since the drawing of image of this is obvious, I omitted here. We can observe following property. 
+
+\begin{prop}{Isomorphism Between Fundamental Groups}{20.2}
+    Let $\alpha$ be a path from $x_0$ to $x_1$ in $X$. $\hat{\alpha}$ is group isomorphism. i.e., 
+    \[\pi_1(X, x_0) \cong \pi_1(X, x_1)\]
+\end{prop}
+
+\begin{proof}
+    It is easy to show that this is homomorphism: 
+    \[[\gamma] * [\delta] = [\gamma * \delta] \mapsto [\overbar{\alpha}] * [\gamma * \delta] * [\alpha]\]
+    By the way, 
+    \begin{align*} 
+        & [\overbar{\alpha}] * [\gamma] * [\alpha] * [\overbar{\alpha}] * [\delta] * [\alpha] \\
+        &= [\overbar{\alpha}] * [\gamma] * [e_{x_0}] * [\delta] * [\alpha] \\ 
+        &= [\overbar{\alpha}] * [\gamma * \delta] * [\alpha]
+    \end{align*}
+    To show that $\hat{\alpha}$ is bijection, it is enough to show that there exists inverse homomorphism. 
+    Define 
+    \[(\hat{\alpha})^{-1}: \pi_1(X, x_1) \rightarrow \pi_1(X, x_0) \text{ defined by } [\delta] \mapsto [\alpha] * [\delta] * [\overbar{\alpha}]\]
+    Hence, $\hat{\alpha}$ is isomorphism. 
+\end{proof}
+
+\begin{cor}{Fundamental Group in Path Connected Space}{20.3}
+    If $X$ is path-connected, $\pi_1(X, x_0)$ does not depend on choice of $x_0 \in X$. i.e., they are all isomorphic. 
+\end{cor}
+
+We'll mainly talk about path connected spaces. The reason is similar why we usually talk about connected graphs in Graph Theory. 
+Since each disconnected components does not have any channel to communicate, it is natural. 
+And note that, \hl{isomorphism between $\pi_1(X, x_0) \xrightarrow{\sim} \pi_1(X, x_1)$ depends on choice of path between them.}
+
+\begin{defn}{Simply Connected Space}{simply connected space}
+    Suppose that $X$ is path-connected space. We say it is \textit{simply connected} when 
+    \[\pi_1(X, x_0) = \{[e_{x_0}]\}\]
+    i.e., trivial group. Intuitively, our space $X$ is very nice as there is not any \lq hole'. 
+\end{defn}
+
+Now the second natural curious is that, what if we change the \lq space $X$' via continuous maps or homeomorphisms? 
+
+\begin{defn}{Homomorphism Induced by Continuous Map}{homomorphism induced by continuous map}
+    Let $f: (X, x_0) \rightarrow (Y, y_0)$ be a continuous mapping. 
+    We can define 
+    \[f_*: \pi_1(X, x_0) \rightarrow \pi_1(Y, y_0) \text{ defined by } [\gamma] \mapsto [f \circ \gamma]\]
+    This $f_*$ is called the \textit{homomorphism induced by $h$ relative to the base point $x_0$}. 
+\end{defn}
+
+It is not hard to see that $f_*$ is well-defined homomorphism. Note that, as very clear reason, \hl{If $f$ is homeomorphism then $f_*$ is group isomorphism}. 
+
 \newpage 
 
 \bibliographystyle{plainurl}
