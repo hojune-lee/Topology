@@ -2735,6 +2735,17 @@ Since the drawing of image of this is obvious, I omitted here. We can observe fo
 We'll mainly talk about path connected spaces. The reason is similar why we usually talk about connected graphs in Graph Theory. 
 Since each disconnected components does not have any channel to communicate, it is natural. 
 And note that, \hl{isomorphism between $\pi_1(X, x_0) \xrightarrow{\sim} \pi_1(X, x_1)$ depends on choice of path between them.}
+However, we can observe following: 
+\[\pi_1(X, x_0) \xrightarrow{\sim} \pi_1(X, x_1) \text{ independent to path } \iff \pi_1(X, x_0) \text{ is Abelian}\]
+
+\begin{proof}
+Let $[\gamma], [\delta] \in \pi_1(X, x_0)$. Suppose that $\alpha$ is a path from $x_0$ to $x_1$. Then we can construct another path $[\delta * \alpha]$. 
+Since the assumption, 
+\[[\overbar{\alpha}] * [\gamma] * [\alpha] = [\overbar{\delta * \alpha}] * [\gamma] * [\delta * \alpha]\]
+This implies that 
+\[[\gamma] = [\overbar{\delta}] * [\gamma] * [\delta] \implies [\delta] * [\gamma] = [\gamma] * [\delta]\]
+And converse is clear. 
+\end{proof}
 
 \begin{defn}{Simply Connected Space}{simply connected space}
     Suppose that $X$ is path-connected space. We say it is \textit{simply connected} when 
