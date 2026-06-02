@@ -2796,7 +2796,255 @@ then it construct $S^1$ circle.
 
 \section{Covering Spaces and Lifting Theorems}
 
+Now we begin the main theory. First, we define the \textit{covering map}. 
+In basic, it is a natural-map from \hl{more unfolded space into folded target space}. 
+However, in real world also, the fold operation makes some symmetric structures like Decalcomani. 
+Try to view the notion of covering map and evenly covered as Decalcomani in general space. 
 
+\begin{rem}{My Intuition}{my intuition-covering}
+    I think we can understand all of these story as \textit{parallel universe theory}. 
+    $B$ is our space, and $E$ is God's space(Entire Universe). There are many Homeomorphic parallel universes (sheets). 
+    If we do some action $f: Y \rightarrow B$, then it effect \textit{some other parallel universe} on $E$. 
+    In this view, the name $p$ can be viewed as \textit{projection}. 
+\end{rem}
+
+\begin{defn}{Evenly Covered, Covering Map}{evenly covered, covering map}
+    Suppose that $p: E \rightarrow B$ is continuous surjection. 
+    For open set $U$ in $B$, it is called \textit{evenly covered by $p$}
+    if 
+    \begin{enumerate}
+        \item[(1)] \[p^{-1}(U) = \bigsqcup_{\alpha \in A} V_\alpha\]
+    means that each $V_\alpha$ are pairwise disjoint open sets. 
+        \item[(2)] Each $V_\alpha$ is homeomorphic to $U$ by $p|_{V_\alpha}$ 
+    \end{enumerate}
+    We say that $p$ is \textit{covering map} if for any $b \in B$, we can find evenly covered neighborhood $U$ of $b$. 
+    We'll say that such $V_\alpha$ are \textit{sheets} over $U$. 
+\end{defn}
+
+Then, we can obtain some easy facts once $p: E \rightarrow B$ is covering map. 
+
+\begin{prop}{Property of Covering Map}{property of covering map}
+    Suppose that $p: E \rightarrow B$ is covering map. 
+    \begin{enumerate}
+        \item[(1)] $p$ is local homeomorphism. 
+        \item[(2)] $p$ is open map. 
+        \item[(3)] Fibers of single point is discrete. 
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    (1), (3) is trivial. Suppose that $V \subseteq E$ is open set. 
+    Then for $\forall e \in E$, we can find sheet $V_e \subseteq E$ such that containing $e$. 
+    However, $p|_{V_e}$ is homeomorphism, hence $p|_{V_e}(V \cap V_e)$ is open in $B$. 
+    $p(V) = \bigcup_{e \in V} p|_{V_e}(V \cap V_e)$, arbitrary union of open sets hence open in $B$. 
+\end{proof}
+
+\begin{defn}{Deck Transformation}{deck transformation}
+    Suppose that covering map $p: E \rightarrow B$ is given. 
+    A homeomorphism $\varphi: E \rightarrow E$ is called \textit{deck transformation} 
+    if $p \circ \varphi = p$. 
+    The set of all deck transformations forms a group, denoted by $\operatorname{Deck}(E/B)$ or $\Aut(p)$. 
+\end{defn}
+
+Here we observe a few important facts. As we've already said, $\pi_1(S^1) \cong \BZ$. 
+However, it is clear that the only deck transformations of $p: \BR \rightarrow S^1$ defined by 
+$t \mapsto e^{2\pi i \cdot t}$ is $\varphi: t \mapsto t + n$ for any $n \in \BZ$. 
+Hence, $\operatorname{Deck}(E/B) = \BZ \cong \pi_1(S^1)$. 
+For another example, let's imagine that $p: S^n \rightarrow P\BR^n$. 
+Here, $P\BR^n$ is all 1-dim vector spaces in $\BR^n$. 
+Then we can imagine that all possible lines over $\BR^3$ and the outer-sphere($S^3$). 
+Any line in $\BR^3$ determines 2 symmetric points over the surface of sphere. 
+Hence, any open sets in $P\BR^n$ construct the open sets over the surface of $S^n$ and it is 
+symmetrical through the origin. Hence, $p: S^n \rightarrow P\BR^n$ is 2-covering map. 
+The only non-trivial deck transformation is $x \mapsto -x$, hence $\operatorname{Deck}(E/B) \cong Z_2 \cong \BZ/2\BZ$. 
+However, $\pi_1(P\BR^n) \cong \BZ/2\BZ$ is known. 
+These results reveals that deck transformation group is isomorphic to fundamental groups of codomain. 
+
+\begin{thm}{Deck Transformation is Unique up to point}{unique deck transformation theorem}
+    Let $p: E \rightarrow B$ be covering map and \hl{$E$ is connected}. $\varphi_1, \varphi_2$ both are deck transformation. 
+    \[\exists \, e \in E, \, \varphi_1(e) = \varphi_2(e) \implies \varphi_1 = \varphi_2\]
+\end{thm}
+
+\begin{proof}
+    Define 
+    \[S = \{e \in E \mid \varphi_1(e) = \varphi_2(e)\} \neq \emptyset\]
+    If $S$ is clopen, $S = E$ since $E$ is connected space. 
+    First, $S$ is open: suppose that $s \in S \implies \varphi_1(s) = \varphi_2(s) = x$. 
+    Then we can find a sheet $V$ over $p(x)$ containing $x$. 
+    Then, $\varphi_1^{-1}(V) \cap \varphi_2^{-1}(V)$ is open neighborhood of $s$ such that $\varphi_1, \varphi_2$ agree. 
+    Similarly, $S$ is closed: if $s \in E \setminus S \implies \varphi_1(s) \neq \varphi_2(s)$. 
+    Hence, they are one the different sheet $V_1, V_2$. 
+    Then we can also find $\varphi_1^{-1}(V_1) \cap \varphi_2^{-1}(V_2)$ is open and contained in $E \setminus S$.  
+\end{proof}
+
+\newpage
+
+Now we define one more important concept, which is called \textit{lifting}. 
+Up to this point, we understand the concept of covering map as Decalcomani. However, 
+we did nothing yet. To give the meaning here, we just need to \hl{draw some picture on our folded space $B$ and 
+unfold it onto $E$} through covering map(fold operation). 
+
+\begin{defn}{Lifting}{lifting}
+    Suppose that $p: E \rightarrow B$ is a covering map. 
+    Let $f: Y \rightarrow B$ is continuous map. 
+    We say that $\tilde{f}: Y \rightarrow E$ is a \textit{lifting of $f$ by $p$} if 
+    $\tilde{f}$ is continuous and $p \circ \tilde{f} = f$. 
+    \[
+    \begin{tikzcd}[row sep=large, column sep=large]
+        & E \arrow[d, two heads, "p", shorten >= 2pt, shorten <= 2pt]\\
+        Y \arrow[ru, red, "\tilde{f}", shorten >= 2pt, shorten <= 2pt] \arrow[r, "f", shorten >= 2pt, shorten <= 2pt] & B
+    \end{tikzcd}
+    \]
+\end{defn}
+
+See \ref{rem:my intuition-covering}. From now on, I'll try to explain my understanding about all these notion as this way. 
+Suppose that we do something($f: Y \rightarrow B$) onto our space $B$. It happens in parallel universes in $E$. 
+Once we can fix one element of some parallel universe, we can fix our entire $f$ on such universe, which is lifting of our $f$. 
+
+\begin{thm}{Unique Lifting Theorem}{unique lifting property}
+    Let $p: E \rightarrow B$ be covering map, $Y$ is connected space and $f: Y \rightarrow B$ is continuous map. 
+    Suppose that $\tilde{f_1}, \tilde{f_2}$ are lifting of $f$ by $p$. 
+    If $\tilde{f_1}, \tilde{f_2}$ agree at least one point in $E$, they are exactly same. 
+    Hence lifting of $f$ by $p$ is unique up to choice of one point. 
+\end{thm}
+
+\begin{proof}
+    Do samething from \ref{thm:unique deck transformation theorem}. 
+\end{proof}
+
+Now, since our goal is deal more intuitive thing which is fundamental group, 
+we'll specify 2 cases using the notion of lifting. 
+First one is path lifting, it can be imagined that we draw some path in our space $B$, 
+then every parallel spaces in $E$ maybe draw it its own way. Second one is Homotopy lifting. 
+If we continuously change our path in $B$, every parallel space can do similar thing in $E$. 
+
+\begin{thm}{Path Lifting Theorem}{path lifting theorem}
+    Let $p: E \rightarrow B$ be a covering map. 
+    Suppose that $\gamma: [0,1] \rightarrow B$ is a path on $B$. 
+    Fix one $e_0 \in E$ such that $p(e_0) = \gamma(0)$. 
+    There exists the unique path lifting $\tilde{\gamma}: [0,1] \rightarrow E$ of $\gamma$ 
+    such that $\tilde{\gamma}(0) = e_0$ and $p \circ \tilde{\gamma} = \gamma$. 
+    \[
+    \begin{tikzcd}[row sep=large, column sep=large]
+        & E \arrow[d, two heads, "p", shorten >= 2pt, shorten <= 2pt]\\
+        \left[0,1\right] \arrow[r, "\gamma", shorten >= 2pt, shorten <= 2pt] \arrow[ru, "\exists! \tilde{\gamma}", red, shorten >= 2pt, shorten <= 2pt] & B
+    \end{tikzcd}
+    \quad \quad \quad
+    \begin{tikzcd}[row sep=large, column sep=large]
+        & e_0 \arrow[d, "p", mapsto, shorten >= 2pt, shorten <= 2pt]\\
+        0 \arrow[r, "\gamma", mapsto, shorten >= 2pt, shorten <= 2pt] \arrow[ru, red, "\exists! \tilde{\gamma}", mapsto, shorten >= 2pt, shorten <= 2pt] & \gamma(0)
+    \end{tikzcd}
+    \]
+\end{thm}
+
+\begin{proof}
+    Since $p$ is covering map, for any $\gamma(t) \in B$ where $t \in [0,1]$, we can find 
+    $U_t$ : evenly covered neighborhood of $\gamma(t)$. 
+    Then, $\gamma^{-1}(U_t)$ forms open covering of $[0,1]$. 
+    By \ref{thm:Lebesgue number lemma}, we can find Lebesgue number $\delta > 0$ such that 
+    if $S \subseteq [0,1]$ and $\operatorname{diam}(S) < \delta$ then $S$ entirely contained in 
+    some $\gamma^{-1}(U_t)$. 
+    Then now, partitioning $[0,1]$ into $[t_i, t_{i+1}]$ where $t_0 = 0, t_m = 1$ and $t_{i+1} - t_i < \delta$. 
+    Now each $[t_i, t_{i+1}] \subseteq \gamma^{-1}(U_t)$ for some $t$. 
+    However, $t_0 = 0$ maps to $e_0$ in $E$ and $\gamma(0)$ in $B$. Hence we can choose 
+    sheet containing $e_0$, then $[t_0, t_1] \rightarrow E$ is uniquely determined when $p \circ \tilde{\gamma} = \gamma$ on $[t_0, t_1]$. 
+    Hence we can fix $\tilde{\gamma}(t_1)$. Do this for $[t_1, t_2]$, and so on. 
+    By pasting lemma \ref{lem:lem_pasting lemma}, we can all concate them, it construct $\tilde{\gamma}: [0,1] \rightarrow E$ such that $\tilde{\gamma}(0) = e_0$ and $p \circ \tilde{\gamma} = \gamma$. 
+\end{proof}
+
+\begin{thm}{Homotopy Lifting Theorem}{homotopy lifting theorem}
+    Let $p: E \rightarrow B$ be a covering map. Suppose that $H: [0,1] \times [0,1] \rightarrow B$ 
+    is a path homotopy on $B$. Once initial path lifting $\tilde{H}|_{[0,1] \times \{0\}}$ is fixed on $E$, 
+    there exists a unique lifting $\tilde{H}$ of $H$ in $E$ such that 
+    \[\tilde{H}: [0,1] \times [0,1] \rightarrow E, \quad p \circ \tilde{H} = H, \quad \tilde{H}(\cdot, 0) = \text{ lift of $H(\cdot, 0)$ }\]
+\end{thm}
+
+\begin{proof}
+    Do similarly with \ref{thm:path lifting theorem} on 2D plane.
+\end{proof}
+
+\begin{cor}{End points of Lifting of Homotopy}{end points of lifting of homotopy}
+    Let $p: E \rightarrow B$ be a covering map. 
+    2 paths $\gamma_1, \gamma_2$ are homotopic in $B$ rel end points. 
+    Suppose that $\tilde{\gamma_1}, \tilde{\gamma_2}$ are there path lifting by $p$. 
+    Once they share the initial point, then they share the end points: $\tilde{\gamma}_1(1) = \tilde{\gamma}_2(1)$. 
+\end{cor}
+
+\begin{proof}
+    Construct homotopy $H: [0,1] \times [0,1] \rightarrow B$ from $\gamma_1$ to $\gamma_2$. 
+    As $\tilde{\gamma}_1$ is given, fix it as initial path on $E$, then there exists unique 
+    homotopy lifting $\tilde{H}$ by \ref{thm:homotopy lifting theorem}. 
+    Now suppose $\tilde{H}(1, \cdot)$. Since $H(1, \cdot)$ is constant map on $\gamma_1(1) = \gamma_2(1) = b$, 
+    $p \circ \tilde{H}(1, \cdot)$ also constant on $b$. 
+    However, $p^{-1}(b)$ is discrete and $\tilde{H}$ is continuous, hence $\tilde{H}(1, \cdot)$ also constant map. 
+    It implies that the end points of $\tilde{\gamma}_1, \tilde{\gamma}_2$ are same. 
+\end{proof}
+
+\begin{cor}{The Induced Homomorphism Between Fundamental Groups}{induced hom fundamental groups}
+    Once covering map $p: E \rightarrow B$ is given, then the induced homomorphism \ref{def:homomorphism induced by continuous map}
+    \[p_*: \pi_1(E, e_0) \rightarrow \pi_1(B, b_0)\]
+    is injective. 
+\end{cor}
+
+\begin{proof}
+    Homomorphism is injective if and only if its kernel is trivial. Suppose that 
+    $p_*([\gamma]) = [C_{b_0}]$. 
+    By definition, it implies that there exists a path homotopy between 
+    $p \circ \gamma \simeq_p C_{b_0}$. 
+    See the lifting of $C_{b_0}$ in $E$. Since $p^{-1}(b_0)$ is discrete and one point $e_0$ is fixed, 
+    lifting of $C_{b_0}$ is $C_{e_0}$ in $E$. 
+    Hence by the homotopy lifting theorem \ref{thm:homotopy lifting theorem}, 
+    lifting of $p \circ \gamma$ is path homotopic to $C_{e_0}$. 
+    We can specify lifting of $p \circ \gamma$ by $\gamma$, hence $\gamma \simeq_p C_{e_0}$, hence 
+    $[\gamma] = [C_{e_0}]$ which is identity in $\pi_1(E, e_0)$. 
+\end{proof}
+
+From now on, we've \hl{shown that the existance of lifting only for path and homotopy} by direct constructing. 
+One natural question is the existance of lifting of general continuous function $f: Y \rightarrow B$. 
+
+Following theorem intuitively means that, lifting exists if and only if $Y$ is unfolded more than $E$. 
+View $f_*(\pi_1(Y, y_0))$ as complexity of space of $Y$. 
+
+\begin{thm}{The Lifting Criterion}{lifting criterion}
+    Let $p: (E, e_0) \rightarrow (B, b_0)$ be a covering map, and $f: (Y, y_0) \rightarrow (B, b_0)$ be continuous map with \hl{$Y$ is path-connected and locally path-connected.}
+    \[\text{Exists unique lift}, \tilde{f}: (Y, y_0) \rightarrow (E, e_0) \iff f_*(\pi_1(Y, y_0)) \leq p_*(\pi_1(E, e_0))\]
+\end{thm}
+
+\begin{proof}
+    ($\Rightarrow$) If such lifting is exists, $p \circ \tilde{f} = f$. 
+    Hence, $f_*(\pi_1(Y, y_0))$ is filtered-image of $p_*(\pi_1(E, e_0))$.(Since functorial property: $p \circ \tilde{f} = f \implies p_* \circ \tilde{f}_* = f_*$) Hence 
+    \[f_*(\pi_1(Y, y_0)) \leq p_*(\pi_1(E, e_0))\]
+    ($\Leftarrow$) 
+    Here we construct $\tilde{f}$ directly. 
+    Choose $y \in Y$, then since $Y$ is path-connected, there exists a path $\alpha$ from $y_0$ to $y$. 
+    It is projected into $B$ by $f$: 
+    \[\alpha \mapsto f \circ \alpha, \quad f \circ \alpha(0) = b_0\]
+    Then we can find its lifting by fixing initial point by $e_0$ in $E$. 
+    \[f \circ \alpha \xmapsto{\text{lift}} \widetilde{f \circ \alpha}, \quad \widetilde{f \circ \alpha}(0) = e_0\]
+    Then we definitionally define 
+    \[\tilde{f}: y \mapsto \widetilde{f \circ \alpha}(1)\]
+    Here we need to show that $\tilde{f}$ is well-defined (independent to the choice of $\alpha$) and valid lifting. 
+    Suppose that we choose another $y_0$ to $y$ path, namely $\beta$. 
+    We want to show that 
+    \[\widetilde{f \circ \alpha}(1) = \widetilde{f \circ \beta}(1)\]
+    Here, $\alpha * \overbar{\beta}$ forms $y_0$ loop in $Y$. 
+    Hence by the assumption, $[\alpha * \overbar{\beta}] \in \pi_1(Y, y_0)$ implies that 
+    \[[f \circ (\alpha * \overbar{\beta})] = p_*([\gamma]), \text{ for some $\gamma \in \pi_1(E, e_0)$ }\]
+    Hence, lifting of $f \circ (\alpha * \overbar{\beta})$ forms loop based at $e_0$ in $E$. 
+    But lifting of $f \circ (\alpha * \overbar{\beta})$ can be viewed as concatenation of both lifts, implies our goal. 
+    Showing continuity is not hard. 
+\end{proof}
+
+Up to these results, we now possesses the tool to compute the fundamental group of $S^1$ rigorously. 
+
+\begin{thm}{Fundamental Group of $S^1$}{fundamental group of S1}
+    $p: t \mapsto e^{2\pi i \cdot t}$ be our covering map. $\tilde{\gamma}$ is lifting of $\gamma$ by fixing initial point by $0 \in \BR$.
+    \[ \pi_1(S^1, x_0) \cong \BZ , \text{ defined by } [\gamma] \mapsto \tilde{\gamma}(1)\]
+\end{thm}
+
+\begin{proof}
+    This will be nice practice.
+\end{proof}
 
 \newpage 
 
