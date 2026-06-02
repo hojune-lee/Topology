@@ -2766,6 +2766,40 @@ It is not hard to see that $f_*$ is well-defined homomorphism. Note that, as ver
 
 \newpage 
 
+\section{Universal Covering Theory - Introduction}
+
+Many topological spaces we encounter in practice are highly complex—riddled with holes, twisted structures, and intricate walls. Imagining such spaces, especially in higher dimensions, can be a daunting task. On the other hand, simply connected spaces, such as $\mathbb{R}^n$, are completely flat and mathematically "clean," making them exceptionally natural and easy to work with. 
+Fortunately, these simple spaces often serve as the fundamental building blocks for more complicated ones via quotient topologies. We have already seen a prime example of this: constructing a torus by gluing the edges of a simple, well-behaved square. Now, we want to take this idea further. Our goal is to reverse this process—to systematically "unfold" or "unroll" any twisted, complex space into a pure, simply connected space.
+
+Here I write up the entire big picture of this section here. 
+We'll state that under \underbar{some condition} of $B$, we can \lq maximally' unfold it into simply connected space(called universal cover) $\tilde{B}$. 
+However, above some condition containing path-connected, hence $B$ has unique first fundamental group $\pi_1(B)$. 
+\hl{Try to view that group acts on $\tilde{B}$}. 
+Then finally, it determines the folded structure of $B$ from $\tilde{B}$, means that 
+\[B \cong \tilde{B}/\pi_1(B)\]
+Hence, for such \underbar{good} $B$, it is enough to analysis fundamental group $\pi_1(B)$. 
+Via them, we can fully understand the topological structures and folded structure of $B$ from $\tilde{B}$. 
+
+Now I give very explicit example in this page. 
+Try to view following complex function as topological manner: 
+\[p: \BR \rightarrow S^1 \cong \text{ unit circle in $\BC$ , defined by } t \mapsto e^{2\pi i \cdot t}\]
+
+The fundamental group $\pi_1(S^1) \cong \BZ$. It can be imagined as $n$-times loop in $S^1$. 
+Suppose that we start from $0$ in $\BR$. 
+Here, $n$-times loop can be viewed as move $0$ to $n$ in $\BR$. i.e., stairup $n$-times in $\BR$ $\implies$ $n$-loop in $S^1$. 
+Hence, each $n$-loop acts on $\BR$ by $x \mapsto x + n$. 
+And also we obtain $S^1 \cong \BR/\BZ$. 
+Now we \lq fold' simply connected space $\BR$ with respect to $\BZ$, 
+then it construct $S^1$ circle. 
+
+\newpage 
+
+\section{Covering Spaces and Lifting Theorems}
+
+
+
+\newpage 
+
 \bibliographystyle{plainurl}
 \bibliography{reference} 
 
