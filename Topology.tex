@@ -3050,6 +3050,159 @@ Up to these results, we now possesses the tool to compute the fundamental group 
 
 \newpage 
 
+\section{The Universal Covering Theorem}
+
+Now we begin our main theory. As we stated, we wonder that the maximal unfolded space of given folded space $B$. 
+It is natural to think that maximal unfolded space is \textit{simply connected space} \ref{def:simply connected space}. 
+So we define the universal covering as following: 
+
+\begin{defn}{Universal Covering}{universal covering}
+    A covering map $p: \tilde{B} \rightarrow B$ is called \textit{universal covering} 
+    when $\tilde{B}$ is \textit{simply connected}. 
+\end{defn}
+
+Universal covering is maximally unfolded space. Hence, intuitively, we can construct 
+every non-maximally unfolded covering space $E$ of $B$ from $\tilde{B}$. 
+
+\begin{prop}{Meaning of Universal Covering}{prop 23.2}
+    Suppose that $p: (\tilde{B}, \tilde{b}_0) \rightarrow (B, b_0)$ is an universal covering. 
+    For any \hl{path-connected covering} $q: (E, e_0) \rightarrow (B, b_0)$, 
+    there exists a covering map $r: (\tilde{B}, \tilde{b}_0) \rightarrow (E, e_0)$ 
+    such thar $q \circ r = p$. 
+\end{prop}
+
+In diagram, 
+\[
+\begin{tikzcd}
+    & & & & (E, e_0) \arrow[ddd, "q", shorten >= 2pt, shorten <= 2pt]\\
+    & & & & \\
+    & & & \circlearrowright & \\
+    (\tilde{B}, \tilde{b}_0) \arrow[rrrruuu, "r", red, shorten >= 3pt, shorten <= 3pt]\arrow[rrrr, "p", shorten >= 2pt, shorten <= 2pt] & &  & & (B, b_0)
+\end{tikzcd}
+\]
+
+Each are path-connected covering map. Remarks that path-connectedness gives the meaning of unfolded into our space \ref{thm:lifting criterion}. 
+\begin{proof}
+    Since $\tilde{B}$ is simply connected, it is path-connected and locally path-connected. 
+    Hence, by the Lifting Criterion \ref{thm:lifting criterion}, 
+    there exists unique lifting $r$ of $p$ such that $r(\tilde{b}_0) = e_0$ such that 
+    $q \circ r = p$. Now we'll claim that $r: (\tilde{B}, \tilde{b}_0) \rightarrow (E, e_0)$ is a covering map. 
+    \[\iff r \text{ is surjective}, \quad \forall e \in E, \exists \, U:\text{open neighborhood of $e$}, \quad U \text{ is evenly covered by $r$}\]
+    Choose any $e \in E$. Since $E$ is path-connected, we can find a path $\gamma$ from $e_0$ to $e$. 
+    Then, its $q$-projection path is $q \circ \gamma$ in $B$. We can fix the lifting of $q \circ r$ through $p$ by fixing 
+    initial point by $\tilde{b}_0$. Then, $r(\widetilde{q \circ \gamma}(1)) = e$. Hence $r$ is surjective. 
+
+    Now choose any $b \in B$. Since both $p, q$ are covering map, we can find $p,q$-evenly covered neighborhood $U$ of $b$. 
+    Denote its sheets on $\tilde{B}$ by $\{V_\alpha\}$ and on $E$ by $\{W_\beta\}$. 
+    In this setting, $r$ sends $\{V_\alpha\}$ into $\{W_\beta\}$ surjectively and homeomorphically. 
+    Hence, for any $e \in E$, we can find $\{V_\alpha\}$ and $\{W_\beta\}$ with respect to $q(e) \in B$ and 
+    then the sheet $W_\beta'$ containing $e$ has sheets in $\{V_\alpha\}$. (Try to check the details in this proof.) 
+\end{proof}
+
+\newpage
+
+Up to here, we observe that once we have universal covering, we can cover all the intermediate-folded spaces. 
+It's time to discuss when such universal covering exsits. This will be the highlights of this section. 
+Before move on, we define some condition of our space first. 
+
+\begin{defn}{Semi-Locally Simply Connected}{semi locally simply connected}
+    $B$ is called \textit{semi-locally simply connected} if for any $b \in B$, 
+    we can find neighborhood $U$ of $b$ such that 
+    any homomorphism $\pi_1(U, b) \rightarrow \pi_1(B, b)$ is trivial. 
+    In other words, for any $b \in B$, if we restrict our loop-space up to $U$, 
+    all possible loops in $U$ is actually trivial loops in $B$. 
+\end{defn}
+
+Now we can state when the universal covering always exists. 
+I'll add my intuition after formal proof of this theorem.
+As this is proof via construction, quite important to remember.
+
+\begin{thm}{Existance of Universal Covering}{exists of universal covering}
+    Any \hl{path connected, locally path connected, semi-locally simply connected} space $B$ has the universal covering $p: \tilde{B} \rightarrow B$.
+    $\tilde{B}$ is unique up to isomorphism.
+\end{thm}
+
+\begin{proof}
+    We create following space $\tilde{B}$ and projection map $p: \tilde{B} \rightarrow B$ by 
+    \[\tilde{B} = \{[\gamma] \mid \gamma \text{ is any path in $B$, homotopic rel end points}\}\]
+    \[p: \tilde{B} \rightarrow B \text{ defined by } [\gamma] \mapsto \gamma(1)\]
+    Since $[\gamma] = [\delta]$ only if there end points are same, hence $p$ is well-defined. Our goal is showing that 
+    $p$ is universal covering. Since $B$ is path-connected, one is clear that $p$ is surjective map. 
+
+    However now yet $\tilde{B}$ is not a space, just a set. 
+    Hence we define the \textit{topology} over $\tilde{B}$. 
+    The very intuition of topology is defining near elements and it is natural to see that 
+    2 paths are near when they are distinct in tiny region. 
+    So we can try to intuitive near path homotopy classes as following: 
+    \[\langle [\gamma], U \rangle = \{[\gamma * \eta] \mid \text{$U$ is $\star$-set, }\eta \text{ is a path in $U$ starting at $\gamma(1)$}\}\]
+    In practical reason, we need to restrict $U$ as condition $\star$. 
+    \[\text{$\star$-set}: \text{Open neighborhood of $\gamma(1)$, path-connected and $\pi_1(U) \rightarrow \pi_1(B)$ is trivial }\]
+    Now we can give this as a basis for $\tilde{B}$. 
+    For any $[\gamma] \in \tilde{B}$, we can find $\star$-set of $[\gamma]$ hence every $[\gamma]$ 
+    is contained in some basis element. Suppose that $[\delta] \in \langle [\gamma_1], U_1 \rangle \cap \langle [\gamma_2], U_2 \rangle$. 
+    We can find $\star$-set $W$ in $U_1 \cap U_2$, and $\langle [\delta], W \rangle \subseteq \langle [\gamma_1], U_1 \rangle \cap \langle [\gamma_2], U_2 \rangle$. 
+    Hence now $\tilde{B}$ is topological space. 
+
+    Now we want to show that $p: \tilde{B} \rightarrow B$ defined by $[\gamma] \mapsto \gamma(1)$ is a covering map. 
+    We'll show that \hl{Every $\star$-set is evenly covered by $p$}. 
+    First, 
+    \[p: \langle [\gamma], U \rangle \rightarrow U\]
+    Since $\star$-set $U$ is path-connected, it is clear. 
+    And more over, this is injective. Namely,
+    \[p: \langle [\gamma], U \rangle \twoheadrightarrow U\]
+    Suppose that $[\gamma * \eta_1], [\gamma * \eta_2] \in \langle [\gamma], U \rangle$ such that $p([\gamma * \eta_1]) = p([\gamma * \eta_2])$. 
+    Means that 
+    $\eta_1 * \overbar{\eta_2}$ is a loop based at $\gamma(1)$. 
+    By the $\star$-condition, $\eta_1 * \overbar{\eta_2} \simeq_p C_{\gamma(1)}$ in $B$. 
+    Hence, $[\gamma * \eta_1] = [\gamma * \eta_2]$ in $B$. Implies that $p$ is injective. 
+
+    Now we show that $U$ has disjoint sheets in $\tilde{B}$. Suppose that 
+    $\langle [\gamma_1], U \rangle \cap \langle [\gamma_2], U \rangle \neq \emptyset$. 
+    It implies that there exists $[\delta] = [\gamma_1 * \eta_1] = [\gamma_2 * \eta_2]$. 
+    Hence, $\gamma_1 \simeq_p \gamma_2 * \eta_2 * \overbar{\eta_1}$. Now we can rewrite 
+    for any $[\gamma_1 * \mu] \in \langle [\gamma], U \rangle$ into 
+    \[[\gamma_2 * \eta_2 * \overbar{\eta_1} * \mu] \implies [\gamma_2 * \mu'] \in \langle [\gamma_2], U \rangle\]
+    Hence, by symmetry, $\langle [\gamma_1], U \rangle = \langle [\gamma_2], U \rangle$. 
+    So every preimages of $U$ over $p$ is disjoint basis(open sets). 
+
+    So we proved that $p$ is a covering map. Remaining job is showing $\tilde{B}$ is simply connected. 
+    Choose any loop $\tilde{\alpha}: [0,1] \rightarrow \tilde{B}$ based at $\tilde{b}_0 = [C_{b_0}]$ in $\tilde{B}$. 
+    Then, $p \circ \tilde{\alpha} = \alpha$ is a loop based at $b_0$ in $B$. 
+    We define $\varphi: [0,1] \rightarrow \tilde{B}$ defined by 
+    \[\varphi: t \mapsto [\alpha|_{[0, t]}]\]
+    This become lifting of $\alpha$ in $\tilde{B}$. 
+    Hence, $\tilde{\alpha} = \varphi$ by the uniqueness. 
+    So, 
+    \[\tilde{\alpha}(1) = \varphi(1) = [\alpha]\]
+    But, $\tilde{\alpha}(1) = [C_{b_0}]$ by loop condition(loop based at $[C_{b_0}]$) Hence, 
+    \[[\alpha] = [C_{b_0}]\]
+    Hence, 
+    \[\alpha \simeq_p C_{b_0} \implies \tilde{\alpha} \simeq_p C_{\tilde{b}_0}\]
+    Implies that $\tilde{B}$ is simply connected. 
+\end{proof}
+
+\newpage 
+
+\begin{thm}{Deck Transformation and Fundamental Groups}{Deck, Fundamental}
+    Let $p: (\tilde{B}, \tilde{b}_0) \rightarrow (B, b_0)$ be an universal covering. 
+    \[\operatorname{Deck}(\tilde{B}/B) \cong \pi_1(B, b_0)\]
+\end{thm}
+
+\begin{proof}
+    We construct explicit isomorphism. 
+    Given $[\alpha] \in \pi_1(B, b_0)$, define $\phi_{[\alpha]}$ by 
+    for given $\tilde{b}$, since $\tilde{B}$ is simply connected, 
+    we can find a path $\tilde{\sigma}$ from $\tilde{b}_0$ to $\tilde{b}$. 
+    Then we project it by $\sigma = p \circ \tilde{\sigma}$. 
+    It is a path from $b_0$ to $p(b)$. 
+    Then, we construct $\alpha * \sigma$. 
+    Defining 
+    \[\phi_{[\alpha]}: \tilde{b} \mapsto \widetilde{\alpha * \sigma}(1)\]
+    Easy to show that this is well-defined isomorphism. 
+\end{proof}
+
+\newpage 
+
 \bibliographystyle{plainurl}
 \bibliography{reference} 
 
