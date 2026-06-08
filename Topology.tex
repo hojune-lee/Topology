@@ -1493,25 +1493,29 @@ Finally, we propose another criterion for space to be compact.
 \end{defn}
 
 \begin{thm}{Finite Intersection Property Criterion}{finite intersection property criterion}
-    $X$ is compact if and only if every collection $\CC$ of \textit{closed subsets} in $X$ having finite intersection property. 
-    i.e., $\bigcap_{C \in \CC} C \neq \emptyset$. 
+    $X$ is compact if and only if every collection $\CC$ of \textit{closed subsets} in $X$ having finite intersection property,
+    then $\bigcap_{C \in \CC} C \neq \emptyset$. 
 \end{thm}
 
 \begin{proof}
-    First, it is important to observe the connection between definition of open covering 
-    and finite intersection property of closed sets. 
-    Let $\CC$ be a given collection of closed sets in $X$. Then, we can construct 
+    Suppose that $X$ is compact and $\CC$ is a collection of closed subsets which having finite intersection property. 
+    Means that for any finite subfamily, there intersection is non-empty. 
+    We forms 
     \[\CA = \{X \setminus C \mid C \in \CC\}\]
-    This is collection of open sets in $X$. Suppose that $\CA$ has a finite subcovering of $X$. 
-    \[\{A_1, \cdots, A_n\} \subseteq \CA \implies \bigcup_{i \in [n]} A_i = X\]
-    This implies that 
-    \[\bigcap_{i \in [n]} C_i = \emptyset \text{ where $C_i = X \setminus A_i \in \CC$ }\]
-    However, $X$ is compact if and only if for any open covering $\CA$, we can find finite subcovering in $\CA$. 
-    So, $X$ is compact if and only if any collection of open sets $\CA$ doesn't have finite subcovering, then $\CA$ not cover $X$. 
-    Latter can be translated into words of $\CC$ and finite intersection property: 
-    \begin{center}
-        \textit{Any collection $\CC$ of closed subsets in $X$ having finite intersection property.}
-    \end{center}
+    Suppose that $\bigcap_{C \in \CC} C = \emptyset$, then $\CA$ become open covering of $X$. hence we can find finite subcovering. 
+    Which means that 
+    \[A_1 \cup \cdots \cup A_n = X \implies X \setminus (C_1 \cap \cdots \cap C_n) = X\]
+    implies that 
+    \[C_1 \cap \cdots \cap C_n = \emptyset\]
+    This is contradiction, hence $\bigcap_{C \in \CC} C \neq \emptyset$. 
+
+    Suppose that later condition holds. 
+    Given $\CA$ be any open covering of $X$. 
+    Then construct 
+    \[\CC = \{X \setminus A \mid A \in \CA\}\]
+    This become family of closed sets. If it has no finite intersection property, we can find 
+    \[(X \setminus A_1) \cap \cdots \cap (X \setminus A_n) = \emptyset \implies A_1, \cdots, A_n \text{ is finite subcovering $\implies$ $X$ is compact}\]
+    If it holds finite intersection property, contradiction to $\CA$ is covering of $X$.
 \end{proof}
 
 \newpage 
