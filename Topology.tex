@@ -2292,22 +2292,24 @@ i.e., there are always perfect gap between closed set and its open boundary.
 \end{thm}
 
 \begin{proof}
-    Let $\CB = \{L_n\}$ be the countable basis of $X$ and $A, B$ are disjoint closed sets in $X$. 
-    Since $A, B$ are closed and $X$ is regular, we can find open sets $U, V$ such that 
-    \[x \in V \subseteq \overbar{V} \subseteq U \subseteq X \setminus B\]
-    By the definition of basis, we can find a basis $L_i \in \CB$ such that $x \in L_i \subseteq V$. 
-    Do this for all $x \in A$ and collect $L_i$. Then such collection is subcollection of $\{L_n\}$, so countable and 
-    it becomes the \textit{countable subcovering} of $A$ of $\CB$. 
-    Denote it by $\{U_n\}$. 
-    Do exactly same things for $B$ and construct countable subcovering $\{V_n\}$ of $B$. 
-    Now, let $U = \bigcup U_n$ and $V = \bigcup V_n$ then they are open sets containing $A, B$ respectively. 
-    Yet, they are not need to be disjoint. 
-    Let's newly define 
-    \[U_n' = U_n \setminus \bigcup_{i = 1}^{n} \overbar{V_i}, \quad V_n' = V_n \setminus \bigcup_{i = 1}^{n} \overbar{U_i}\]
-    Then clearly $U_n', V_n'$ are open, and $\{U_n'\}$ covers $A$, $\{V_n'\}$ covers $B$. 
-    Finally, 
-    \[U' = \bigcup U'_n , \quad V' = \bigcup V'_n\]
-    are disjoint open sets such that seperating $A, B$ in $X$. 
+    As $X$ is second countable, we can find $\CB = \{B_n\}_{n \in \BN}$ countable basis. 
+    Let $A, B \subseteq X$ be disjoint closed sets. 
+    For any $a \in A$ and $X \setminus B$, we can apply \ref{prop:regularity property} so find 
+    \[a \in U_a \subseteq \overbar{U_a} \subseteq X \setminus B\]
+    However, by the definition of basis, we can find proper $B_{n(a)} \in \CB$ such that 
+    \[a \in B_{n(a)} \subseteq U_a \subseteq \overbar{U_a} \subseteq X \setminus B\]
+    \hl{Hence, $a \in B_{n(a)} \subseteq \overbar{B_{n(a)}} \subseteq X \setminus B$. }
+    By the way, we can collect $n(a)$ for every $a \in A$ then obtain 
+    \[B_{a_1}, B_{a_2}, \cdots \implies A \subseteq \bigcup_{i = 1}^{\infty} B_{a_i}\]
+    Similarly, 
+    \[B_{b_1}, B_{b_2}, \cdots \implies B \subseteq \bigcup_{j = 1}^{\infty} B_{b_j}\]
+    Now let's define 
+    \[U_n := B_{a_n} \setminus \bigcup_{j = 1}^{n} \overbar{B_{b_j}}, \quad V_n := B_{b_n} \setminus \bigcup_{i = 1}^{n} \overbar{B_{a_i}}\]
+    and construct 
+    \[U = \bigcup U_n, \quad V = \bigcup V_n\]
+    Then $U_n, V_n$ are finite intersection of open sets, hence open, so $U, V$ are open. 
+    And for any $U_n, V_m$ are disjoint, hence they are pairwise disjoint, so $U \cap V = \emptyset$. 
+    Finally, by the highlights, we obtain $A \subseteq U, B \subseteq V$. So $A, B$ can be seperated by disjoint open sets, hence $X$ is normal.
 \end{proof}
 
 \newpage
