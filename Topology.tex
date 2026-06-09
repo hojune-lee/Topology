@@ -1867,21 +1867,29 @@ Now here we state one of the most important theorem in this summary note.
 \end{thm}
 
 \begin{proof}
-    Let $\CA$ be any open covering of $X$. 
-    If $X \in \CA$, then statement automatically holds for any $\delta > 0$. 
-    So suppose that $X \notin \CA$. 
-    Since $X$ is compact, we can find finite subcovering $\{A_1, \cdots, A_n\} \subseteq \CA$. 
-    Denote $C_i = X \setminus A_i$ for each $i \in [n]$. Define 
-    \[f(x) = \frac{1}{n}\sum_{i = 1}^{n} d(x, C_i)\]
-    Then \hl{$f(x) > 0$ (strictly larger than 0) since $x$ must contained in some open cover ($= A_i$)}, so 
-    \[x \in A_i \implies B_d(x, \varepsilon) \subseteq A_i \implies d(x, C_i) > \varepsilon \implies f(x) > 0\]
-    However, according to \ref{rem:12.4} and summation of continuous functions are continuous, $f$ is continuous over $X$. 
-    Since $X$ is compact, $f(X)$ also compact by \ref{thm:continuous preserves compact} 
-    and so closed and bounded. We can find minimum($=\delta$) of $f(X)$. 
-    This $\delta > 0$ become a Lebesgue number we claimed. Suppose that $B \subseteq X$ and diameter of $B$ $< \delta$. 
-    Let $x_0 \in B$ then 
-    \[\delta \leq f(x_0) \leq d(x_0, C_m) \text{ where $C_m$ is the most far $C_i$}\]
-    Implies that $B(f(x_0), \delta) \subseteq A_m \in \CA$. 
+    Let $\CA$ be an open covering of $X$. 
+    If $X \in \CA$, then we can take any $\delta > 0$ to be Lebesgue number. Hence, 
+    suppose that $X \notin \CA$ is natural. 
+
+    As $X$ is compact, we can find finite subcovering $\{A_1, \cdots, A_n\}$. 
+    Let's define $f: X \rightarrow \BR$ as follow
+    \[f: x \mapsto \frac{1}{n} \sum_{i = 1}^{n} d(x, X \setminus A_i)\]
+    this is continuous function as each distance is continuous. 
+    Hence, the image $f(X)$ is compact in $\BR$ since $X$ is compact. 
+    By \ref{thm:extreme value theorem}, we can find minimum $f(x_0) \in f(X)$. 
+    Let 
+    \[\delta = f(x_0) = \text{ minimum in } f(X)\]
+    Since $x_0 \in A_i$ for some $i \in [n]$, $\delta > 0$ holds.
+
+    Now we claim that this $\delta > 0$ be the Lebesgue number. 
+    Let $B \subseteq X$ where $\operatorname{diam}(B) < \delta$. 
+    For any $b \in B$, 
+    \[\delta \leq f(b) = \frac{1}{n} \sum_{i = 1}^{n} d(b, X \setminus A_i) \leq d(b, X \setminus A^*)\]
+    It means that, distance between $b$ and $A^*$ is at least $\delta$ we obtained. 
+    Hence, 
+    \[B \subseteq B(b, \delta) \subseteq A^* \in \CA\]
+    Hence, $\delta > 0$ is well-defined Lebesgue number and always exists for any open covering $\CA$ of 
+    compact space $X$. 
 \end{proof}
 
 Now view $\CA$ as the \textit{collection of open sets} such that as many as enough to cover $X$ totally. 
