@@ -2217,19 +2217,19 @@ One natural question is that what's the resolution level of spaces we've learned
 \end{thm}
 
 \begin{proof}
-    Let $X$ be compact Hausdorff space and $A, B$ are two disjoint closed subset in $X$. 
-    Suppose that we choose any point $\alpha \in A$. For every point $\beta \in B$, since $X$ is Hausdorff, 
-    we can find $U_\alpha^\beta, V_\beta$ such that $\alpha \in U_\alpha^\beta$ and $\beta \in V_\beta$. 
-    Collection of $V_\beta$ such that $\{V_\beta \mid \beta \in B\}$ forms an open covering of $B$. 
-    Since $B$ is closed subset in compact space, $B$ also compact by \ref{thm:closed in compact is compact}. 
-    So we can find $\{V_{\beta_1}, \cdots, V_{\beta_n}\}$ a finite subcovering. 
-    Then we have corresponding $U_\alpha^{\beta_i}$ an open neighborhood of $\alpha$. 
-    Then, 
-    \[U_\alpha^* = \bigcap U_\alpha^{\beta_i}, V^*_\alpha = \bigcup V_{\beta_i} \implies U^*_\alpha \cap V^*_\alpha = \emptyset, \text{ both are open }, \alpha \in U^*_\alpha, \quad B \subseteq V^*_\alpha\]
-    Do this all for $\alpha \in A$, obtaining $\{U^*_\alpha \mid \alpha \in A\}$ forms open covering of $A$. 
-    By the similar reasoning, we finally obtain finite subcovering $\{U^*_{\alpha_i}\}_{i = 1}^{m}$
-    \[A \subseteq U = \bigcup U^*_{\alpha_i}, \quad B \subseteq V = \bigcap V^*_{\alpha_i}\]
-    Where $U, V$ are disjoint open set in $X$. 
+    Let $X$ be a compact Hausdorff space. We'll show that $X$ is regular first. 
+    Since $X$ is Hausdorff, $T_1$ is automatically holds. 
+    Let $C$ be a closed set(hence compact) and $x \notin C$. Then, for every $c \in C$, we can find 
+    $c \in W_c$ and $x \in V_c$ are disjoint open sets. 
+    Then, $\{W_c\}_{c \in C}$ is open covering of $C$, so we can find finite subcovering 
+    \[W_{c_1}, \cdots, W_{c_n} \implies C \subseteq \bigcup_{i = 1}^{n} W_{c_i} , \quad x \in \bigcap_{i = 1}^{n} V_{c_i}\]
+    They are disjoint open sets, so $X$ is regular. 
+
+    Now we'll show that $X$ is normal. Let $A, B \subseteq X$ are disjoint closed sets. 
+    For each $a \in A$, we can seperate $a$ and $B$ via disjoint open sets $U_a, V_a$ since $X$ is regular. 
+    $\{U_a\}_{a \in A}$ is an open covering of $A$, so we can find finite subcovering 
+    \[U_{a_1}, \cdots, U_{a_m} \implies A \subseteq \bigcup_{j = 1}^{m} U_{a_j}, \quad B \subseteq \bigcap_{j = 1}^{m} V_{a_j}\]
+    They are disjoint open sets seperating $A$ and $B$, hence $X$ is normal. 
 \end{proof}
 
 \begin{exmp}{Examples}{examples of seperation axioms}
