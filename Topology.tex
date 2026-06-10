@@ -2593,21 +2593,25 @@ Now we're ready to prove main statement of this section.
 
 Here I append some remarks from \cite{Lecture01}. 
 
-\begin{rem}{}{18.3}
-    If Tietze extension property holds then $X$ is normal. 
-\end{rem}
+\begin{cor}{}{18.3}
+    If $X$ is $T_1$ and Tietze extension property holds then $X$ is normal. 
+\end{cor}
 
 \begin{proof}
-    Let $A, B$ are disjoint open sets in $X$. 
-    We construct $f: A \rightarrow 0$ and $g: B \rightarrow 1$. 
-    Since constant function is continuous, they are continuous in $A, B$ respectively. 
-    By \ref{lem:lem_pasting lemma}, we can construct 
-    \[h: A \cup B \rightarrow [0, 1], \quad h|_A \equiv f, \quad h|_B \equiv g, \quad h\text{ is continuous }\]
-    So we can apply Tietze extension theorem: 
-    \[F: X \rightarrow [0, 1], \quad \text{ continuous }, \quad F|_A \equiv 0 , F|_B \equiv 1\]
-    This can be viewed as Urysohn seperation function in \ref{lem:Urysohn's Lemma}. 
-    Now simply, $F^{-1}([0, 1/2))$ and $ F^{-1}((1/2, 1])$ forms open seperator of $A, B$ in $X$. 
-    Implies that $X$ is normal. 
+    Let $A, B \subseteq X$ be disjoint closed subsets. 
+    Then, we can naturally construct constant functions(hence continuous)
+    \[f_A : A \rightarrow 0, \quad f_B : B \rightarrow 1\]
+    Since $A, B$ are disjoint, 
+    \[f_{A \cup B} = \begin{cases}
+        f_A & \text{ in $A$} \\
+        f_B & \text{ in $B$}
+    \end{cases}\]
+    is also continuous function such that $f_{A \cup B} : A \cup B \rightarrow [0,1]$. 
+    Hence, by \ref{thm:Tietze extension theorem}, we can expand this into continuous function
+    \[f^* : X \rightarrow [0,1], \quad f^*|_A \equiv 0 , \quad f^*|_B \equiv 1\]
+    Then, we can seperate $A, B$ by two disjoint open sets 
+    \[U = (f^*)^{-1}([0, 1/2)), \quad V = (f^*)^{-1}((1/2, 1])\]
+    Hence $X$ is normal. 
 \end{proof}
 
 \begin{rem}{}{18.3}
