@@ -3041,32 +3041,42 @@ View $f_*(\pi_1(Y, y_0))$ as complexity of space of $Y$.
 
 \begin{thm}{The Lifting Criterion}{lifting criterion}
     Let $p: (E, e_0) \rightarrow (B, b_0)$ be a covering map, and $f: (Y, y_0) \rightarrow (B, b_0)$ be continuous map with \hl{$Y$ is path-connected and locally path-connected.}
-    \[\text{Exists unique lift}, \tilde{f}: (Y, y_0) \rightarrow (E, e_0) \iff f_*(\pi_1(Y, y_0)) \leq p_*(\pi_1(E, e_0))\]
+    \[\text{Exists unique lifting } \tilde{f}: (Y, y_0) \rightarrow (E, e_0) \iff f_*(\pi_1(Y, y_0)) \leq p_*(\pi_1(E, e_0))\]
 \end{thm}
 
 \begin{proof}
-    ($\Rightarrow$) If such lifting is exists, $p \circ \tilde{f} = f$. 
-    Hence, $f_*(\pi_1(Y, y_0))$ is filtered-image of $p_*(\pi_1(E, e_0))$.(Since functorial property: $p \circ \tilde{f} = f \implies p_* \circ \tilde{f}_* = f_*$) Hence 
-    \[f_*(\pi_1(Y, y_0)) \leq p_*(\pi_1(E, e_0))\]
-    ($\Leftarrow$) 
-    Here we construct $\tilde{f}$ directly. 
-    Choose $y \in Y$, then since $Y$ is path-connected, there exists a path $\alpha$ from $y_0$ to $y$. 
-    It is projected into $B$ by $f$: 
-    \[\alpha \mapsto f \circ \alpha, \quad f \circ \alpha(0) = b_0\]
-    Then we can find its lifting by fixing initial point by $e_0$ in $E$. 
-    \[f \circ \alpha \xmapsto{\text{lift}} \widetilde{f \circ \alpha}, \quad \widetilde{f \circ \alpha}(0) = e_0\]
-    Then we definitionally define 
-    \[\tilde{f}: y \mapsto \widetilde{f \circ \alpha}(1)\]
-    Here we need to show that $\tilde{f}$ is well-defined (independent to the choice of $\alpha$) and valid lifting. 
-    Suppose that we choose another $y_0$ to $y$ path, namely $\beta$. 
-    We want to show that 
+    ($\Rightarrow$) Once the lifting $\tilde{f}$ exists, then $p \circ \tilde{f} = f$. 
+    By the functorial property, $p_* \circ \tilde{f}_* = f_*$. 
+    Hence, $\Im(f_*) = \Im(p_* \circ f_*) \leq \Im(p_*)$. 
+
+    ($\Leftarrow$) We'll construct $\tilde{f}: Y \rightarrow E$ such that well-defined, continuous 
+    and $p \circ \tilde{f} = f$. 
+    For any given $y \in Y$, since $Y$ is path-connected, we can find $\alpha$ a path from $y_0$ to $y$. 
+    Send $\alpha$ via continuous function $f$, so that $f \circ \alpha$ is path in $B$ from $b_0$ to $f(y)$. 
+    By fix the initial point be $e_0$, we can lift $f \circ \alpha$ into $E$, 
+    \[\widetilde{f \circ \alpha} \text{ is a path from $e_0$ to somewhere in $E$ }\]
+    Now we define 
+    \[\tilde{f} : y \mapsto \widetilde{f \circ \alpha}(1)\]
+    This is well-defined i.e., independent to the choice of path from $y_0$ to $y$. 
+    Suppose that we choose another path $\beta$ from $y_0$ to $y$. 
+    Then, $\alpha * \overbar{\beta}$ forms a loop in $Y$ based at $y_0$. 
+    Hence, 
+    \[[f \circ (\alpha * \overbar{\beta})] \in \Im(f_*) \leq \Im(p_*)\]
+    So we can find $[\gamma] \in \pi_1(E, e_0)$ such that 
+    \[[f \circ (\alpha * \overbar{\beta})] = [p \circ \gamma] \implies f \circ (\alpha * \overbar{\beta}) \simeq_p p \circ \gamma\]
+    By Homotopy Lifting Theorem \ref{thm:homotopy lifting theorem}, we obtain lifting of $f \circ (\alpha * \overbar{\beta})$ and $\gamma$ are homotopic. 
+    Hence $f \circ (\alpha * \overbar{\beta})$ is a loop based at $e_0$, implies that $f \circ \alpha(1) = f \circ \overbar{\beta}(0) = f \circ \beta(1)$. 
+    So that $\tilde{f}$ is well-defined: 
     \[\widetilde{f \circ \alpha}(1) = \widetilde{f \circ \beta}(1)\]
-    Here, $\alpha * \overbar{\beta}$ forms $y_0$ loop in $Y$. 
-    Hence by the assumption, $[\alpha * \overbar{\beta}] \in \pi_1(Y, y_0)$ implies that 
-    \[[f \circ (\alpha * \overbar{\beta})] = p_*([\gamma]), \text{ for some $\gamma \in \pi_1(E, e_0)$ }\]
-    Hence, lifting of $f \circ (\alpha * \overbar{\beta})$ forms loop based at $e_0$ in $E$. 
-    But lifting of $f \circ (\alpha * \overbar{\beta})$ can be viewed as concatenation of both lifts, implies our goal. 
-    Showing continuity is not hard. 
+    Second, following holds. 
+    \[p \circ \tilde{f}(y) = p \circ \tilde{f}(\alpha(1)) = p \circ \widetilde{f \circ \alpha}(1) = f \circ \alpha(1) = f(y)\]
+    Hence, 
+    \[p \circ \tilde{f} = f\]
+    Finally, we already know that $p$ is open map \ref{prop:property of covering map}. 
+    Hence, for any open set $U \subseteq E$, $p(U)$ is also open in $B$. 
+    We take its preimage through continuous map $f$, so $f^{-1}(p(U))$ is open in $Y$. However, 
+    \[\tilde{f}^{-1}(U) = f^{-1}(p(U))\]
+    So, $\tilde{f}^{-1}(U)$ is open in $Y$ hence $\tilde{f}$ is continuous. 
 \end{proof}
 
 Up to these results, we now possesses the tool to compute the fundamental group of $S^1$ rigorously. 
