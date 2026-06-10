@@ -3127,22 +3127,29 @@ In diagram,
 \end{tikzcd}
 \]
 
-Each are path-connected covering map. Remarks that path-connectedness gives the meaning of unfolded into our space \ref{thm:lifting criterion}. 
 \begin{proof}
-    Since $\tilde{B}$ is simply connected, it is path-connected and locally path-connected. 
-    Hence, by the Lifting Criterion \ref{thm:lifting criterion}, 
-    there exists unique lifting $r$ of $p$ such that $r(\tilde{b}_0) = e_0$ such that 
-    $q \circ r = p$. Now we'll claim that $r: (\tilde{B}, \tilde{b}_0) \rightarrow (E, e_0)$ is a covering map. 
-    \[\iff r \text{ is surjective}, \quad \forall e \in E, \exists \, U:\text{open neighborhood of $e$}, \quad U \text{ is evenly covered by $r$}\]
-    Choose any $e \in E$. Since $E$ is path-connected, we can find a path $\gamma$ from $e_0$ to $e$. 
-    Then, its $q$-projection path is $q \circ \gamma$ in $B$. We can fix the lifting of $q \circ r$ through $p$ by fixing 
-    initial point by $\tilde{b}_0$. Then, $r(\widetilde{q \circ \gamma}(1)) = e$. Hence $r$ is surjective. 
+    Since $\tilde{B}$ is simply connected, it is path-connected locally path-connected, and $\pi_1(\tilde{B}) = 1$. 
+    Hence for any covering map $q$, we obtain that $\Im(p_*) = 1 \leq \Im(q_*)$ hence by \ref{thm:lifting criterion}, 
+    there exists unique lifting of $p$, denoted by $r: (\tilde{B}, \tilde{b}_0) \rightarrow (E, e_0)$ so $q \circ r = p$. 
 
-    Now choose any $b \in B$. Since both $p, q$ are covering map, we can find $p,q$-evenly covered neighborhood $U$ of $b$. 
-    Denote its sheets on $\tilde{B}$ by $\{V_\alpha\}$ and on $E$ by $\{W_\beta\}$. 
-    In this setting, $r$ sends $\{V_\alpha\}$ into $\{W_\beta\}$ surjectively and homeomorphically. 
-    Hence, for any $e \in E$, we can find $\{V_\alpha\}$ and $\{W_\beta\}$ with respect to $q(e) \in B$ and 
-    then the sheet $W_\beta'$ containing $e$ has sheets in $\{V_\alpha\}$. (Try to check the details in this proof.) 
+    Now we're showing that such $r$ is indeed covering map. We already obtain that $r$ is continuous, 
+    hence it is sufficient to show that (1) $r$ is surjective (2) $r$ satisfies the evenly covered condition. 
+
+    (1) Choose arbitrary $e \in E$ then as $E$ is path-connected, we can find a path $\alpha$ from $e_0$ to $e$. 
+    We take it into $B$ through $q$, denoted by $q \circ \alpha$ which is a path from $b_0$ to $b = q(e)$. 
+    It has unique lifting when we fix the initial point of lifting path by $\tilde{b}_0$. 
+    Denote the lifting by $\widetilde{q \circ \alpha}$ is the path from $\tilde{b}_0$ to $\tilde{b}$ where $p(\tilde{b}) = q(e)$. 
+    By the commuteness, $r \circ \widetilde{q \circ \alpha} = \alpha$ hence $r \circ \widetilde{q \circ \alpha}(1) = r(\tilde{b}) = \alpha(1) = e$
+    So $r$ is surjective. 
+
+    (2) Choose arbitrary $e \in E$. For $b = f(e) \in B$, we can find evenly covered neighborhood $U$ such that 
+    evenly covered by both $p, q$ covering maps. 
+    Hence, we can find homeomorphic sheets $\{\tilde{V}_\alpha\}$ over $\tilde{B}$ 
+    and $\{U_\beta\}$ over $E$. 
+    Since they are disjoint homeomorphic to each others and commuteness implies that 
+    there are a surjection from $\{\tilde{V}_\alpha\}$ to $\{U_\beta\}$. 
+    Then for $e \in U_*$, we can obtain its preimage over $r$ is subset of $\{\tilde{V}_\alpha\}$ 
+    hence $U_*$ is evenly covered by $r$. So the lifting of $p$, $r$ is a covering map. 
 \end{proof}
 
 \newpage
