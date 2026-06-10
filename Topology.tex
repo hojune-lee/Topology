@@ -3166,9 +3166,10 @@ Before move on, we define some condition of our space first.
     all possible loops in $U$ is actually trivial loops in $B$. 
 \end{defn}
 
-Now we can state when the universal covering always exists. 
-I'll add my intuition after formal proof of this theorem.
-As this is proof via construction, quite important to remember.
+One false-example of semi-locally simply connected is Hawaiian Earring defined by 
+radius $1/n$ circles intersects unique point $0$ in $\BR^2$. At $0$, any neighborhood of $0$ contains 
+some circles in there, loop on them does not contractable into origin even entire space.
+By the way, cone on Hawaiian Earring is semi-locally simply connected and extract top of the cone is again false example. 
 
 \begin{thm}{Existance of Universal Covering}{exists of universal covering}
     Any \hl{path connected, locally path connected, semi-locally simply connected} space $B$ has the universal covering $p: \tilde{B} \rightarrow B$.
@@ -3176,62 +3177,7 @@ As this is proof via construction, quite important to remember.
 \end{thm}
 
 \begin{proof}
-    We create following space $\tilde{B}$ and projection map $p: \tilde{B} \rightarrow B$ by 
-    \[\tilde{B} = \{[\gamma] \mid \gamma \text{ is any path in $B$, homotopic rel end points}\}\]
-    \[p: \tilde{B} \rightarrow B \text{ defined by } [\gamma] \mapsto \gamma(1)\]
-    Since $[\gamma] = [\delta]$ only if there end points are same, hence $p$ is well-defined. Our goal is showing that 
-    $p$ is universal covering. Since $B$ is path-connected, one is clear that $p$ is surjective map. 
-
-    However now yet $\tilde{B}$ is not a space, just a set. 
-    Hence we define the \textit{topology} over $\tilde{B}$. 
-    The very intuition of topology is defining near elements and it is natural to see that 
-    2 paths are near when they are distinct in tiny region. 
-    So we can try to intuitive near path homotopy classes as following: 
-    \[\langle [\gamma], U \rangle = \{[\gamma * \eta] \mid \text{$U$ is $\star$-set, }\eta \text{ is a path in $U$ starting at $\gamma(1)$}\}\]
-    In practical reason, we need to restrict $U$ as condition $\star$. 
-    \[\text{$\star$-set}: \text{Open neighborhood of $\gamma(1)$, path-connected and $\pi_1(U) \rightarrow \pi_1(B)$ is trivial }\]
-    Now we can give this as a basis for $\tilde{B}$. 
-    For any $[\gamma] \in \tilde{B}$, we can find $\star$-set of $[\gamma]$ hence every $[\gamma]$ 
-    is contained in some basis element. Suppose that $[\delta] \in \langle [\gamma_1], U_1 \rangle \cap \langle [\gamma_2], U_2 \rangle$. 
-    We can find $\star$-set $W$ in $U_1 \cap U_2$, and $\langle [\delta], W \rangle \subseteq \langle [\gamma_1], U_1 \rangle \cap \langle [\gamma_2], U_2 \rangle$. 
-    Hence now $\tilde{B}$ is topological space. 
-
-    Now we want to show that $p: \tilde{B} \rightarrow B$ defined by $[\gamma] \mapsto \gamma(1)$ is a covering map. 
-    We'll show that \hl{Every $\star$-set is evenly covered by $p$}. 
-    First, 
-    \[p: \langle [\gamma], U \rangle \rightarrow U\]
-    Since $\star$-set $U$ is path-connected, it is clear. 
-    And more over, this is injective. Namely,
-    \[p: \langle [\gamma], U \rangle \twoheadrightarrow U\]
-    Suppose that $[\gamma * \eta_1], [\gamma * \eta_2] \in \langle [\gamma], U \rangle$ such that $p([\gamma * \eta_1]) = p([\gamma * \eta_2])$. 
-    Means that 
-    $\eta_1 * \overbar{\eta_2}$ is a loop based at $\gamma(1)$. 
-    By the $\star$-condition, $\eta_1 * \overbar{\eta_2} \simeq_p C_{\gamma(1)}$ in $B$. 
-    Hence, $[\gamma * \eta_1] = [\gamma * \eta_2]$ in $B$. Implies that $p$ is injective. 
-
-    Now we show that $U$ has disjoint sheets in $\tilde{B}$. Suppose that 
-    $\langle [\gamma_1], U \rangle \cap \langle [\gamma_2], U \rangle \neq \emptyset$. 
-    It implies that there exists $[\delta] = [\gamma_1 * \eta_1] = [\gamma_2 * \eta_2]$. 
-    Hence, $\gamma_1 \simeq_p \gamma_2 * \eta_2 * \overbar{\eta_1}$. Now we can rewrite 
-    for any $[\gamma_1 * \mu] \in \langle [\gamma], U \rangle$ into 
-    \[[\gamma_2 * \eta_2 * \overbar{\eta_1} * \mu] \implies [\gamma_2 * \mu'] \in \langle [\gamma_2], U \rangle\]
-    Hence, by symmetry, $\langle [\gamma_1], U \rangle = \langle [\gamma_2], U \rangle$. 
-    So every preimages of $U$ over $p$ is disjoint basis(open sets). 
-
-    So we proved that $p$ is a covering map. Remaining job is showing $\tilde{B}$ is simply connected. 
-    Choose any loop $\tilde{\alpha}: [0,1] \rightarrow \tilde{B}$ based at $\tilde{b}_0 = [C_{b_0}]$ in $\tilde{B}$. 
-    Then, $p \circ \tilde{\alpha} = \alpha$ is a loop based at $b_0$ in $B$. 
-    We define $\varphi: [0,1] \rightarrow \tilde{B}$ defined by 
-    \[\varphi: t \mapsto [\alpha|_{[0, t]}]\]
-    This become lifting of $\alpha$ in $\tilde{B}$. 
-    Hence, $\tilde{\alpha} = \varphi$ by the uniqueness. 
-    So, 
-    \[\tilde{\alpha}(1) = \varphi(1) = [\alpha]\]
-    But, $\tilde{\alpha}(1) = [C_{b_0}]$ by loop condition(loop based at $[C_{b_0}]$) Hence, 
-    \[[\alpha] = [C_{b_0}]\]
-    Hence, 
-    \[\alpha \simeq_p C_{b_0} \implies \tilde{\alpha} \simeq_p C_{\tilde{b}_0}\]
-    Implies that $\tilde{B}$ is simply connected. 
+    
 \end{proof}
 
 \newpage 
