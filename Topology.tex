@@ -3009,6 +3009,8 @@ If we continuously change our path in $B$, every parallel space can do similar t
     It implies that the end points of $\tilde{\gamma}_1, \tilde{\gamma}_2$ are same. 
 \end{proof}
 
+\newpage
+
 \begin{cor}{The Induced Homomorphism Between Fundamental Groups}{induced hom fundamental groups}
     Once covering map $p: E \rightarrow B$ is given, then the induced homomorphism \ref{def:homomorphism induced by continuous map}
     \[p_*: \pi_1(E, e_0) \rightarrow \pi_1(B, b_0)\]
@@ -3016,16 +3018,19 @@ If we continuously change our path in $B$, every parallel space can do similar t
 \end{cor}
 
 \begin{proof}
-    Homomorphism is injective if and only if its kernel is trivial. Suppose that 
-    $p_*([\gamma]) = [C_{b_0}]$. 
-    By definition, it implies that there exists a path homotopy between 
-    $p \circ \gamma \simeq_p C_{b_0}$. 
-    See the lifting of $C_{b_0}$ in $E$. Since $p^{-1}(b_0)$ is discrete and one point $e_0$ is fixed, 
-    lifting of $C_{b_0}$ is $C_{e_0}$ in $E$. 
-    Hence by the homotopy lifting theorem \ref{thm:homotopy lifting theorem}, 
-    lifting of $p \circ \gamma$ is path homotopic to $C_{e_0}$. 
-    We can specify lifting of $p \circ \gamma$ by $\gamma$, hence $\gamma \simeq_p C_{e_0}$, hence 
-    $[\gamma] = [C_{e_0}]$ which is identity in $\pi_1(E, e_0)$. 
+    We use following facts in group theory: 
+    \[\textit{Group homomorphism $\varphi$ is injective if and only if $\ker \varphi$ is trivial}\]
+    Here, 
+    \[\ker{p_*} = \{[\gamma] \mid p: [\gamma] \mapsto [C_{b_0}] \} \subseteq \pi_1(E, e_0)\]
+    Hence, suppose that $[p \circ \gamma] = [C_{b_0}]$. Means that $p \circ \gamma$ and $C_{b_0}$ are 
+    homotopic relative to end points. So construct 
+    \[H: [0,1] \times [0,1] \rightarrow B, \quad F|_{[0,1] \times \{0\}} \equiv C_{b_0}, \quad F|_{[0,1] \times \{1\}} \equiv p \circ \gamma\]
+    We can find unique lifting of $C_{b_0}$ whose initial point is $e_0$, indeed it is $C_{e_0}$. 
+    Hence, we can lift our homotopy into $E$ by 
+    \[\tilde{H}: [0,1] \times [0,1] \rightarrow E, \quad \tilde{H}|_{[0,1] \times \{0\}} \equiv C_{e_0}, \quad \tilde{H}|_{[0,1] \times \{1\}} \equiv \widetilde{p \circ \gamma} = \gamma\]
+    The lifting of $\widetilde{p \circ \gamma}$ is uniquely fixed by $\gamma$ since its initial point is $e_0$. 
+    Hence, $C_{e_0} \simeq_p \gamma$ and implies that $[\gamma] = [C_{e_0}]$, means that $\ker{p_*} = \{[C_{e_0}]\}$, trivial subgroup.
+    Hence, $p_*$ is injective. 
 \end{proof}
 
 From now on, we've \hl{shown that the existance of lifting only for path and homotopy} by direct constructing. 
